@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "server/index.js",
   "author": "Finn Terdal <fterdal@gmail.com>",
+  "scripts": {
+    "start": "nodemon server/index.js"
+  },
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
