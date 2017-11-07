@@ -1,0 +1,14 @@
+{
+  "name": "graph-todo",
+  "version": "1.0.0",
+  "main": "server/index.js",
+  "author": "Finn Terdal <fterdal@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mocha": "^4.0.1",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.12.1"
+  }
+}
