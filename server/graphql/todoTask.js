@@ -2,7 +2,7 @@
 const graphql = require('graphql');
 
 const todoTaskType = new graphql.GraphQLObjectType({
-  name : 'Todo Task',
+  name : 'TodoTask',
   fields : {
     id : {
       type : graphql.GraphQLString
@@ -11,7 +11,7 @@ const todoTaskType = new graphql.GraphQLObjectType({
       type : graphql.GraphQLString
     },
     text : {
-      type : graphql.GraphQLInt
+      type : graphql.GraphQLString
     },
     completed : {
       type : graphql.GraphQLBoolean,
