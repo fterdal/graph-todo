@@ -1,4 +1,5 @@
 /* eslint key-spacing:0 */
+const { buildSchema } = require('graphql');
 const graphql = require('graphql');
 
 const todoTaskType = new graphql.GraphQLObjectType({
@@ -18,6 +19,12 @@ const todoTaskType = new graphql.GraphQLObjectType({
     }
   }
 });
+const query = buildSchema(`
+  type Query {
+    TodoTasks: [TodoTask]
+    TodoTaskById: TodoTask
+  }
+`);
 
 module.exports = {
   type : todoTaskType,

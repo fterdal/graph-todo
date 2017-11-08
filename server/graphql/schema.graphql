@@ -1,0 +1,10 @@
+type TodoTask {
+  id: Int!
+  title: String
+  text: String
+  completed: Boolean
+}
+
+type Query {
+  TodoTaskById(id: Int!): TodoTask
+}
