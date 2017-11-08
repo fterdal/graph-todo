@@ -18,17 +18,17 @@ app.use('/graphiql', expressGraphql({
   graphiql : true
 }));
 
-app.get('/graphql', (req, res) => {
-  const graphqlQuery = req.query.graphqlQuery;
-  if (!graphqlQuery) {
-    return res.status(500).send('You must provide a query');
-  }
-
-  return graphql(rootSchema, graphqlQuery)
-    .then(response => response.data)
-    .then((data) => res.json(data))
-    .catch((err) => console.error(err));
-});
+// app.get('/graphql', (req, res) => {
+//   const graphqlQuery = req.query.graphqlQuery;
+//   if (!graphqlQuery) {
+//     return res.status(500).send('You must provide a query');
+//   }
+//
+//   return graphql(rootSchema, graphqlQuery)
+//     .then(response => response.data)
+//     .then((data) => res.json(data))
+//     .catch((err) => console.error(err));
+// });
 
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, '..', 'public')));
