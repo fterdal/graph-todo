@@ -5,7 +5,7 @@
   "author": "Finn Terdal <fterdal@gmail.com>",
   "scripts": {
     "start": "nodemon server/index.js",
-    "test-server": "mocha server/**/*.spec.js"
+    "test-server": "mocha --watch server/**/*.spec.js"
   },
   "license": "MIT",
   "dependencies": {
