@@ -3,12 +3,18 @@
 const graphql = require('graphql');
 const chai = require('chai');
 
-// const pokemon = require('./pokemon');
+const todoTask = require('./todoTask');
 
-// const pokemonType = pokemon.type;
+const todoTaskType = todoTask.type;
 const expect = chai.expect;
 
-describe('Pokemon', () => {
+describe('Todo Task', () => {
   // Tests
-  it('is a test', () => {});
+  it('is a passing test', () => {
+    expect(false);
+  });
+
+  it('is a failing test', () => {
+    expect(false).to.equal(true);
+  });
 });
