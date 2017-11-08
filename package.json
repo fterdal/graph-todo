@@ -4,7 +4,8 @@
   "main": "server/index.js",
   "author": "Finn Terdal <fterdal@gmail.com>",
   "scripts": {
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "test-server": "mocha tests/server/*.spec.js"
   },
   "license": "MIT",
   "dependencies": {
