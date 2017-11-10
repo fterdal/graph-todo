@@ -12,13 +12,14 @@ const expect = chai.expect;
 
 describe('Todo Task', () => {
 
+  before(() => {
+
+  })
+
   describe('Fields', () => {
 
     it('has fields id, title, text, completed', () => {
-      expect(Object.keys(TodoTask._fields)).to.contain('id');
-      expect(Object.keys(TodoTask._fields)).to.contain('title');
-      expect(Object.keys(TodoTask._fields)).to.contain('text');
-      expect(Object.keys(TodoTask._fields)).to.contain('completed');
+      expect(TodoTask._fields).to.have.all.keys('id', 'title', 'text', 'completed');
     });
 
     it('id is a required Int', () => {
