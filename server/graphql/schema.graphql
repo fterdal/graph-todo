@@ -14,5 +14,5 @@ type Query {
   TodoTaskById(id: Int!): TodoTask
   AllTodoTasks: [TodoTask]
   AllUsers: [User]
-  UserById: User
+  UserById(id: Int!): User
 }
