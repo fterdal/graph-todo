@@ -1,6 +1,7 @@
 'use strict';
 
 const chai = require('chai');
+const util = require('util');
 
 const { schema, resolverMap } = require('./index');
 
@@ -8,6 +9,9 @@ const { schema, resolverMap } = require('./index');
 const expect = chai.expect;
 
 describe('Todo Task', () => {
+
+  const TodoTask = schema._typeMap.TodoTask;
+
   // Tests
   before(() => {
     // console.log('schema', schema);
@@ -16,24 +20,14 @@ describe('Todo Task', () => {
   describe('Fields', () => {
 
     it('has the fields id, title, text, completed', () => {
-      expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('id');
-      expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('title');
-      expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('text');
-      expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('completed');
+      expect(Object.keys(TodoTask._fields)).to.contain('id');
+      expect(Object.keys(TodoTask._fields)).to.contain('title');
+      expect(Object.keys(TodoTask._fields)).to.contain('text');
+      expect(Object.keys(TodoTask._fields)).to.contain('completed');
     });
 
-    it('id is a string', () => {
-      // console.log(Object.keys(schema._typeMap.TodoTask));
-
-      console.log('Object.keys(schema._typeMap.TodoTask._fields.id.type)',
-        Object.keys(schema._typeMap.TodoTask._fields.id.type)
-      );
-      // expect(schema._typeMap.TodoTask._fields.id.type).to.equal('Int!');
-      // console.log('type of completed field:', schema._typeMap.TodoTask._typeConfig.astNode.fields[3].type.name.value);
-      // expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('id');
-      // expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('title');
-      // expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('text');
-      // expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('completed');
+    it('id is a required Int', () => {
+      expect(String(TodoTask._fields.id.type)).to.equal('Int!');
     });
 
   })
