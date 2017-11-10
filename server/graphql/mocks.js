@@ -1,3 +1,10 @@
+const mockUsers = [
+  {
+    id: 1,
+    email: 'bobby@'
+  },
+]
+
 const mockTodoTasks = [
   {
     id: 1,
@@ -16,6 +23,11 @@ const mockTodoTasks = [
     title: 'letter to grandma',
     text: "remember to mention grandpa's upcoming birthday",
     completed: true,
+  },
+  {
+    id: 4,
+    title: 'change oil in car',
+    completed: false,
   },
 ];
 
