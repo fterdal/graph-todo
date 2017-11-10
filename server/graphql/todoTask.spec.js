@@ -1,7 +1,7 @@
+/* eslint new-cap:0 */
 'use strict';
 
 const chai = require('chai');
-const util = require('util');
 
 const {
   schema: { _typeMap: { TodoTask } },
@@ -11,10 +11,6 @@ const {
 const expect = chai.expect;
 
 describe('Todo Task', () => {
-
-  before(() => {
-
-  })
 
   describe('Fields', () => {
 
