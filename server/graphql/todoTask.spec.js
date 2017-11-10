@@ -1,36 +1,52 @@
 'use strict';
 
-const graphql = require('graphql');
 const chai = require('chai');
+const util = require('util');
 
-const todoTask = require('./todoTask');
+const {
+  schema: { _typeMap: { TodoTask } },
+  resolverMap: { TodoTaskById },
+} = require('./index');
 
-const todoTaskType = todoTask.type;
 const expect = chai.expect;
 
 describe('Todo Task', () => {
-  // Tests
+
+  before(() => {
+
+  })
 
   describe('Fields', () => {
 
-    it('has a string field called id', () => {
-      expect(todoTaskType.getFields()).to.have.property('id');
-      expect(todoTaskType.getFields().id.type).to.deep.equals(graphql.GraphQLString);
+    it('has fields id, title, text, completed', () => {
+      expect(TodoTask._fields).to.have.all.keys('id', 'title', 'text', 'completed');
     });
 
-    it('has a string field called title', () => {
-      expect(todoTaskType.getFields()).to.have.property('title');
-      expect(todoTaskType.getFields().title.type).to.deep.equals(graphql.GraphQLString);
+    it('id is a required Int', () => {
+      expect(String(TodoTask._fields.id.type)).to.equal('Int!');
+    });
+    it('title is a String', () => {
+      expect(String(TodoTask._fields.title.type)).to.equal('String');
+    });
+    it('text is a String', () => {
+      expect(String(TodoTask._fields.text.type)).to.equal('String');
+    });
+    it('completed is a Boolean', () => {
+      expect(String(TodoTask._fields.completed.type)).to.equal('Boolean');
     });
 
-    it('has a string field called text', () => {
-      expect(todoTaskType.getFields()).to.have.property('text');
-      expect(todoTaskType.getFields().text.type).to.deep.equals(graphql.GraphQLString);
-    });
+  })
 
-    it('has a boolean field called completed', () => {
-      expect(todoTaskType.getFields()).to.have.property('completed');
-      expect(todoTaskType.getFields().completed.type).to.deep.equals(graphql.GraphQLBoolean);
+  describe('Resolvers', () => {
+
+    it('TodoTaskById takes an argument and returns a TodoTask', () => {
+      // console.log('resolverMap.TodoTaskById', resolverMap.TodoTaskById);
+      expect(TodoTaskById(1)).to.deep.equal({
+        id: '1',
+        title: 'groceries',
+        text: 'get milk, eggs, and bear traps',
+        completed: false,
+      });
     });
 
   })
