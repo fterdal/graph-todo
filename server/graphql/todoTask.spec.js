@@ -19,7 +19,7 @@ describe('Todo Task', () => {
 
   describe('Fields', () => {
 
-    it('has the fields id, title, text, completed', () => {
+    it('has fields id, title, text, completed', () => {
       expect(Object.keys(TodoTask._fields)).to.contain('id');
       expect(Object.keys(TodoTask._fields)).to.contain('title');
       expect(Object.keys(TodoTask._fields)).to.contain('text');
@@ -28,6 +28,15 @@ describe('Todo Task', () => {
 
     it('id is a required Int', () => {
       expect(String(TodoTask._fields.id.type)).to.equal('Int!');
+    });
+    it('title is a String', () => {
+      expect(String(TodoTask._fields.title.type)).to.equal('String');
+    });
+    it('text is a String', () => {
+      expect(String(TodoTask._fields.text.type)).to.equal('String');
+    });
+    it('completed is a Boolean', () => {
+      expect(String(TodoTask._fields.completed.type)).to.equal('Boolean');
     });
 
   })
