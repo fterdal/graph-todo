@@ -1,9 +1,8 @@
 'use strict';
 
-const graphql = require('graphql');
 const chai = require('chai');
 
-const schema = require('./index');
+const { schema, resolverMap } = require('./index');
 
 // const todoTaskType = todoTask.type;
 const expect = chai.expect;
@@ -11,36 +10,40 @@ const expect = chai.expect;
 describe('Todo Task', () => {
   // Tests
   before(() => {
-    console.log(schema.schema);
+    // console.log('schema', schema);
   });
 
   describe('Fields', () => {
 
-    it('just a sample test', () => {
-      // console.log(schema);
-      expect(true);
+    it('has the fields id, title, text, completed', () => {
+      expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('id');
+      expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('title');
+      expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('text');
+      expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('completed');
     });
 
-    // it('has a string field called id', () => {
-    //   console.log(todoTask);
-    //   expect(todoTaskType.getFields()).to.have.property('id');
-    //   expect(todoTaskType.getFields().id.type).to.deep.equals(graphql.GraphQLString);
-    // });
-    //
-    // it('has a string field called title', () => {
-    //   expect(todoTaskType.getFields()).to.have.property('title');
-    //   expect(todoTaskType.getFields().title.type).to.deep.equals(graphql.GraphQLString);
-    // });
-    //
-    // it('has a string field called text', () => {
-    //   expect(todoTaskType.getFields()).to.have.property('text');
-    //   expect(todoTaskType.getFields().text.type).to.deep.equals(graphql.GraphQLString);
-    // });
-    //
-    // it('has a boolean field called completed', () => {
-    //   expect(todoTaskType.getFields()).to.have.property('completed');
-    //   expect(todoTaskType.getFields().completed.type).to.deep.equals(graphql.GraphQLBoolean);
-    // });
+    it('id is a string', () => {
+      // console.log(Object.keys(schema._typeMap.TodoTask));
+
+      console.log('Object.keys(schema._typeMap.TodoTask._fields.id.type)',
+        Object.keys(schema._typeMap.TodoTask._fields.id.type)
+      );
+      // expect(schema._typeMap.TodoTask._fields.id.type).to.equal('Int!');
+      // console.log('type of completed field:', schema._typeMap.TodoTask._typeConfig.astNode.fields[3].type.name.value);
+      // expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('id');
+      // expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('title');
+      // expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('text');
+      // expect(Object.keys(schema._typeMap.TodoTask._fields)).to.contain('completed');
+    });
+
+  })
+
+  describe('Resolvers', () => {
+
+    xit('just a sample test', () => {
+      // console.log('resolverMap.TodoTaskById', resolverMap.TodoTaskById);
+      expect(true);
+    });
 
   })
 
