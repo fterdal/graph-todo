@@ -1,7 +1,19 @@
 const mockUsers = [
   {
     id: 1,
-    email: 'bobby@'
+    email: 'bobby@gmail.com'
+  },
+  {
+    id: 2,
+    email: 'ellen@yahoo.com'
+  },
+  {
+    id: 3,
+    email: 'frank@hotmail.com'
+  },
+  {
+    id: 4,
+    email: 'janet@federalreserve.gov'
   },
 ]
 
@@ -31,4 +43,7 @@ const mockTodoTasks = [
   },
 ];
 
-module.exports = mockTodoTasks;
+module.exports = {
+  mockUsers,
+  mockTodoTasks
+};

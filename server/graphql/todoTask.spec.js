@@ -5,7 +5,7 @@ const chai = require('chai');
 
 const {
   schema: { _typeMap: { TodoTask } },
-  resolverMap: { TodoTaskById },
+  resolverMap: { TodoTaskById, AllTodoTasks },
 } = require('./index');
 
 const expect = chai.expect;
@@ -36,13 +36,23 @@ describe('Todo Task', () => {
   describe('Resolvers', () => {
 
     it('TodoTaskById takes an argument and returns a TodoTask', () => {
-      // console.log('resolverMap.TodoTaskById', resolverMap.TodoTaskById);
-      expect(TodoTaskById(1)).to.deep.equal({
-        id: '1',
+      expect(TodoTaskById({ id: 1 })).to.deep.equal({
+        id: 1,
         title: 'groceries',
         text: 'get milk, eggs, and bear traps',
         completed: false,
       });
+    });
+
+    it('AllTodoTasks returns all TodoTasks', () => {
+      const allTodoTasks = AllTodoTasks();
+      expect(allTodoTasks).to.have.length(4);
+      expect(allTodoTasks[1]).to.deep.equal({
+        id: 2,
+        title: 'clothes shopping',
+        text: 'get some new pants and socks',
+        completed: false,
+      })
     });
 
   })
