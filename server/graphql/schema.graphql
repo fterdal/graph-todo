@@ -7,4 +7,5 @@ type TodoTask {
 
 type Query {
   TodoTaskById(id: Int!): TodoTask
+  AllTodoTasks: [TodoTask]
 }
