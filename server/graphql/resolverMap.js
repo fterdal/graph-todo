@@ -3,7 +3,7 @@ const {
   mockTodoTasks,
 } = require('./mocks');
 
-const resolverMap = {
+const todoResolvers = {
   TodoTaskById: ({ id }) => {
     return mockTodoTasks.find(task => {
       return task.id === id;
@@ -12,9 +12,21 @@ const resolverMap = {
   AllTodoTasks: () => {
     return mockTodoTasks
   },
+}
+
+
+const userResolvers = {
+  UserById: ({ id }) => {
+    return mockUsers.find(user => {
+      return user.id === id;
+    })
+  },
   AllUsers: () => {
     return mockUsers
   },
-};
+}
 
-module.exports = resolverMap;
+module.exports = {
+  ...todoResolvers,
+  ...userResolvers,
+};

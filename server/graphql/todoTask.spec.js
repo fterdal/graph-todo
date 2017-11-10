@@ -21,16 +21,18 @@ describe('Todo Task', () => {
     it('id is a required Int', () => {
       expect(String(TodoTask._fields.id.type)).to.equal('Int!');
     });
+
     it('title is a String', () => {
       expect(String(TodoTask._fields.title.type)).to.equal('String');
     });
+
     it('text is a String', () => {
       expect(String(TodoTask._fields.text.type)).to.equal('String');
     });
+
     it('completed is a Boolean', () => {
       expect(String(TodoTask._fields.completed.type)).to.equal('Boolean');
     });
-
   })
 
   describe('Resolvers', () => {
@@ -56,6 +58,4 @@ describe('Todo Task', () => {
     });
 
   })
-
-
 });
