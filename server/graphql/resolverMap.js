@@ -1,5 +1,3 @@
-
-
 const resolverMap = {
   TodoTaskById: id => {
     return {

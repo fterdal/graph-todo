@@ -3,19 +3,14 @@
 const chai = require('chai');
 const util = require('util');
 
-const { schema, resolverMap } = require('./index');
+const {
+  schema: { _typeMap: { TodoTask } },
+  resolverMap: { TodoTaskById },
+} = require('./index');
 
-// const todoTaskType = todoTask.type;
 const expect = chai.expect;
 
 describe('Todo Task', () => {
-
-  const TodoTask = schema._typeMap.TodoTask;
-
-  // Tests
-  before(() => {
-    // console.log('schema', schema);
-  });
 
   describe('Fields', () => {
 
@@ -43,9 +38,14 @@ describe('Todo Task', () => {
 
   describe('Resolvers', () => {
 
-    xit('just a sample test', () => {
+    it('TodoTaskById takes an argument and returns a TodoTask', () => {
       // console.log('resolverMap.TodoTaskById', resolverMap.TodoTaskById);
-      expect(true);
+      expect(TodoTaskById(1)).to.deep.equal({
+        id: '1',
+        title: 'groceries',
+        text: 'get milk, eggs, and bear traps',
+        completed: false,
+      });
     });
 
   })
