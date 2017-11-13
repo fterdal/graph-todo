@@ -27,7 +27,6 @@ describe('GraphQL Queries', () => {
           `})
         .expect(200)
         .then(res => {
-          console.log(res.text);
           expect(JSON.parse(res.text)).to.deep.equal({
             data: {
               TodoTaskById: {
