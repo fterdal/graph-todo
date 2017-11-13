@@ -5,14 +5,24 @@ type TodoTask {
   completed: Boolean
 }
 
+type TodoList {
+  id: Int!
+  name: String
+  description: String
+  tasks: [TodoTask]!
+}
+
 type User {
   id: Int!
   email: String!
+  todoLists: [TodoList]
 }
 
 type Query {
-  TodoTaskById(id: Int!): TodoTask
   AllTodoTasks: [TodoTask]
+  TodoTaskById(id: Int!): TodoTask
+  AllTodoLists: [TodoList]
+  TodoListById(id: Int!): TodoList
   AllUsers: [User]
   UserById(id: Int!): User
 }
