@@ -5,19 +5,22 @@
   "author": "Finn Terdal <fterdal@gmail.com>",
   "scripts": {
     "start": "nodemon server/index.js",
-    "test-server": "mocha --watch --recursive server"
+    "test-server": "NODE_ENV='test' mocha --watch --recursive server"
   },
   "license": "MIT",
   "dependencies": {
     "babel-register": "^6.26.0",
     "body-parser": "^1.18.2",
-    "chai": "^4.1.2",
     "express": "^4.16.2",
     "express-graphql": "^0.6.11",
     "graphql": "^0.11.7",
-    "mocha": "^4.0.1",
     "morgan": "^1.9.0",
-    "nodemon": "^1.12.1",
+    "nodemon": "^1.12.1"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "chai": "^4.1.2",
+    "supertest": "^3.0.0",
     "sinon": "^4.1.2",
     "sinon-chai": "^2.14.0"
   }
