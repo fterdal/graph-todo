@@ -7,8 +7,10 @@ const expect = chai.expect;
 
 describe('GraphQL Queries', () => {
 
-  describe('TodoTask Queris', () => {
-
+  describe('TodoTask Queries', () => {
+    xit('is a query', () => {
+      expect(true);
+    })
   })
 
   describe('User Queries', () => {
