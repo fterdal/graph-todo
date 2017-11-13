@@ -48,8 +48,8 @@ describe('GraphQL Schema', () => {
       expect(String(User._fields.email.type)).to.equal('String!');
     });
 
-    it('todoList is a TodoList', () => {
-      expect(String(User._fields.todoLists.type)).to.equal('TodoList');
+    it('todoList is an array of TodoLists', () => {
+      expect(String(User._fields.todoLists.type)).to.equal('[TodoList]');
     });
 
   })
