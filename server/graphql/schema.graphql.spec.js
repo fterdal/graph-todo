@@ -3,7 +3,9 @@
 
 const chai = require('chai');
 
-const { schema: { _typeMap: { TodoTask, User } } } = require('./index');
+const {
+   schema: { _typeMap: { TodoTask, User, TodoList } }
+} = require('./index');
 
 const expect = chai.expect;
 
@@ -34,8 +36,8 @@ describe('GraphQL Schema', () => {
 
   describe('User Fields', () => {
 
-    it('has fields id, email', () => {
-      expect(User._fields).to.have.all.keys('id', 'email');
+    it('has fields id, email, todoLists', () => {
+      expect(User._fields).to.have.all.keys('id', 'email', 'todoLists');
     });
 
     it('id is a required Int', () => {
@@ -44,6 +46,34 @@ describe('GraphQL Schema', () => {
 
     it('email is a required String', () => {
       expect(String(User._fields.email.type)).to.equal('String!');
+    });
+
+    it('todoList is a TodoList', () => {
+      expect(String(User._fields.todoLists.type)).to.equal('TodoList');
+    });
+
+  })
+
+  describe('TodoList Fields', () => {
+
+    it('has fields id, name, description, tasks', () => {
+      expect(TodoList._fields).to.have.all.keys('id', 'name', 'description', 'tasks');
+    });
+
+    it('id is a required Int', () => {
+      expect(String(TodoList._fields.id.type)).to.equal('Int!');
+    });
+
+    it('name is a required String', () => {
+      expect(String(TodoList._fields.name.type)).to.equal('String');
+    });
+
+    it('description is a required String', () => {
+      expect(String(TodoList._fields.description.type)).to.equal('String');
+    });
+
+    it('tasks is a required array of TodoItems', () => {
+      expect(String(TodoList._fields.tasks.type)).to.equal('[TodoTask]!');
     });
 
   })

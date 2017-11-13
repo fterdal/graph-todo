@@ -15,7 +15,7 @@ type TodoList {
 type User {
   id: Int!
   email: String!
-  todoLists: [TodoList]!
+  todoLists: TodoList
 }
 
 type Query {
