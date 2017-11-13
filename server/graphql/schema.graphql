@@ -19,8 +19,10 @@ type User {
 }
 
 type Query {
-  TodoTaskById(id: Int!): TodoTask
   AllTodoTasks: [TodoTask]
+  TodoTaskById(id: Int!): TodoTask
+  AllTodoLists: [TodoList]
+  TodoListById(id: Int!): TodoList
   AllUsers: [User]
   UserById(id: Int!): User
 }
