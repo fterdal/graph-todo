@@ -10,6 +10,23 @@ const expect = chai.expect;
 
 describe('GraphQL Server', () => {
 
+  it('responds to incorrect URI with 404', () => {
+    return request(app)
+      .post('/wrongGraphQLURL')
+      .set('Accept', 'application/json')
+      .send({ query: `
+        {
+          TodoTaskById(id: 1) {
+            id
+            title
+            text
+            completed
+          }
+        }
+        `})
+      .expect(404)
+  })
+
   describe('TodoTask Queries', () => {
 
     it('responds to valid query with status 200 & JSON body', () => {
