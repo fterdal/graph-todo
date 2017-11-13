@@ -12,11 +12,11 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/graphiql', expressGraphql({
+app.use('/graphql', expressGraphql({
   schema,
   rootValue: resolverMap,
   pretty : true,
-  graphiql : true
+  graphiql : true,
 }));
 
 // static file-serving middleware
@@ -25,3 +25,5 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 if (require.main === module) {
   app.listen(PORT, () => console.log(`Waiting for requests on port ${PORT}`));
 }
+
+module.exports = app;
