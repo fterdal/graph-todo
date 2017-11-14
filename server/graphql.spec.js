@@ -29,7 +29,7 @@ describe('GraphQL Server', () => {
 
   describe('TodoTask Queries', () => {
 
-    it('responds to valid query with status 200 & JSON body', () => {
+    it('valid TodoTaskById query reqponds with status 200 & JSON body', () => {
       return request(app)
         .post('/graphql')
         .set('Accept', 'application/json')
@@ -54,6 +54,34 @@ describe('GraphQL Server', () => {
                 completed: false,
               }
             }
+          })
+        })
+    })
+
+    it('valid AllTodoTasks query reqponds with status 200 & JSON body', () => {
+      return request(app)
+        .post('/graphql')
+        .set('Accept', 'application/json')
+        .send({ query: `
+          {
+            AllTodoTasks {
+              id
+              title
+              text
+              completed
+            }
+          }
+          `})
+        .expect(200)
+        .then(res => {
+          const parsedResData = JSON.parse(res.text).data;
+          expect(parsedResData).to.have.own.property('AllTodoTasks');
+          expect(parsedResData.AllTodoTasks).to.have.length(4);
+          expect(parsedResData.AllTodoTasks[1]).to.deep.equal({
+            id: 2,
+            title: 'clothes shopping',
+            text: 'get some new pants and socks',
+            completed: false,
           })
         })
     })
