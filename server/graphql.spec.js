@@ -209,6 +209,80 @@ describe('GraphQL Server', () => {
 
   describe('TodoList Queries', () => {
 
+    it('valid TodoListById query responds with status 200 & JSON body', () => {
+      return request(app)
+        .post('/graphql')
+        .set('Accept', 'application/json')
+        .send({ query: `
+          {
+            TodoListById(id: 1) {
+              id
+              name
+              description
+            }
+          }
+          `})
+        .expect(200)
+        .then(res => {
+          expect(JSON.parse(res.text)).to.deep.equal({
+            data: {
+              TodoListById: {
+                id: 1,
+                name: 'first list',
+                description: 'go do some stuff',
+              }
+            }
+          })
+        })
+    })
+    it('valid AllTodoList query responds with status 200 & JSON body', () => {
+      return request(app)
+        .post('/graphql')
+        .set('Accept', 'application/json')
+        .send({ query: `
+          {
+            AllTodoLists {
+              id
+              name
+              description
+            }
+          }
+          `})
+        .expect(200)
+        .then(res => {
+          const parsedResData = JSON.parse(res.text).data;
+          expect(parsedResData).to.have.own.property('AllTodoLists');
+          expect(parsedResData.AllTodoLists).to.have.length(5);
+          expect(parsedResData.AllTodoLists[1]).to.deep.equal({
+            id: 2,
+            name: 'second list',
+            description: 'get busy!',
+          })
+        })
+      })
+
+      it('responds to invalid query with 400', () => {
+        return request(app)
+          .post('/graphql')
+          .set('Accept', 'application/json')
+          .send({ query: `
+            {
+              # Missing id argument
+              TodoListById {
+                id
+                name
+                description
+              }
+            }
+            `})
+          .expect(400)
+          .then(res => {
+            const parsedRes = JSON.parse(res.text);
+            expect(parsedRes).to.have.own.property('errors');
+            expect(parsedRes).to.not.have.own.property('data');
+          })
+      })
+
   })
 
 });
