@@ -27,6 +27,11 @@ app.use('/graphql', expressGraphql({
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+// sends index.html
+  app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+  })
+
 if (require.main === module) {
   app.listen(PORT, () => console.log(`Waiting for requests on port ${PORT}`));
 }
