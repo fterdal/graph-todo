@@ -4,7 +4,7 @@ const userResolvers = {
   UserById: ({ id }) => {
     return mockUsers.find(user => {
       return user.id === id;
-    })
+    });
   },
   AllUsers: () => {
     return mockUsers
