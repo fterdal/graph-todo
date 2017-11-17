@@ -19,14 +19,14 @@ type User {
 }
 
 type Query {
-  AllTodoTasks: [TodoTask]
-  TodoTaskById(id: Int!): TodoTask
-  AllTodoLists: [TodoList]
-  TodoListById(id: Int!): TodoList
-  AllUsers: [User]
-  UserById(id: Int!): User
+  allTodoTasks: [TodoTask]
+  todoTaskById(id: Int!): TodoTask
+  allTodoLists: [TodoList]
+  todoListById(id: Int!): TodoList
+  allUsers: [User]
+  userById(id: Int!): User
 }
 
 type Mutation {
-  CompleteTask(id: Int!): TodoTask
+  completeTaskById(id: Int!): TodoTask
 }

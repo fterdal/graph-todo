@@ -4,15 +4,15 @@
 const chai = require('chai');
 
 const {
-  resolverMap: { AllTodoTasks, TodoTaskById },
+  resolverMap: { allTodoTasks, todoTaskById },
 } = require('../../index');
 
 const expect = chai.expect;
 
 describe('TodoTask Resolvers', () => {
 
-    it('TodoTaskById takes an argument and returns a TodoTask', () => {
-      expect(TodoTaskById({ id: 1 })).to.deep.equal({
+    it('todoTaskById takes an argument and returns a TodoTask', () => {
+      expect(todoTaskById({ id: 1 })).to.deep.equal({
         id: 1,
         title: 'groceries',
         text: 'get milk, eggs, and bear traps',
@@ -20,10 +20,10 @@ describe('TodoTask Resolvers', () => {
       });
     });
 
-    it('AllTodoTasks returns all TodoTasks', () => {
-      const allTodoTasks = AllTodoTasks();
-      expect(allTodoTasks).to.have.length(4);
-      expect(allTodoTasks[1]).to.deep.equal({
+    it('allTodoTasks returns all TodoTasks', () => {
+      const todoTasks = allTodoTasks();
+      expect(todoTasks).to.have.length(4);
+      expect(todoTasks[1]).to.deep.equal({
         id: 2,
         title: 'clothes shopping',
         text: 'get some new pants and socks',

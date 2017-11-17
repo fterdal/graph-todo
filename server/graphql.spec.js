@@ -12,13 +12,13 @@ describe('GraphQL Server', () => {
 
   describe('TodoTask Queries', () => {
 
-    it('valid TodoTaskById query responds with status 200 & JSON body', () => {
+    it('valid todoTaskById query responds with status 200 & JSON body', () => {
       return request(app)
         .post('/graphql')
         .set('Accept', 'application/json')
         .send({ query: `
           {
-            TodoTaskById(id: 1) {
+            todoTaskById(id: 1) {
               id
               title
               text
@@ -30,7 +30,7 @@ describe('GraphQL Server', () => {
         .then(res => {
           expect(JSON.parse(res.text)).to.deep.equal({
             data: {
-              TodoTaskById: {
+              todoTaskById: {
                 id: 1,
                 title: 'groceries',
                 text: 'get milk, eggs, and bear traps',
@@ -41,13 +41,13 @@ describe('GraphQL Server', () => {
         })
     })
 
-    it('valid AllTodoTasks query responds with status 200 & JSON body', () => {
+    it('valid allTodoTasks query responds with status 200 & JSON body', () => {
       return request(app)
         .post('/graphql')
         .set('Accept', 'application/json')
         .send({ query: `
           {
-            AllTodoTasks {
+            allTodoTasks {
               id
               title
               text
@@ -58,9 +58,9 @@ describe('GraphQL Server', () => {
         .expect(200)
         .then(res => {
           const parsedResData = JSON.parse(res.text).data;
-          expect(parsedResData).to.have.own.property('AllTodoTasks');
-          expect(parsedResData.AllTodoTasks).to.have.length(4);
-          expect(parsedResData.AllTodoTasks[1]).to.deep.equal({
+          expect(parsedResData).to.have.own.property('allTodoTasks');
+          expect(parsedResData.allTodoTasks).to.have.length(4);
+          expect(parsedResData.allTodoTasks[1]).to.deep.equal({
             id: 2,
             title: 'clothes shopping',
             text: 'get some new pants and socks',
@@ -76,7 +76,7 @@ describe('GraphQL Server', () => {
         .send({ query: `
           {
             # Missing id argument
-            TodoTaskById {
+            todoTaskById {
               id
               title
               text
@@ -96,13 +96,13 @@ describe('GraphQL Server', () => {
 
   describe('User Queries', () => {
 
-    it('valid UserById query responds with status 200 & JSON body', () => {
+    it('valid userById query responds with status 200 & JSON body', () => {
       return request(app)
         .post('/graphql')
         .set('Accept', 'application/json')
         .send({ query: `
           {
-            UserById(id: 1) {
+            userById(id: 1) {
               id
               email
             }
@@ -112,7 +112,7 @@ describe('GraphQL Server', () => {
         .then(res => {
           expect(JSON.parse(res.text)).to.deep.equal({
             data: {
-              UserById: {
+              userById: {
                 id: 1,
                 email: 'bobby@gmail.com',
               }
@@ -121,13 +121,13 @@ describe('GraphQL Server', () => {
         })
     })
 
-    it('valid AllUsers query responds with status 200 & JSON body', () => {
+    it('valid allUsers query responds with status 200 & JSON body', () => {
       return request(app)
         .post('/graphql')
         .set('Accept', 'application/json')
         .send({ query: `
           {
-            AllUsers {
+            allUsers {
               id
               email
             }
@@ -136,9 +136,9 @@ describe('GraphQL Server', () => {
         .expect(200)
         .then(res => {
           const parsedResData = JSON.parse(res.text).data;
-          expect(parsedResData).to.have.own.property('AllUsers');
-          expect(parsedResData.AllUsers).to.have.length(4);
-          expect(parsedResData.AllUsers[1]).to.deep.equal({
+          expect(parsedResData).to.have.own.property('allUsers');
+          expect(parsedResData.allUsers).to.have.length(4);
+          expect(parsedResData.allUsers[1]).to.deep.equal({
             id: 2,
             email: 'ellen@yahoo.com',
           })
@@ -151,7 +151,7 @@ describe('GraphQL Server', () => {
         .set('Accept', 'application/json')
         .send({ query: `
           {
-            UserById(id: 1) {
+            userById(id: 1) {
               id
               email
               todoLists {
@@ -165,7 +165,7 @@ describe('GraphQL Server', () => {
         .then(res => {
           expect(JSON.parse(res.text)).to.deep.equal({
             data: {
-              UserById: {
+              userById: {
                 id: 1,
                 email: 'bobby@gmail.com',
                 todoLists: [
@@ -191,7 +191,7 @@ describe('GraphQL Server', () => {
         .send({ query: `
           {
             # Missing id argument
-            UserById {
+            userById {
               id
               email
             }
@@ -209,13 +209,13 @@ describe('GraphQL Server', () => {
 
   describe('TodoList Queries', () => {
 
-    it('valid TodoListById query responds with status 200 & JSON body', () => {
+    it('valid todoListById query responds with status 200 & JSON body', () => {
       return request(app)
         .post('/graphql')
         .set('Accept', 'application/json')
         .send({ query: `
           {
-            TodoListById(id: 1) {
+            todoListById(id: 1) {
               id
               name
               description
@@ -226,7 +226,7 @@ describe('GraphQL Server', () => {
         .then(res => {
           expect(JSON.parse(res.text)).to.deep.equal({
             data: {
-              TodoListById: {
+              todoListById: {
                 id: 1,
                 name: 'first list',
                 description: 'go do some stuff',
@@ -235,13 +235,13 @@ describe('GraphQL Server', () => {
           })
         })
     })
-    it('valid AllTodoList query responds with status 200 & JSON body', () => {
+    it('valid allTodoList query responds with status 200 & JSON body', () => {
       return request(app)
         .post('/graphql')
         .set('Accept', 'application/json')
         .send({ query: `
           {
-            AllTodoLists {
+            allTodoLists {
               id
               name
               description
@@ -251,9 +251,9 @@ describe('GraphQL Server', () => {
         .expect(200)
         .then(res => {
           const parsedResData = JSON.parse(res.text).data;
-          expect(parsedResData).to.have.own.property('AllTodoLists');
-          expect(parsedResData.AllTodoLists).to.have.length(5);
-          expect(parsedResData.AllTodoLists[1]).to.deep.equal({
+          expect(parsedResData).to.have.own.property('allTodoLists');
+          expect(parsedResData.allTodoLists).to.have.length(5);
+          expect(parsedResData.allTodoLists[1]).to.deep.equal({
             id: 2,
             name: 'second list',
             description: 'get busy!',
@@ -268,7 +268,7 @@ describe('GraphQL Server', () => {
           .send({ query: `
             {
               # Missing id argument
-              TodoListById {
+              todoListById {
                 id
                 name
                 description
