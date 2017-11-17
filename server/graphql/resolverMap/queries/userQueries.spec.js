@@ -5,8 +5,8 @@ const chai = require('chai');
 
 const {
   resolverMap: { AllUsers, UserById },
-} = require('../index');
-const { mockUsers } = require('./mocks');
+} = require('../../index');
+const { mockUsers } = require('../mocks');
 
 const expect = chai.expect;
 

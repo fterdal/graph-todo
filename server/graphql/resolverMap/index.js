@@ -1,11 +1,7 @@
-const todoTaskResolvers = require('./todoTaskResolvers');
-const todoListResolvers = require('./todoListResolvers');
-const userResolvers = require('./userResolvers');
-const mutationResolvers = require('./mutationResolvers');
+const queries = require('./queries');
+const mutations = require('./mutations');
 
 module.exports = {
-  ...todoListResolvers,
-  ...todoTaskResolvers,
-  ...userResolvers,
-  ...mutationResolvers,
+  ...queries,
+  ...mutations,
 };

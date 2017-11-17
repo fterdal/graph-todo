@@ -1,4 +1,4 @@
-const { mockTodoTasks } = require('./mocks');
+const { mockTodoTasks } = require('../mocks');
 
 const todoTaskResolvers = {
   TodoTaskById: ({ id }) => {
