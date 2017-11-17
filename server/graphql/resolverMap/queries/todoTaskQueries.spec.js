@@ -10,7 +10,7 @@ const { reset } = require('../mocks');
 
 const expect = chai.expect;
 
-describe('TodoTask Queries', () => {
+describe('TodoTask Query Resolvers', () => {
 
     beforeEach(() => {
       // console.log(reset.toString());

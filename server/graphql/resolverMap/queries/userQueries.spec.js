@@ -10,7 +10,7 @@ const { mockUsers } = require('../mocks');
 
 const expect = chai.expect;
 
-describe('User Queries', () => {
+describe('User Query Resolvers', () => {
 
   it('userById takes an argument and returns a User', () => {
     expect(userById({ id: 1 })).to.deep.equal(mockUsers[0]);

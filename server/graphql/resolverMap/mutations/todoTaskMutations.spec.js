@@ -10,7 +10,7 @@ const { mockTodoTasks } = require('../mocks');
 
 const expect = chai.expect;
 
-describe('TodoTask Mutations', () => {
+describe('TodoTask Mutation Resolvers', () => {
 
     it('completeTaskById takes an id argument and changes the matching todoTask', () => {
       const todoTaskBefore = { ...mockTodoTasks[0] };

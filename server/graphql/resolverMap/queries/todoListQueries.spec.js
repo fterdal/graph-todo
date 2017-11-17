@@ -10,7 +10,7 @@ const { mockTodoLists } = require('../mocks');
 
 const expect = chai.expect;
 
-describe('TodoList Queries', () => {
+describe('TodoList Query Resolvers', () => {
 
     it('todoListById takes an argument and returns a TodoList', () => {
       expect(todoListById({ id: 1 })).to.deep.equal(mockTodoLists[0]);
