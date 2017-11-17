@@ -1,7 +1,9 @@
-const queries = require('./queries');
-const mutations = require('./mutations');
+const todoTasks = require('./todoTasks');
+const todoLists = require('./todoLists');
+const users = require('./users');
 
 module.exports = {
-  ...queries,
-  ...mutations,
+  ...todoTasks,
+  ...todoLists,
+  ...users,
 };

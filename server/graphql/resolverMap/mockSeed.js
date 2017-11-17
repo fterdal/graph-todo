@@ -1,5 +1,7 @@
 const mocks = require('./mocks');
 
+mocks.reset();
+
 const seedTodoTasks = [
   {
     title: 'groceries',
@@ -80,5 +82,3 @@ const seedUsers = [
 seedUsers.forEach(user => {
   mocks.addUser(user)
 });
-
-// mocks.reset();
