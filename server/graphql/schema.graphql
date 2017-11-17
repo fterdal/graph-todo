@@ -26,3 +26,7 @@ type Query {
   AllUsers: [User]
   UserById(id: Int!): User
 }
+
+type Mutation {
+  CompleteTask(id: Int!): TodoTask
+}
