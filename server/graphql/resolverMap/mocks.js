@@ -35,6 +35,7 @@ module.exports = {
 
   completeTask({id}) {
     mockTodoTasks[id].completed = !mockTodoTasks[id].completed
+    return mockTodoTasks[id];
   },
 
   listTodoTasks() {

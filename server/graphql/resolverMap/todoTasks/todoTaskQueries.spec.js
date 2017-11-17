@@ -14,10 +14,6 @@ const expect = chai.expect;
 
 describe('TodoTask Query Resolvers', () => {
 
-    beforeEach(() => {
-      reset();
-    })
-
     it('todoTaskById takes an argument and returns a TodoTask', () => {
       expect(todoTaskById({ id: 1 })).to.deep.equal({
         id: 1,

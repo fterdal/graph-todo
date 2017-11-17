@@ -1,11 +1,9 @@
-const { mockTodoTasks } = require('../mocks');
+const {
+  completeTask,
+} = require('../mocks');
 
 const todoTaskMutations = {
-  completeTaskById: ({ id }) => {
-    const foundTask = mockTodoTasks.find(task => task.id === id)
-    foundTask.completed = !foundTask.completed;
-    return foundTask;
-  },
+  completeTaskById: ({ id }) => completeTask({ id }),
 }
 
 module.exports = todoTaskMutations;
