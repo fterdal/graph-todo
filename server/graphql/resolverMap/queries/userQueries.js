@@ -1,12 +1,12 @@
 const { mockUsers } = require('../mocks');
 
 const userResolvers = {
-  UserById: ({ id }) => {
+  userById: ({ id }) => {
     return mockUsers.find(user => {
       return user.id === id;
     });
   },
-  AllUsers: () => {
+  allUsers: () => {
     return mockUsers
   },
 }

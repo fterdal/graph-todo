@@ -1,12 +1,12 @@
 const { mockTodoLists } = require('../mocks');
 
 const todoListResolvers = {
-  TodoListById: ({ id }) => {
+  todoListById: ({ id }) => {
     return mockTodoLists.find(list => {
       return list.id === id;
     })
   },
-  AllTodoLists: () => {
+  allTodoLists: () => {
     return mockTodoLists
   },
 }
