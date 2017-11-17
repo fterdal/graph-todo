@@ -1,4 +1,4 @@
-const mockTodoTasks = [
+let mockTodoTasks = [
   {
     id: 1,
     title: 'groceries',
@@ -23,8 +23,9 @@ const mockTodoTasks = [
     completed: false,
   },
 ];
+const originalMockTodoTasks = {...mockTodoTasks};
 
-const mockTodoLists = [
+let mockTodoLists = [
   {
     id: 1,
     name: 'first list',
@@ -56,8 +57,9 @@ const mockTodoLists = [
     tasks: [mockTodoTasks[2]],
   },
 ];
+const originalMockTodoLists = {...mockTodoLists};
 
-const mockUsers = [
+let mockUsers = [
   {
     id: 1,
     email: 'bobby@gmail.com',
@@ -79,9 +81,24 @@ const mockUsers = [
     todoLists: [mockTodoLists[3]],
   },
 ];
+const originalMockUsers = Object.assign({}, mockUsers);
+
+const reset = () => {
+  console.log('originalMockUsers[0]', originalMockUsers[0]);
+  mockUsers = {...originalMockUsers};
+  mockTodoTasks = originalMockTodoTasks;
+  mockTodoLists = originalMockTodoLists;
+}
+
+console.log('mockUsers[0]', mockUsers[0]);
+mockUsers[0].email = 'bobbys new email dot com';
+console.log('mockUsers[0]', mockUsers[0]);
+reset();
+console.log('mockUsers[0]', mockUsers[0]);
 
 module.exports = {
   mockUsers,
   mockTodoTasks,
   mockTodoLists,
+  reset,
 };

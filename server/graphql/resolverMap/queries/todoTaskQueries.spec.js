@@ -6,10 +6,16 @@ const chai = require('chai');
 const {
   resolverMap: { allTodoTasks, todoTaskById },
 } = require('../../index');
+const { reset } = require('../mocks');
 
 const expect = chai.expect;
 
-describe('TodoTask Resolvers', () => {
+describe('TodoTask Queries', () => {
+
+    beforeEach(() => {
+      // console.log(reset.toString());
+      reset();
+    })
 
     it('todoTaskById takes an argument and returns a TodoTask', () => {
       expect(todoTaskById({ id: 1 })).to.deep.equal({
