@@ -1,22 +1,51 @@
-let mockTodoTasks = []
-let mockTodoLists = []
-let mockUsers = []
+let mockTodoTasks = {}
+let mockTodoLists = {}
+let mockUsers = {}
+
+const largestId = (obj) => {
+  return Object.keys(obj).reduce((largest, elem) => {
+    return Number(elem) > largest ? Number(elem) : largest
+  }, 0)
+}
 
 module.exports = {
 
+  // RESET
   reset() {
-    mockTodoTasks = []
-    mockTodoLists = []
-    mockUsers = []
+    mockTodoTasks = {}
+    mockTodoLists = {}
+    mockUsers = {}
   },
 
+  // TODOTASKS
   addTodoTask({title, text, completed = false}) {
-    const nextId = mockUsers.length + 1;
-    mockTodoTasks.push({nextId, title, text, completed});
+    const id = largestId(mockTodoTasks) + 1;
+    mockTodoTasks[id] = {id, title, text, completed};
   },
 
   listTodoTasks() {
     return mockTodoTasks;
+  },
+
+  // TODOLISTS
+  addTodoList({name, description, tasks = []}) {
+    const id = largestId(mockTodoLists) + 1;
+    mockTodoLists[id] = {id, name, description, tasks};
+  },
+
+  listTodoLists() {
+    return mockTodoLists;
+  },
+
+  // USERS
+  addUser({email, taskLists = []}) {
+    // const id = mockUsers.length + 1;
+    const id = largestId(mockUsers) + 1;
+    mockUsers[id] = {id, email, taskLists};
+  },
+
+  listUsers() {
+    return mockUsers;
   },
   //
   // mockTodoTasks : [
