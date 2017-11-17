@@ -1,4 +1,4 @@
-const { mockTodoLists } = require('./mocks');
+const { mockTodoLists } = require('../mocks');
 
 const todoListResolvers = {
   TodoListById: ({ id }) => {

@@ -25,7 +25,7 @@ app.use('/graphql', expressGraphql({
 }));
 
 // static file-serving middleware
-app.use(express.static(path.join(__dirname, '..', 'public')));1
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // sends index.html
 app.use('*', (req, res) => {

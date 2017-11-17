@@ -5,7 +5,7 @@ const chai = require('chai');
 
 const {
   resolverMap: { AllTodoTasks, TodoTaskById },
-} = require('../index');
+} = require('../../index');
 
 const expect = chai.expect;
 

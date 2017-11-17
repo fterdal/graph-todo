@@ -4,9 +4,9 @@
 const chai = require('chai');
 
 const {
-  resolverMap: { AllTodoLists, TodoListById },
-} = require('../index');
-const { mockTodoLists } = require('./mocks');
+  resolverMap: { AllTodoLists, TodoListById }
+} = require('../../index');
+const { mockTodoLists } = require('../mocks');
 
 const expect = chai.expect;
 

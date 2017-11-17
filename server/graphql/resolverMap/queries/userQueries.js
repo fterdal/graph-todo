@@ -1,4 +1,4 @@
-const { mockUsers } = require('./mocks');
+const { mockUsers } = require('../mocks');
 
 const userResolvers = {
   UserById: ({ id }) => {
