@@ -8,6 +8,12 @@ const largestId = (obj) => {
   }, 0)
 }
 
+const getData = (obj) =>  {
+  return Object.keys(obj).map(key => {
+    return obj[key];
+  })
+}
+
 module.exports = {
 
   // RESET
@@ -24,7 +30,7 @@ module.exports = {
   },
 
   listTodoTasks() {
-    return mockTodoTasks;
+    return getData(mockTodoTasks);
   },
 
   // TODOLISTS
@@ -34,7 +40,7 @@ module.exports = {
   },
 
   listTodoLists() {
-    return mockTodoLists;
+    return getData(mockTodoLists);
   },
 
   // USERS
@@ -45,7 +51,7 @@ module.exports = {
   },
 
   listUsers() {
-    return mockUsers;
+    return getData(mockUsers);
   },
   //
   // mockTodoTasks : [
