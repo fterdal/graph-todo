@@ -29,6 +29,10 @@ module.exports = {
     mockTodoTasks[id] = {id, title, text, completed};
   },
 
+  todoTaskById({id}) {
+    return mockTodoTasks[id]
+  },
+
   listTodoTasks() {
     return getData(mockTodoTasks);
   },
@@ -39,47 +43,28 @@ module.exports = {
     mockTodoLists[id] = {id, name, description, tasks};
   },
 
+  todoListById({id}) {
+    return mockTodoLists[id]
+  },
+
   listTodoLists() {
     return getData(mockTodoLists);
   },
 
   // USERS
   addUser({email, taskLists = []}) {
-    // const id = mockUsers.length + 1;
     const id = largestId(mockUsers) + 1;
     mockUsers[id] = {id, email, taskLists};
+  },
+
+  userById({id}) {
+    return mockUsers[id]
   },
 
   listUsers() {
     return getData(mockUsers);
   },
-  //
-  // mockTodoTasks : [
-  //   {
-  //     id: 1,
-  //     title: 'groceries',
-  //     text: 'get milk, eggs, and bear traps',
-  //     completed: false,
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'clothes shopping',
-  //     text: 'get some new pants and socks',
-  //     completed: false,
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'letter to grandma',
-  //     text: "remember to mention grandpa's upcoming birthday",
-  //     completed: true,
-  //   },
-  //   {
-  //     id: 4,
-  //     title: 'change oil in car',
-  //     completed: false,
-  //   },
-  // ],
-  //
+
   // mockTodoLists : [
   //   {
   //     id: 1,
