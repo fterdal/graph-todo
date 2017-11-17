@@ -8,12 +8,13 @@ const {
 } = require('../../index');
 const { reset } = require('../mocks');
 
+// TODO: Refactor this to const { expect } = require('chai');
+// and delete the above const chai
 const expect = chai.expect;
 
 describe('TodoTask Query Resolvers', () => {
 
     beforeEach(() => {
-      // console.log(reset.toString());
       reset();
     })
 
