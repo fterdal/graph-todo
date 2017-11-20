@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/graphql', expressGraphql({
   schema,
-  rootValue: resolverMap,
+  rootValue : resolverMap,
   pretty : true,
   graphiql : true,
 }));
