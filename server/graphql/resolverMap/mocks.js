@@ -29,7 +29,7 @@ module.exports = {
     mockTodoTasks[id] = {id, title, text, completed};
   },
 
-  todoTaskById({id}) {
+  todoTask({id}) {
     return mockTodoTasks[id]
   },
 
@@ -48,7 +48,7 @@ module.exports = {
     mockTodoLists[id] = {id, name, description, tasks};
   },
 
-  todoListById({id}) {
+  todoList({id}) {
     return mockTodoLists[id]
   },
 
@@ -62,7 +62,7 @@ module.exports = {
     mockUsers[id] = {id, email, todoLists};
   },
 
-  userById({id}) {
+  user({id}) {
     return mockUsers[id]
   },
 

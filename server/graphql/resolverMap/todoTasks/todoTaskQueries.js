@@ -1,10 +1,10 @@
 const {
-  todoTaskById,
+  todoTask,
   listTodoTasks,
 } = require('../mocks');
 
 const todoTaskResolvers = {
-  todoTaskById: ({ id }) => todoTaskById({ id }),
+  todoTaskById: ({ id }) => todoTask({ id }),
   allTodoTasks: () => listTodoTasks(),
 }
 

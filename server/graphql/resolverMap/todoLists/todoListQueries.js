@@ -1,14 +1,11 @@
-const { mockTodoLists } = require('../mocks');
+const {
+  todoList,
+  listTodoLists,
+} = require('../mocks');
 
 const todoListResolvers = {
-  todoListById: ({ id }) => {
-    return mockTodoLists.find(list => {
-      return list.id === id;
-    })
-  },
-  allTodoLists: () => {
-    return mockTodoLists
-  },
+  todoListById: ({ id }) => todoList({id: id}),
+  allTodoLists: () => listTodoLists(),
 }
 
 module.exports = todoListResolvers;

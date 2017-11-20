@@ -1,16 +1,11 @@
 /* eslint new-cap:0 */
 'use strict';
 
-const chai = require('chai');
+const { expect } = require('chai');
 
 const {
   resolverMap: { allTodoTasks, todoTaskById },
 } = require('../../index');
-const { reset } = require('../mocks');
-
-// TODO: Refactor this to const { expect } = require('chai');
-// and delete the above const chai
-const expect = chai.expect;
 
 describe('TodoTask Query Resolvers', () => {
 
@@ -19,7 +14,7 @@ describe('TodoTask Query Resolvers', () => {
         id: 1,
         title: 'groceries',
         text: 'get milk, eggs, and bear traps',
-        completed: false,
+        completed: true,
       });
     });
 
