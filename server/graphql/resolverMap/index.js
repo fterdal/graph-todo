@@ -1,7 +1,11 @@
-const queries = require('./queries');
-const mutations = require('./mutations');
+const todoTasks = require('./todoTasks');
+const todoLists = require('./todoLists');
+const users = require('./users');
+
+require('./mockSeed');
 
 module.exports = {
-  ...queries,
-  ...mutations,
+  ...todoTasks,
+  ...todoLists,
+  ...users,
 };

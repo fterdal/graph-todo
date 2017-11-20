@@ -1,22 +1,20 @@
 /* eslint new-cap:0 */
 'use strict';
 
-const chai = require('chai');
+const { expect } = require('chai');
 
 const {
   resolverMap: { allTodoTasks, todoTaskById },
 } = require('../../index');
 
-const expect = chai.expect;
-
-describe('TodoTask Resolvers', () => {
+describe('TodoTask Query Resolvers', () => {
 
     it('todoTaskById takes an argument and returns a TodoTask', () => {
       expect(todoTaskById({ id: 1 })).to.deep.equal({
         id: 1,
         title: 'groceries',
         text: 'get milk, eggs, and bear traps',
-        completed: false,
+        completed: true,
       });
     });
 
