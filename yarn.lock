@@ -138,7 +138,7 @@ apollo-link-http@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/apollo-link-http/-/apollo-link-http-1.2.0.tgz#48464c2ebfa6474f7a89908696827d66b2deb5cc"
 
-apollo-link@^1.0.0:
+apollo-link@^1.0.0, apollo-link@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.0.3.tgz#759c36abeeb99e227eca45f919ee07fb8fee911e"
   dependencies:
