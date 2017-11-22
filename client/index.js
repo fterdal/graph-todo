@@ -5,6 +5,8 @@ import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
+import App from './App';
+
 const client = new ApolloClient({
   link: new HttpLink(),
   cache: new InMemoryCache(),
@@ -12,7 +14,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <h1>Hello from React & Apollo!</h1>
+    <App />
   </ApolloProvider>,
   document.getElementById('app')
 );
