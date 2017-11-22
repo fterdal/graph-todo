@@ -2,16 +2,16 @@ import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
-const App = (props) => {
-  console.log(props);
+const App = ({data}) => {
+  const users = data.loading ? [] : data.allUsers;
+  const usersList = users.map(user => {
+    return <li key={user.id} >{user.id} -- {user.email}</li>;
+  })
   return (
-    <div>
-      <h1>This is the main App component.</h1>
-      <h2>Eventually, this'll be a list of users, gathered from GraphQL</h2>
+    <div className="container">
+      <h1>All Users</h1>
       <ul>
-        <li>dummy</li>
-        <li>dummy2</li>
-        <li>dummy3</li>
+        {usersList ? usersList : 'Loading...'}
       </ul>
     </div>
   )
@@ -19,7 +19,7 @@ const App = (props) => {
 
 const query = gql`
   query {
-  userById(id: 4) {
+  allUsers {
     id
     email
   }
