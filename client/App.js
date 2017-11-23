@@ -1,31 +1,25 @@
 import React from 'react';
-import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag';
+import { Router } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
+import {
+  UsersList,
+  Home,
+  NavBar,
+} from './components';
+import history from './history';
 
-const App = ({data}) => {
-  const users = data.loading ? [] : data.allUsers;
-  const usersList = users.map(user => {
-    return <li key={user.id} >{user.id} -- {user.email}</li>;
-  })
+const App = () => {
   return (
-    <div className="container">
-      <h1>All Users</h1>
-      <ul>
-        {usersList ? usersList : 'Loading...'}
-      </ul>
-    </div>
+    <Router history={history}>
+      <div>
+        <NavBar />
+        <Switch>
+          <Route path="/users" component={UsersList}/>
+          <Route path="/" component={Home}/>
+        </Switch>
+      </div>
+    </Router>
   )
 }
 
-const query = gql`
-  query {
-  allUsers {
-    id
-    email
-  }
-}
-`;
-
-export default compose(
-  graphql(query),
-)(App)
+export default App;
