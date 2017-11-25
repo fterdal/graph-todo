@@ -3,6 +3,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressGraphql = require('express-graphql');
+const jwt = require('jwt-express');
+
+let jwtSecret
+try { jwtSecret = require('../secrets').jwtSecret }
+catch(_) { jwtSecret = 'secret' }
 
 const { schema, resolverMap } = require('./graphql');
 const PORT = process.env.PORT || 8080;
@@ -16,6 +21,10 @@ if (process.env.NODE_ENV !== 'test') {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Set up authentication / authorization with JWTs. Make sure
+// you have a secrets.js file at the root of this project.
+app.use(jwt.init(jwtSecret));
 
 app.use('/graphql', expressGraphql({
   schema,
