@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressGraphql = require('express-graphql');
+const cookieParser = require('cookie-parser')
 const jwt = require('jwt-express');
 
 require('../secrets');
@@ -22,7 +23,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up authentication / authorization with JWTs. Make sure
 // you have a secrets.js file at the root of this project.
-app.use(jwt.init(process.env.jwtSecret || 'some secret'));
+app.use(cookieParser(process.env.jwtSecret || 'super secret'))
+app.use(jwt.init(process.env.jwtSecret || 'super secret'));
 
 app.use('/graphql', expressGraphql({
   schema,
