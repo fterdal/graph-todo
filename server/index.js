@@ -3,6 +3,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressGraphql = require('express-graphql');
+const cookieParser = require('cookie-parser')
+const jwt = require('express-jwt');
+
+try { require('../secrets') }
+catch(err) {
+  console.error(`You should create a secrets file which adds private data to the process.env`);
+  process.env.jwtSecret = 'super secret';
+}
 
 const { schema, resolverMap } = require('./graphql');
 const PORT = process.env.PORT || 8080;
@@ -16,6 +24,15 @@ if (process.env.NODE_ENV !== 'test') {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Set up authentication / authorization with JWTs. Make sure
+// you have a secrets.js file at the root of this project.
+// app.use(cookieParser(process.env.jwtSecret));
+
+app.get('/protected', jwt({secret: process.env.jwtSecret}), function(req, res) {
+    if (!req.user.admin) return res.sendStatus(401);
+    res.sendStatus(200);
+});
 
 app.use('/graphql', expressGraphql({
   schema,
