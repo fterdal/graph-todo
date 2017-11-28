@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressGraphql = require('express-graphql');
 const cookieParser = require('cookie-parser')
-const jwt = require('jwt-express');
+const jwt = require('express-jwt');
 
 try { require('../secrets') }
 catch(err) {
@@ -27,8 +27,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up authentication / authorization with JWTs. Make sure
 // you have a secrets.js file at the root of this project.
-app.use(cookieParser(process.env.jwtSecret))
-app.use(jwt.init(process.env.jwtSecret));
+// app.use(cookieParser(process.env.jwtSecret));
+
+app.get('/protected', jwt({secret: process.env.jwtSecret}), function(req, res) {
+    if (!req.user.admin) return res.sendStatus(401);
+    res.sendStatus(200);
+});
 
 app.use('/graphql', expressGraphql({
   schema,
