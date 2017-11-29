@@ -51,10 +51,6 @@ const createApp = () => {
   })
 }
 
-
-if (require.main === module) {
-  app.listen(PORT, () => console.log(`Waiting for requests on port ${PORT}`));
-}
 if (require.main === module) {
   sessionStore.sync()
     .then(() => postgres.sync() )
@@ -64,7 +60,7 @@ if (require.main === module) {
       app.listen(PORT, () => console.log(`Waiting for requests on port ${PORT}`));
     })
 } else {
-  createApp()
+  // createApp()
 }
 
 module.exports = app;
