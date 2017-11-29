@@ -25,8 +25,15 @@ type Query {
   todoListById(id: Int!): TodoList
   allUsers: [User]
   userById(id: Int!): User
+
+  # Auth
+  me: User
 }
 
 type Mutation {
   completeTaskById(id: Int!): TodoTask
+
+  # Auth
+  login(id: Int!): User
+  signup(id: Int!): User
 }
