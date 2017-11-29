@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressGraphql = require('express-graphql');
+const passport = require('passport');
 
 if (process.env.NODE_ENV !== 'production') require('../secrets');
 
@@ -16,6 +17,15 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
 
+// static file-serving middleware
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+const { user } = require('./graphql/resolverMap/mocks');
+
+// passport registration
+passport.serializeUser(({ id }, done) => done(null, id))
+passport.deserializeUser((id) => user({id}))
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -27,9 +37,6 @@ app.use('/graphql', expressGraphql({
   pretty : true,
   graphiql : process.env.NODE_ENV !== 'production',
 }));
-
-// static file-serving middleware
-app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // sends index.html
 app.use('*', (req, res) => {
