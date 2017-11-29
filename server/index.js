@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressGraphql = require('express-graphql');
 
-require('../secrets');
+if (process.env.NODE_ENV !== 'production') require('../secrets');
 
 const { schema, resolverMap } = require('./graphql');
 const PORT = process.env.PORT || 8080;
