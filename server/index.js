@@ -3,48 +3,68 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressGraphql = require('express-graphql');
+const session = require('express-session');
 const passport = require('passport');
+const postgres = require('./postgres');
 
-if (process.env.NODE_ENV !== 'production') require('../secrets');
+console.log('postgres', postgres);
 
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const sessionStore = new SequelizeStore({ db: postgres });
+console.log('\n~~~~~ HELLO ~~~~~~\n');
 const { schema, resolverMap } = require('./graphql');
 const PORT = process.env.PORT || 8080;
 const app = express();
-
-// Morgan logging can get annoying when running tests.
-// Only turn on logging when not running tests.
-if (process.env.NODE_ENV !== 'test') {
-  app.use(morgan('dev'));
-}
-
-// static file-serving middleware
-app.use(express.static(path.join(__dirname, '..', 'public')));
-
-const { user } = require('./graphql/resolverMap/mocks');
+if (process.env.NODE_ENV !== 'production') require('../secrets');
 
 // passport registration
-passport.serializeUser(({ id }, done) => done(null, id))
-passport.deserializeUser((id) => user({id}))
+passport.serializeUser(({ id }, done) => done(null, id));
+passport.deserializeUser((id, done) => {
+  return postgres.models.user.findById(id)
+    .then(user => done(null, user))
+    .catch(done)
+});
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const createApp = () => {
 
-// Set up the GraphQL endpoint at /graphql.
-// Allow GraphiQL unless its deployed in production
-app.use('/graphql', expressGraphql({
-  schema,
-  rootValue : resolverMap,
-  pretty : true,
-  graphiql : process.env.NODE_ENV !== 'production',
-}));
+  // Use Logging
+  app.use(morgan('dev'));
 
-// sends index.html
-app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
-})
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+
+  // Set up the GraphQL endpoint at /graphql.
+  // Allow GraphiQL unless its deployed in production
+  app.use('/graphql', expressGraphql({
+    schema,
+    rootValue : resolverMap,
+    pretty : true,
+    graphiql : process.env.NODE_ENV !== 'production',
+  }));
+
+  // static file-serving middleware
+  app.use(express.static(path.join(__dirname, '..', 'public')));
+
+  // sends index.html
+  app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+  })
+}
+
 
 if (require.main === module) {
   app.listen(PORT, () => console.log(`Waiting for requests on port ${PORT}`));
+}
+if (require.main === module) {
+  sessionStore.sync()
+    .then(() => postgres.sync() )
+    .then(createApp)
+    .then(() => {
+      // Start Listening on specified port:
+      app.listen(PORT, () => console.log(`Waiting for requests on port ${PORT}`));
+    })
+} else {
+  createApp()
 }
 
 module.exports = app;
