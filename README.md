@@ -23,7 +23,5 @@ yarn start
 ## TODO
 
 1. As an existing user, I should be able to login.
-    - Ideally, let's not worry about databases and persistence just yet.
 2. As a new user, I should be able to create an account.
-    - Ideally, let's implement this (and the above login behavior) as a GraphQL
-      mutation instead of a lonely REST route to handle auth.
+3. Setup Sequelize

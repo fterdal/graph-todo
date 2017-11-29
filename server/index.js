@@ -3,54 +3,63 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressGraphql = require('express-graphql');
-const cookieParser = require('cookie-parser')
-const jwt = require('express-jwt');
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const passport = require('passport');
+const postgres = require('./postgres');
 
-try { require('../secrets') }
-catch(err) {
-  console.error(`You should create a secrets file which adds private data to the process.env`);
-  process.env.jwtSecret = 'super secret';
-}
-
+const sessionStore = new SequelizeStore({ db: postgres });
 const { schema, resolverMap } = require('./graphql');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
-// Morgan logging can get annoying when running tests.
-// Only turn on logging when not running tests.
-if (process.env.NODE_ENV !== 'test') {
-  app.use(morgan('dev'));
-}
+const notProduction = process.env.NODE_ENV !== 'production';
+if (notProduction) require('../secrets');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Set up authentication / authorization with JWTs. Make sure
-// you have a secrets.js file at the root of this project.
-// app.use(cookieParser(process.env.jwtSecret));
-
-app.get('/protected', jwt({secret: process.env.jwtSecret}), function(req, res) {
-    if (!req.user.admin) return res.sendStatus(401);
-    res.sendStatus(200);
+// passport registration
+passport.serializeUser(({ id }, done) => done(null, id));
+passport.deserializeUser((id, done) => {
+  return postgres.models.user.findById(id)
+    .then(user => done(null, user))
+    .catch(done)
 });
 
-app.use('/graphql', expressGraphql({
-  schema,
-  rootValue : resolverMap,
-  pretty : true,
-  graphiql : true,
-}));
+const createApp = () => {
 
-// static file-serving middleware
-app.use(express.static(path.join(__dirname, '..', 'public')));
+  // Use Logging
+  app.use(morgan('dev'));
 
-// sends index.html
-app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
-})
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+
+  // Set up the GraphQL endpoint at /graphql.
+  // Allow GraphiQL unless its deployed in production
+  app.use('/graphql', expressGraphql({
+    schema,
+    rootValue : resolverMap,
+    pretty : true,
+    graphiql : notProduction,
+  }));
+
+  // static file-serving middleware
+  app.use(express.static(path.join(__dirname, '..', 'public')));
+
+  // sends index.html
+  app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+  })
+}
 
 if (require.main === module) {
-  app.listen(PORT, () => console.log(`Waiting for requests on port ${PORT}`));
+  sessionStore.sync()
+    .then(() => postgres.sync({ force: notProduction}) )
+    .then(createApp)
+    .then(() => {
+      // Start Listening on specified port:
+      app.listen(PORT, () => console.log(`Waiting for requests on port ${PORT}`));
+    })
+} else {
+  createApp();
 }
 
 module.exports = app;
