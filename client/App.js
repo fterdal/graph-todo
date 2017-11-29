@@ -14,8 +14,8 @@ const App = () => {
       <div>
         <NavBar />
         <Switch>
-          <Route path="/users" component={UsersList}/>
-          <Route path="/" component={Home}/>
+          <Route path="/users" component={UsersList} />
+          <Route path="/" component={Home} />
         </Switch>
       </div>
     </Router>
