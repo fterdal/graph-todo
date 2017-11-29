@@ -4,18 +4,17 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressGraphql = require('express-graphql');
 const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 const postgres = require('./postgres');
 
-console.log('postgres', postgres);
-
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sessionStore = new SequelizeStore({ db: postgres });
-console.log('\n~~~~~ HELLO ~~~~~~\n');
 const { schema, resolverMap } = require('./graphql');
 const PORT = process.env.PORT || 8080;
 const app = express();
-if (process.env.NODE_ENV !== 'production') require('../secrets');
+
+const notProduction = process.env.NODE_ENV !== 'production';
+if (notProduction) require('../secrets');
 
 // passport registration
 passport.serializeUser(({ id }, done) => done(null, id));
@@ -39,7 +38,7 @@ const createApp = () => {
     schema,
     rootValue : resolverMap,
     pretty : true,
-    graphiql : process.env.NODE_ENV !== 'production',
+    graphiql : notProduction,
   }));
 
   // static file-serving middleware
@@ -53,14 +52,14 @@ const createApp = () => {
 
 if (require.main === module) {
   sessionStore.sync()
-    .then(() => postgres.sync() )
+    .then(() => postgres.sync({ force: notProduction}) )
     .then(createApp)
     .then(() => {
       // Start Listening on specified port:
       app.listen(PORT, () => console.log(`Waiting for requests on port ${PORT}`));
     })
 } else {
-  // createApp()
+  createApp();
 }
 
 module.exports = app;
