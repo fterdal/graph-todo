@@ -19,11 +19,13 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Set up the GraphQL endpoint at /graphql.
+// Allow GraphiQL unless its deployed in production
 app.use('/graphql', expressGraphql({
   schema,
   rootValue : resolverMap,
   pretty : true,
-  graphiql : true,
+  graphiql : process.env.NODE_ENV !== 'production',
 }));
 
 // static file-serving middleware
