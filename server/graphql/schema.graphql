@@ -34,6 +34,6 @@ type Mutation {
   completeTaskById(id: Int!): TodoTask
 
   # Auth
-  login(id: Int!): User
+  login(email: String!, password: String!): User
   signup(email: String!, password: String!): User
 }

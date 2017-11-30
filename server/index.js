@@ -52,18 +52,13 @@ const createApp = () => {
     graphiql : notProduction,
   }));
 
-  app.get('/requser', (req, res, next) => {
-    console.log(req.user);
-    res.status(200).send(req.user);
-  });
-
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')));
 
   // sends index.html
   app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public/index.html'))
-  })
+  });
 }
 
 if (require.main === module) {
