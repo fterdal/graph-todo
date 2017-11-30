@@ -1,3 +1,4 @@
+### Basic Types ###
 type TodoTask {
   id: Int!
   title: String
@@ -9,7 +10,7 @@ type TodoList {
   id: Int!
   name: String
   description: String
-  tasks: [TodoTask]!
+  tasks: [TodoTask]
 }
 
 type User {
@@ -18,6 +19,20 @@ type User {
   todoLists: [TodoList]
 }
 
+### Input Types ###
+input TodoListInput {
+  name: String
+  description: String
+  tasks: [TodoTaskInput]
+}
+
+input TodoTaskInput {
+  title: String
+  text: String
+  completed: Boolean
+}
+
+### Root Queries ###
 type Query {
   allTodoTasks: [TodoTask]
   todoTaskById(id: Int!): TodoTask
@@ -30,12 +45,10 @@ type Query {
   me: User
 }
 
+### Root Mutations ###
 type Mutation {
   completeTaskById(id: Int!): TodoTask
-  createTodoList(
-    name: String,
-    description: String,
-  ): TodoList
+  createTodoList(input: TodoListInput): TodoList
 
   # Auth
   login(email: String!, password: String!): User
