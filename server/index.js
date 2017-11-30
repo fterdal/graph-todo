@@ -29,8 +29,13 @@ const createApp = () => {
   // Use Logging
   app.use(morgan('dev'));
 
+  // Parse request bodies
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+
+  // Initialize passport with the session (defined above)
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   // Set up the GraphQL endpoint at /graphql.
   // Allow GraphiQL unless its deployed in production
