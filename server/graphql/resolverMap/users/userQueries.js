@@ -1,9 +1,6 @@
-const {
-  user,
-  listUsers,
-} = require('../mocks');
+const User = require('../../../postgres/models/user');
 
 module.exports = {
-  userById: ({ id }) => user({ id }),
-  allUsers: () => listUsers(),
+  userById: ({ id }) => User.findById(id),
+  allUsers: () => User.findAll(),
 }
