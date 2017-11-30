@@ -3,9 +3,7 @@ const {
   listUsers,
 } = require('../mocks');
 
-const userResolvers = {
+module.exports = {
   userById: ({ id }) => user({ id }),
   allUsers: () => listUsers(),
 }
-
-module.exports = userResolvers;

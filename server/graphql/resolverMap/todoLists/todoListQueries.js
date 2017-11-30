@@ -3,9 +3,7 @@ const {
   listTodoLists,
 } = require('../mocks');
 
-const todoListResolvers = {
+module.exports = {
   todoListById: ({ id }) => todoList({id: id}),
   allTodoLists: () => listTodoLists(),
 }
-
-module.exports = todoListResolvers;
