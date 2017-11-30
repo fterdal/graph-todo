@@ -32,6 +32,10 @@ type Query {
 
 type Mutation {
   completeTaskById(id: Int!): TodoTask
+  createTodoList(
+    name: String,
+    description: String,
+  ): TodoList
 
   # Auth
   login(email: String!, password: String!): User

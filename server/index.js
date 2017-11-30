@@ -27,7 +27,7 @@ passport.deserializeUser((id, done) => {
 const createApp = () => {
 
   // Use Logging
-  app.use(morgan('dev'));
+  if (process.env.NODE_ENV !== 'test') app.use(morgan('dev'));
 
   // Parse request bodies
   app.use(bodyParser.json());

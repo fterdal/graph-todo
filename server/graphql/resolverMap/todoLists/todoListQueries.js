@@ -1,9 +1,6 @@
-const {
-  todoList,
-  listTodoLists,
-} = require('../mocks');
+const TodoList = require('../../../postgres/models/todoList');
 
 module.exports = {
-  todoListById: ({ id }) => todoList({id: id}),
-  allTodoLists: () => listTodoLists(),
+  todoListById: ({ id }) => TodoList.findById(id),
+  allTodoLists: () => TodoList.findAll(),
 }
