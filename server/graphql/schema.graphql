@@ -35,5 +35,5 @@ type Mutation {
 
   # Auth
   login(id: Int!): User
-  signup(id: Int!): User
+  signup(email: String!, password: String!): User
 }

@@ -2,11 +2,9 @@ const {
   user,
 } = require('../mocks');
 
-const authResolvers = {
+module.exports = {
   me: (_, req) => {
     console.log('req.user', req.user);
     return user({id: 1});
   },
 }
-
-module.exports = authResolvers;

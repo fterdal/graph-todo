@@ -4,7 +4,7 @@
   "main": "server/index.js",
   "author": "Finn Terdal <fterdal@gmail.com>",
   "scripts": {
-    "start": "nodemon server/index.js",
+    "start": "nodemon server/index.js --ignore public",
     "test-server": "NODE_ENV='test' mocha --watch --recursive server",
     "client-dev": "webpack -w",
     "start-dev": "yarn client-dev & yarn start"
