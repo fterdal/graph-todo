@@ -19,17 +19,10 @@ if (notProduction) require('../secrets');
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser((id, done) => {
-  console.log('~~~~ DESERIALIZING USER ~~~');
   return postgres.models.user.findById(id)
     .then(user => done(null, user))
     .catch(done)
 });
-
-// passport.deserializeUser((id, done) =>
-//   postgres.models.user.findById(id)
-//     .then(user => done(null, user))
-//     .catch(done))
-
 
 const createApp = () => {
 
