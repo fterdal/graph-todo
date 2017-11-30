@@ -17,7 +17,7 @@ const notProduction = process.env.NODE_ENV !== 'production';
 if (notProduction) require('../secrets');
 
 // passport registration
-passport.serializeUser(({ id }, done) => done(null, id));
+passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser((id, done) => {
   return postgres.models.user.findById(id)
     .then(user => done(null, user))
@@ -29,8 +29,19 @@ const createApp = () => {
   // Use Logging
   app.use(morgan('dev'));
 
+  // Parse request bodies
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+
+  // Initialize passport with the session (defined above)
+  app.use(session({
+    secret: process.env.SESSION_SECRET || 'super secret shhhhhhh...',
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false,
+  }));
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   // Set up the GraphQL endpoint at /graphql.
   // Allow GraphiQL unless its deployed in production
@@ -47,12 +58,12 @@ const createApp = () => {
   // sends index.html
   app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public/index.html'))
-  })
+  });
 }
 
 if (require.main === module) {
   sessionStore.sync()
-    .then(() => postgres.sync({ force: notProduction}) )
+    .then(() => postgres.sync({ force: false}) ) // Change to notProduction eventually
     .then(createApp)
     .then(() => {
       // Start Listening on specified port:
