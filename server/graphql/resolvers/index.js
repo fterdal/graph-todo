@@ -1,3 +1,11 @@
+const Query = {
+  ...require('./todoTasks'),
+}
+
+const TodoTask = require('./todoTasks/TodoTask');
+
 module.exports = {
-  ...require('./newResolvers'),
+  Query,
+  // Mutation: {},
+  TodoTask,
 }
