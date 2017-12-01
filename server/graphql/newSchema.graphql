@@ -1,0 +1,12 @@
+### Basic Types ###
+type TodoTask {
+  id: Int!
+  title: String
+  text: String
+  completed: Boolean
+}
+
+### Root Queries ###
+type Query {
+  allTodoTasks: [TodoTask]
+}

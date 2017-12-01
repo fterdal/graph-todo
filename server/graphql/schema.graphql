@@ -13,24 +13,24 @@ type TodoList {
   todoTasks: [TodoTask]
 }
 
-type User {
-  id: Int!
-  email: String!
-  todoLists: [TodoList]
-}
+# type User {
+#   id: Int!
+#   email: String!
+#   todoLists: [TodoList]
+# }
 
-### Input Types ###
-input TodoListInput {
-  name: String
-  description: String
-  tasks: [TodoTaskInput]
-}
+# ### Input Types ###
+# input TodoListInput {
+#   name: String
+#   description: String
+#   tasks: [TodoTaskInput]
+# }
 
-input TodoTaskInput {
-  title: String
-  text: String
-  completed: Boolean
-}
+# input TodoTaskInput {
+#   title: String
+#   text: String
+#   completed: Boolean
+# }
 
 ### Root Queries ###
 type Query {
@@ -38,19 +38,19 @@ type Query {
   todoTaskById(id: Int!): TodoTask
   allTodoLists: [TodoList]
   todoListById(id: Int!): TodoList
-  allUsers: [User]
-  userById(id: Int!): User
-
-  # Auth
-  me: User
+  # allUsers: [User]
+  # userById(id: Int!): User
+  #
+  # # Auth
+  # me: User
 }
 
-### Root Mutations ###
-type Mutation {
-  completeTaskById(id: Int!): TodoTask
-  createTodoList(input: TodoListInput): TodoList
-
-  # Auth
-  login(email: String!, password: String!): User
-  signup(email: String!, password: String!): User
-}
+# ### Root Mutations ###
+# type Mutation {
+#   completeTaskById(id: Int!): TodoTask
+#   createTodoList(input: TodoListInput): TodoList
+#
+#   # Auth
+#   login(email: String!, password: String!): User
+#   signup(email: String!, password: String!): User
+# }

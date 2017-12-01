@@ -9,7 +9,7 @@ const passport = require('passport');
 const postgres = require('./postgres');
 
 const sessionStore = new SequelizeStore({ db: postgres });
-const { schema, resolverMap } = require('./graphql');
+const schema = require('./graphql');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -47,7 +47,6 @@ const createApp = () => {
   // Allow GraphiQL unless its deployed in production
   app.use('/graphql', expressGraphql({
     schema,
-    rootValue : resolverMap,
     pretty : true,
     graphiql : notProduction,
   }));

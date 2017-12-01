@@ -6,5 +6,4 @@ const db = new Sequelize(
   }
 );
 
-// TODO: Refactor so that module.exports = new Sequelize(......)
 module.exports = db;
