@@ -1,26 +1,9 @@
 const TodoListModel = require('../../../postgres/models/todoList');
 const TodoTask = require('../../../postgres/models/todoTask');
-
-class TodoList {
-  constructor(id, name, description) {
-    this.id = id;
-    this.name = name;
-    this.description = description;
-    this.tasks = [];
-    console.log('TODOLIST CLASS WAS CALLED!');
-  }
-
-  tasks() {
-    return this.tasks;
-  }
-}
+const TodoList = require('./TodoList');
 
 module.exports = {
-  todoListById: async ({ id }) => await new TodoList(
-    5,
-    'fake list',
-    'fake description',
-  ),
+  todoListById: ({ id }) => new TodoList(id),
   // todoListById: ({ id }) => TodoListModel.findById(id),
   allTodoLists: async () => {
     const results = await TodoListModel.findAll({

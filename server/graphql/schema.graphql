@@ -10,7 +10,7 @@ type TodoList {
   id: Int!
   name: String
   description: String
-  tasks: [TodoTask]
+  todoTasks: [TodoTask]
 }
 
 type User {
