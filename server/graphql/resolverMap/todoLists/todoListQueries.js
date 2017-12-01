@@ -13,6 +13,7 @@ module.exports = {
     return results;
   },
   TodoList: {
+    name: () => { return 'a name' },
     tasks: () => {
       console.log('~~~~~~~~~~~~~~~');
       console.log('~~~~ HELLO ~~~~');
