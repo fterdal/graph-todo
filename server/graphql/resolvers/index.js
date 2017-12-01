@@ -1,11 +1,16 @@
 const Query = {
   ...require('./todoTasks'),
+  ...require('./todoLists'),
 }
 
-const TodoTask = require('./todoTasks/TodoTask');
+const Mutation = {
+  ...require('./auth'),
+}
+
+const TodoList = require('./todoLists/TodoList');
 
 module.exports = {
   Query,
-  // Mutation: {},
-  TodoTask,
+  Mutation,
+  TodoList,
 }

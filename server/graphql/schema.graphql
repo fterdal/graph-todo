@@ -13,11 +13,11 @@ type TodoList {
   todoTasks: [TodoTask]
 }
 
-# type User {
-#   id: Int!
-#   email: String!
-#   todoLists: [TodoList]
-# }
+type User {
+  id: Int!
+  email: String!
+  todoLists: [TodoList]
+}
 
 # ### Input Types ###
 # input TodoListInput {
@@ -32,25 +32,30 @@ type TodoList {
 #   completed: Boolean
 # }
 
+input UserInput {
+  email: String
+  password: String
+}
+
 ### Root Queries ###
 type Query {
   allTodoTasks: [TodoTask]
   todoTaskById(id: Int!): TodoTask
   allTodoLists: [TodoList]
   todoListById(id: Int!): TodoList
-  # allUsers: [User]
-  # userById(id: Int!): User
+  allUsers: [User]
+  userById(id: Int!): User
   #
   # # Auth
-  # me: User
+  me: User
 }
 
-# ### Root Mutations ###
-# type Mutation {
-#   completeTaskById(id: Int!): TodoTask
-#   createTodoList(input: TodoListInput): TodoList
-#
-#   # Auth
-#   login(email: String!, password: String!): User
-#   signup(email: String!, password: String!): User
-# }
+### Root Mutations ###
+type Mutation {
+  # completeTaskById(id: Int!): TodoTask
+  # createTodoList(input: TodoListInput): TodoList
+
+  # Auth
+  login(input: UserInput): User
+  signup(input: UserInput): User
+}

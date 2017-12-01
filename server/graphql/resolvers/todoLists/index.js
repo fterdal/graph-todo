@@ -1,3 +1,6 @@
+const TodoList = require('../../../postgres/models/todoList');
+
 module.exports = {
-  // ...require('./newResolvers'),
+  allTodoLists: () => TodoList.findAll(),
+  todoListById: (_, { id }) => TodoList.findById(id),
 }
