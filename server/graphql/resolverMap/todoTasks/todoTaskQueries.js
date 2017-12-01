@@ -1,11 +1,6 @@
-const {
-  todoTask,
-  listTodoTasks,
-} = require('../mocks');
+const TodoTask = require('../../../postgres/models/todoTask');
 
-const todoTaskResolvers = {
-  todoTaskById: ({ id }) => todoTask({ id }),
-  allTodoTasks: () => listTodoTasks(),
+module.exports = {
+  todoTaskById: ({ id }) => TodoTask.findById(id),
+  allTodoTasks: () => TodoTask.findAll(),
 }
-
-module.exports = todoTaskResolvers;
