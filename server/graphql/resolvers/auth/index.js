@@ -1,11 +1,14 @@
 const User = require('../../../postgres/models/user');
 
 module.exports = {
-  signup: async (_, { email, password }, context) => {
-    // console.log('email', email);
-    console.log('Object.keys(context)', Object.keys(context));
-    console.log('context.session', context.session);
-    console.log('context._passport', context._passport);
+  signup: async (_, {input: { email, password }}, context) => {
+    // console.log('Object.keys(context)', Object.keys(context));
+    // console.log('context.session', context.session);
+    // console.log('context._passport', context._passport);
+    console.log('~~~~~ signup mutation running! ~~~~~');
+    console.log('email', email);
+    console.log('password', password);
+    console.log('~~~~~ signup mutation running! ~~~~~');
     const user = await User.create({ email, password });
     req.login(user, err => { if (err) console.error(err) });
     return user;

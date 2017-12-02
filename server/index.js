@@ -62,7 +62,7 @@ const createApp = () => {
 
 if (require.main === module) {
   sessionStore.sync()
-    .then(() => postgres.sync({ force: false}) ) // Change to notProduction eventually
+    .then(() => postgres.sync({ force: notProduction}) ) // Change to notProduction eventually
     .then(createApp)
     .then(() => {
       // Start Listening on specified port:
