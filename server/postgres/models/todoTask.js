@@ -10,6 +10,7 @@ const TodoTask = db.define('todoTask', {
   },
   completed: {
     type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
 });
 

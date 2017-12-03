@@ -20,11 +20,11 @@ type User {
 }
 
 # ### Input Types ###
-# input TodoListInput {
-#   name: String
-#   description: String
-#   tasks: [TodoTaskInput]
-# }
+input TodoListInput {
+  name: String
+  description: String
+  todoTasks: [TodoTaskInput]
+}
 
 input TodoTaskInput {
   title: String
@@ -45,8 +45,8 @@ type Query {
   todoListById(id: Int!): TodoList
   allUsers: [User]
   userById(id: Int!): User
-  #
-  # # Auth
+
+  # Auth
   me: User
 }
 
@@ -56,6 +56,7 @@ type Mutation {
   # createTodoList(input: TodoListInput): TodoList
 
   createTodoTask(input: TodoTaskInput!): TodoTask
+  createTodoList(input: TodoListInput!): TodoList
 
   # Auth
   login(input: UserInput!): User
