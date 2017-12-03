@@ -1,21 +1,13 @@
 module.exports = {
-  // todoTasks: async (todoList, { models: { TodoTask } }) => {
-  todoTasks: async (todoList, _, { models: { TodoTask } }) => {
-    // console.log('~~~~~~~ todoList', todoList);
-    // console.log('~~~~~~~ TodoTask', TodoTask);
-    // const myTodoTasks = await TodoTask.findAll({
-    //   where: {
-    //     todoListId: todoList.id
-    //   }
-    // })
+  todoTasks: async todoList => {
+    // Without this extra async call, we are unable to retrieve
+    // the todoTasks from the createTodoList mutation. I think it
+    // finishes creating the todoList, then immdiately runs this
+    // function, before its finished creating/associating the
+    // todoTasks. Try removing it and console.logging myTodoTasks
+    await todoList.getTodoTasks();
     const myTodoTasks = await todoList.getTodoTasks();
-    console.log('todoList.id', todoList.id);
-    console.log('myTodoTasks', myTodoTasks);
+    // console.log('myTodoTasks', myTodoTasks);
     return myTodoTasks;
-    // await TodoTask.findAll({
-    //   where: {
-    //     todoListId: todoList.id
-    //   }
-    // })
   }
 }
