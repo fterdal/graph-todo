@@ -40,21 +40,22 @@ input UserInput {
 
 ### Root Queries ###
 type Query {
+  # todoTasks
   allTodoTasks: [TodoTask]
   todoTaskById(id: Int!): TodoTask
+  # todoTLists
   allTodoLists: [TodoList]
   todoListById(id: Int!): TodoList
+  # users
   allUsers: [User]
   userById(id: Int!): User
-
-  # Auth
+  # auth
   me: User
 }
 
 ### Root Mutations ###
 type Mutation {
   # completeTaskById(id: Int!): TodoTask
-  # createTodoList(input: TodoListInput): TodoList
 
   createTodoTask(input: TodoTaskInput!): TodoTask
   createTodoList(input: TodoListInput!): TodoList
