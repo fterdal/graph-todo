@@ -1,6 +1,4 @@
-const TodoTask = require('../../../postgres/models/todoTask');
-
 module.exports = {
-  allTodoTasks: () => TodoTask.findAll(),
-  todoTaskById: (_, { id }) => TodoTask.findById(id),
+  allTodoTasks: (_, __, { models: { TodoTask } }) => TodoTask.findAll(),
+  todoTaskById: (_, { id }, { models: { TodoTask } }) => TodoTask.findById(id),
 }

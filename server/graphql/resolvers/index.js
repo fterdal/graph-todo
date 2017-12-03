@@ -1,10 +1,6 @@
-const Query = {
-  ...require('./Query'),
-}
+const Query = require('./Query')
 
-const Mutation = {
-  ...require('./Mutation'),
-}
+const Mutation = require('./Mutation')
 
 const TodoList = require('./TodoList');
 
