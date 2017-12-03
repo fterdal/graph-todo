@@ -6,7 +6,7 @@ const Mutation = {
   ...require('./Mutation'),
 }
 
-const TodoList = require('./todoLists/TodoList');
+const TodoList = require('./TodoList');
 
 module.exports = {
   Query,
