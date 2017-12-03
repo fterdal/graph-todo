@@ -26,11 +26,11 @@ type User {
 #   tasks: [TodoTaskInput]
 # }
 
-# input TodoTaskInput {
-#   title: String
-#   text: String
-#   completed: Boolean
-# }
+input TodoTaskInput {
+  title: String
+  text: String
+  completed: Boolean
+}
 
 input UserInput {
   email: String
@@ -55,7 +55,9 @@ type Mutation {
   # completeTaskById(id: Int!): TodoTask
   # createTodoList(input: TodoListInput): TodoList
 
+  createTodoTask(input: TodoTaskInput!): TodoTask
+
   # Auth
-  login(input: UserInput): User
-  signup(input: UserInput): User
+  login(input: UserInput!): User
+  signup(input: UserInput!): User
 }
