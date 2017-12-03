@@ -7,9 +7,10 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 const postgres = require('./postgres');
+const models = require('./postgres/models');
 
 const sessionStore = new SequelizeStore({ db: postgres });
-const { schema, resolverMap } = require('./graphql');
+const schema = require('./graphql');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -43,14 +44,21 @@ const createApp = () => {
   app.use(passport.initialize());
   app.use(passport.session());
 
+
+  // app.post(req => context)
   // Set up the GraphQL endpoint at /graphql.
   // Allow GraphiQL unless its deployed in production
-  app.use('/graphql', expressGraphql({
+  // app.use('/graphql', expressGraphql({
+  //   schema,
+  //   pretty : true,
+  //   graphiql : notProduction,
+  // }));
+  app.use('/graphql', expressGraphql( req => ({
     schema,
-    rootValue : resolverMap,
-    pretty : true,
-    graphiql : notProduction,
-  }));
+    pretty: true,
+    graphiql: notProduction,
+    context: { req, models },
+  })));
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')));
@@ -63,7 +71,7 @@ const createApp = () => {
 
 if (require.main === module) {
   sessionStore.sync()
-    .then(() => postgres.sync({ force: false}) ) // Change to notProduction eventually
+    .then(() => postgres.sync({ force: notProduction}) ) // Change to notProduction eventually
     .then(createApp)
     .then(() => {
       // Start Listening on specified port:

@@ -1,11 +1,9 @@
 const fs = require('fs');
-const { buildSchema } = require('graphql');
+const { makeExecutableSchema } = require('graphql-tools');
 
-const schemaTxt = fs.readFileSync('./server/graphql/schema.graphql', 'utf-8');
-const resolverMap = require('./resolverMap');
+const typeDefs = fs.readFileSync('./server/graphql/schema.graphql', 'utf-8');
+const resolvers = require('./resolvers');
 
-const schema = buildSchema(schemaTxt);
-// console.log('~~~~ SCHEMA ===>', schema);
-// console.log('~~~~ resolverMap ===>', resolverMap);
+const schema = makeExecutableSchema({ typeDefs, resolvers })
 
-module.exports = { schema, resolverMap };
+module.exports = schema;
