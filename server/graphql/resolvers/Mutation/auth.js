@@ -1,5 +1,3 @@
-// const User = require('../../../postgres/models/user');
-
 module.exports = {
   signup: async (_, {input: { email, password }}, { req, models: { User } }) => {
     const user = await User.create({ email, password });

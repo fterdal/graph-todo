@@ -1,10 +1,9 @@
 const Query = {
-  ...require('./todoTasks'),
-  ...require('./todoLists'),
+  ...require('./Query'),
 }
 
 const Mutation = {
-  ...require('./auth'),
+  ...require('./Mutation'),
 }
 
 const TodoList = require('./todoLists/TodoList');
