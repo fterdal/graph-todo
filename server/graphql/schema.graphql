@@ -20,16 +20,17 @@ type User {
 }
 
 # ### Input Types ###
-input TodoListInput {
-  name: String
-  description: String
-  todoTasks: [TodoTaskInput]
-}
-
 input TodoTaskInput {
   title: String
   text: String
   completed: Boolean
+}
+
+input TodoListInput {
+  name: String
+  description: String
+  todoTasks: [TodoTaskInput]
+  user: UserInput
 }
 
 input UserInput {
