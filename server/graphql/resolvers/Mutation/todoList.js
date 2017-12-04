@@ -22,7 +22,7 @@ module.exports = {
     // to the database (currently the todoList gets created, but the user is
     // not associated with it)
     const user = await User.findById(userId);
-    console.log('user');
+    // console.log('user', user);
     const todoList = await TodoList.create({ name, description });
     user.addTodoList(todoList);
     // if (user) {
