@@ -53,11 +53,11 @@ const createApp = () => {
   //   pretty : true,
   //   graphiql : notProduction,
   // }));
-  app.use('/graphql', expressGraphql( req => ({
+  app.use('/graphql', expressGraphql( (req, res) => ({
     schema,
     pretty: true,
     graphiql: notProduction,
-    context: { req, models },
+    context: { req, res, models },
   })));
 
   // static file-serving middleware
