@@ -24,14 +24,12 @@ input TodoTaskInput {
   title: String
   text: String
   completed: Boolean
-  userId: Int!
 }
 
 input TodoListInput {
   name: String
   description: String
   todoTasks: [TodoTaskInput]
-  userId: Int!
 }
 
 input UserInput {
