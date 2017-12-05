@@ -24,4 +24,7 @@ yarn start
 
 1. As an existing user, I should be able to login.
 2. As a new user, I should be able to create an account.
-3. Setup Sequelize
+3. As a logged-in user, I should be able to
+     - create new todoLists
+     - add todoTasks to existing todoLists
+     - mark todoTasks as complete/uncompleted

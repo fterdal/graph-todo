@@ -19,7 +19,7 @@ type User {
   todoLists: [TodoList]
 }
 
-# ### Input Types ###
+### Input Types ###
 input TodoTaskInput {
   title: String
   text: String
@@ -30,7 +30,6 @@ input TodoListInput {
   name: String
   description: String
   todoTasks: [TodoTaskInput]
-  user: UserInput
 }
 
 input UserInput {
@@ -43,13 +42,16 @@ type Query {
   # todoTasks
   allTodoTasks: [TodoTask]
   todoTaskById(id: Int!): TodoTask
-  # todoTLists
+  # todoLists
   allTodoLists: [TodoList]
   todoListById(id: Int!): TodoList
-  # users
+
+  # Get All users (admins only)
   allUsers: [User]
+  # Get a particular user by their id (admins only)
   userById(id: Int!): User
-  # auth
+
+  # Describes the currently logged-in user
   me: User
 }
 
@@ -58,6 +60,8 @@ type Mutation {
   # completeTaskById(id: Int!): TodoTask
 
   createTodoTask(input: TodoTaskInput!): TodoTask
+  # Creates a TodoTask
+
   createTodoList(input: TodoListInput!): TodoList
 
   # Auth
