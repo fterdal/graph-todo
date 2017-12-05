@@ -8,16 +8,18 @@ const seedUsers = users => {
   return Promise.all(users.map(mockUser => User.create(mockUser)))
 }
 
-const seedTodoLists = (users, todoLists) =>
-  Promise.all(
+const seedTodoLists = async (users, todoLists) => {
+  await Promise.all(
     Object.entries(todoLists)
     .map(([ userEmail, lists ]) => {
       const userToAssign = users.find(user => user.email === userEmail);
       return Promise.all(lists.map(async list => {
-         return userToAssign.addTodoLists( await TodoList.create(list) );
+        return userToAssign.addTodoLists( await TodoList.create(list) );
       }))
     })
   )
+  return TodoList.findAll();
+}
 
 const seedTodoTasks = (todoLists, todoTasks) =>
   Promise.all(
