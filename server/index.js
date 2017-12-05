@@ -65,7 +65,7 @@ const createApp = () => {
 if (require.main === module) {
   sessionStore.sync()
     .then(() => postgres.sync({ force: notProduction}) ) // Change to notProduction eventually
-    .then(seed) // Seed the database
+    .then(() => { if (notProduction) seed() } ) // Seed the database (unless in production)
     .then(createApp) // Create the app
     .then(() => {
       // Start Listening on specified port:
