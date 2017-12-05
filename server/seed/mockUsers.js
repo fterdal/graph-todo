@@ -1,5 +1,10 @@
 module.exports = [
   {
+    email: 'yoda@swamp.swamp',
+    password: 'aPasswordThisIs',
+    isAdmin: true,
+  },
+  {
     email: 'kyloren@firstorder.gov',
     password: 'VaderRulez',
   },
@@ -18,10 +23,5 @@ module.exports = [
   {
     email: 'chewbacca@fuzzypals.org',
     password: 'GGWWWRGHH!!!!',
-  },
-  {
-    email: 'yoda@swamp.swamp',
-    password: 'aPasswordThisIs',
-    isAdmin: true,
   },
 ]
