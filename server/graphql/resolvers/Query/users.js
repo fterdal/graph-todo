@@ -1,4 +1,12 @@
+const { isAdmin } = require('../utils');
+
 module.exports = {
-  allUsers: (_, __, { models: { User } }) => User.findAll(),
-  userById: (_, { id }, { models: { User } }) => User.findById(id),
+  allUsers: (_, __, { req, res, models: { User } }) => {
+    isAdmin(req, res);
+    return User.findAll();
+  },
+  userById: (_, { id }, { req, res, models: { User } }) => {
+    isAdmin(req, res);
+    return User.findById(id);
+  },
 }
