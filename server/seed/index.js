@@ -13,8 +13,8 @@ const seedTodoLists = async (users, todoLists) => {
     Object.entries(todoLists)
     .map(([ userEmail, lists ]) => {
       const userToAssign = users.find(user => user.email === userEmail);
-      return Promise.all(lists.map(async list => {
-        return userToAssign.addTodoLists( await TodoList.create(list) );
+      return Promise.all(lists.map( async list => {
+        userToAssign.addTodoLists( await TodoList.create(list) );
       }))
     })
   )
@@ -26,7 +26,7 @@ const seedTodoTasks = (todoLists, todoTasks) =>
     Object.entries(todoTasks)
     .map( ([ listName, tasks ]) => {
       const listToAssign = todoLists.find(list => list.name === listName);
-      return Promise.all(tasks.map(async task => {
+      return Promise.all(tasks.map( async task => {
          listToAssign.addTodoTasks( await TodoTask.create(task) );
       }))
     })
