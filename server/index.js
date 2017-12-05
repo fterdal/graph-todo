@@ -4,10 +4,12 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const expressGraphql = require('express-graphql');
 const session = require('express-session');
+
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 const postgres = require('./postgres');
 const models = require('./postgres/models');
+const seed = require('./seed');
 
 const sessionStore = new SequelizeStore({ db: postgres });
 const schema = require('./graphql');
@@ -44,15 +46,6 @@ const createApp = () => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-
-  // app.post(req => context)
-  // Set up the GraphQL endpoint at /graphql.
-  // Allow GraphiQL unless its deployed in production
-  // app.use('/graphql', expressGraphql({
-  //   schema,
-  //   pretty : true,
-  //   graphiql : notProduction,
-  // }));
   app.use('/graphql', expressGraphql( (req, res) => ({
     schema,
     pretty: true,
@@ -72,11 +65,13 @@ const createApp = () => {
 if (require.main === module) {
   sessionStore.sync()
     .then(() => postgres.sync({ force: notProduction}) ) // Change to notProduction eventually
-    .then(createApp)
+    .then(() => { if (notProduction) return seed() } ) // Seed the database (unless in production)
+    .then(() => createApp()) // Create the app
     .then(() => {
       // Start Listening on specified port:
       app.listen(PORT, () => console.log(`Waiting for requests on port ${PORT}`));
     })
+    .catch(console.error)
 } else {
   createApp();
 }
