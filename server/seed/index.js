@@ -1,8 +1,8 @@
-const { User, TodoList } = require('../postgres/models');
+const { User, TodoList, TodoTask } = require('../postgres/models');
 
 const mockUsers = require('./mockUsers');
 const mockTodoLists = require('./mockTodoLists');
-const mockTodoTasks = {/* To Do: Make these */}
+const mockTodoTasks = require('./mockTodoTasks');
 
 const seedUsers = users => {
   return Promise.all(users.map(mockUser => User.create(mockUser)))
@@ -11,17 +11,24 @@ const seedUsers = users => {
 const seedTodoLists = (users, todoLists) =>
   Promise.all(
     Object.entries(todoLists)
-    .map( ([ userEmail, lists ]) => {
+    .map(([ userEmail, lists ]) => {
       const userToAssign = users.find(user => user.email === userEmail);
       return Promise.all(lists.map(async list => {
-         userToAssign.addTodoLists( await TodoList.create(list) );
+         return userToAssign.addTodoLists( await TodoList.create(list) );
       }))
     })
   )
 
-const seedTodoTasks = (todoLists, todoTasks) => {
-
-}
+const seedTodoTasks = (todoLists, todoTasks) =>
+  Promise.all(
+    Object.entries(todoTasks)
+    .map( ([ listName, tasks ]) => {
+      const listToAssign = todoLists.find(list => list.name === listName);
+      return Promise.all(tasks.map(async task => {
+         listToAssign.addTodoTasks( await TodoTask.create(task) );
+      }))
+    })
+  )
 
 const seed = async () => {
   const createdUsers = await seedUsers(mockUsers);
