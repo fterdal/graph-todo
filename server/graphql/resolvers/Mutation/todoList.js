@@ -31,4 +31,19 @@ module.exports = {
     if (description !== undefined) newData.description = description;
     return todoList.update(newData);
   },
+  addTodoTask: async (_, {
+    input: { todoListId, input: { name, description } }
+  }, {
+    req, res
+  }) => {
+    const todoList = await userCanEditTodoList(req, res, todoListId);
+    // Unfortunately, we can't just pass the arguments in as-is, like:
+    //   return todoList.update({ name, description })
+    // If the client omitted one of the fields, then it will try to set
+    // that field in the database to null
+    const newData = {};
+    if (name !== undefined) newData.name = name;
+    if (description !== undefined) newData.description = description;
+    return todoList.update(newData);
+  },
 }

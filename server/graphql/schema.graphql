@@ -31,6 +31,11 @@ input UpdateTodoListInput {
   input: TodoListInput!
 }
 
+input AddTodoTaskInput {
+  todoListId: Int!
+  input: TodoTaskInput!
+}
+
 input TodoTaskInput {
   title: String
   text: String
@@ -74,6 +79,8 @@ type Mutation {
   createTodoList(input: TodoListInput!): TodoList
   # Update a TodoList
   updateTodoList(input: UpdateTodoListInput!): TodoList
+  # Add a TodoTask to a TodoList
+  addTodoTask(input: AddTodoTaskInput!): TodoList
 
   # Update a TodoTask
   updateTodoTask(input: UpdateTodoTaskInput!): TodoTask
