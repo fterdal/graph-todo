@@ -1,29 +1,36 @@
-const isLoggedIn = (req, res) => {
+const { TodoList } = require('../../postgres/models');
+
+// Confirms that the user is logged in
+const userIsLoggedIn = (req, res) => {
   if (!req.user) {
     res.status(401);
     throw new Error('Unauthorized');
   }
 }
 
-const isAdmin = (req, res) => {
-  isLoggedIn(req, res);
+// Confirms that the user is an admin
+const userIsAdmin = (req, res) => {
+  userIsLoggedIn(req, res);
   if (!req.user.isAdmin)  {
     res.status(403);
     throw new Error('Forbidden');
   }
 }
 
-const todoListBelongsToUser = (req, res, todoListId) => {
-  isLoggedIn(req, res);
-  // TODO
-}
-
-const todoTaskBelongsToUser = (req, res, todoTask) => {
-  isLoggedIn(req, res);
-  // TODO
+// Confirms that the user (stored in req.user) can edit the todoList which
+// corresponds to todoListId. If so, returns that todoList.
+const userCanEditTodoList = async (req, res, todoListId) => {
+  userIsLoggedIn(req, res);
+  const todoList = await TodoList.findById(todoListId);
+  if (!req.user.canEditTodoList(todoList)) {
+    res.status(403);
+    throw new Error('Forbidden');
+  }
+  return todoList;
 }
 
 module.exports = {
-  isLoggedIn,
-  isAdmin,
+  userIsLoggedIn,
+  userIsAdmin,
+  userCanEditTodoList,
 }

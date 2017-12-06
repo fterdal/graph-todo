@@ -1,12 +1,12 @@
-const { isAdmin } = require('../utils');
+const { userIsAdmin } = require('../utils');
 
 module.exports = {
   allTodoLists: (_, __, { req, res, models: { TodoList } }) => {
-    isAdmin(req, res);
+    userIsAdmin(req, res);
     return TodoList.findAll();
   },
   todoListById: (_, { id }, { req, res, models: { TodoList } }) => {
-    isAdmin(req, res);
+    userIsAdmin(req, res);
     return TodoList.findById(id)
   },
 }
