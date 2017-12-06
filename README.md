@@ -26,10 +26,6 @@ yarn start
      - create new todoLists
      - add todoTasks to existing todoLists
      - mark todoTasks as complete/uncompleted
-2. As the developer of this application, I should have some data seeded to the db
-     - rewrite the seed file so that it seeds the database
-     - add a yarn command to seed the database
-     - connect the tests to a new test database
-3. As the developer of this application, I should be able to run the tests
+2. As the developer of this application, I should be able to run the tests
      - rewrite the tests with the new functionality in mind
      - move the tests from that tests folder to each individual file
