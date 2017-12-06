@@ -1,16 +1,16 @@
 ### Basic Types ###
-type TodoTask {
-  id: Int!
-  title: String
-  text: String
-  completed: Boolean
-}
-
 type TodoList {
   id: Int!
   name: String
   description: String
   todoTasks: [TodoTask]
+}
+
+type TodoTask {
+  id: Int!
+  title: String
+  text: String
+  completed: Boolean
 }
 
 type User {
@@ -20,16 +20,30 @@ type User {
 }
 
 ### Input Types ###
+input TodoListInput {
+  name: String
+  description: String
+  todoTasks: [TodoTaskInput]
+}
+
+input UpdateTodoListInput {
+  todoListId: Int!
+  name: String
+  description: String
+  todoTasks: [TodoTaskInput]
+}
+
 input TodoTaskInput {
   title: String
   text: String
   completed: Boolean
 }
 
-input TodoListInput {
-  name: String
-  description: String
-  todoTasks: [TodoTaskInput]
+input UpdateTodoTaskInput {
+  todoTaskId: Int!
+  title: String
+  text: String
+  completed: Boolean
 }
 
 input UserInput {
@@ -63,12 +77,12 @@ type Mutation {
   # Creates a TodoList
   createTodoList(input: TodoListInput!): TodoList
   # Update a TodoList
-  updateTodoList(input: TodoListInput!): TodoList
+  updateTodoList(input: UpdateTodoListInput!): TodoList
 
   # Creates a TodoTask
   createTodoTask(input: TodoTaskInput!): TodoTask
   # Update a TodoTask
-  updateTodoTask(input: TodoTaskInput!): TodoTask
+  updateTodoTask(input: UpdateTodoTaskInput!): TodoTask
 
   # Login
   login(input: UserInput!): User

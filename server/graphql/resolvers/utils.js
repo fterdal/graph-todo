@@ -13,7 +13,7 @@ const isAdmin = (req, res) => {
   }
 }
 
-const todoListBelongsToUser = (req, res, todoList) => {
+const todoListBelongsToUser = (req, res, todoListId) => {
   isLoggedIn(req, res);
   // TODO
 }
