@@ -3,7 +3,7 @@ module.exports = {
     {
       input: { title, text, completed }
     }, {
-      models: { TodoTask }
+      req, res, models: { TodoTask }
     }) => {
     const todoTask = await TodoTask.create({ title, text, completed });
     return todoTask;

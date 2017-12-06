@@ -39,12 +39,15 @@ input UserInput {
 
 ### Root Queries ###
 type Query {
-  # todoTasks
-  allTodoTasks: [TodoTask]
-  todoTaskById(id: Int!): TodoTask
-  # todoLists
+  # Get All todoLists (admins only)
   allTodoLists: [TodoList]
+  # Get a particular todoList by its id (admins only)
   todoListById(id: Int!): TodoList
+
+  # Get All todoTasks (admins only)
+  allTodoTasks: [TodoTask]
+  # Get a particular todoTask by its id (admins only)
+  todoTaskById(id: Int!): TodoTask
 
   # Get All users (admins only)
   allUsers: [User]
@@ -57,14 +60,18 @@ type Query {
 
 ### Root Mutations ###
 type Mutation {
-  # completeTaskById(id: Int!): TodoTask
-
-  createTodoTask(input: TodoTaskInput!): TodoTask
-  # Creates a TodoTask
-
+  # Creates a TodoList
   createTodoList(input: TodoListInput!): TodoList
+  # Update a TodoList
+  updateTodoList(input: TodoListInput!): TodoList
 
-  # Auth
+  # Creates a TodoTask
+  createTodoTask(input: TodoTaskInput!): TodoTask
+  # Update a TodoTask
+  updateTodoTask(input: TodoTaskInput!): TodoTask
+
+  # Login
   login(input: UserInput!): User
+  # Signup
   signup(input: UserInput!): User
 }
