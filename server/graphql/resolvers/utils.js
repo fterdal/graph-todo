@@ -30,11 +30,11 @@ const userCanEditTodoList = async (req, res, todoListId) => {
 }
 
 // Confirms that the user (stored in req.user) can edit the todoTask which
-// corresponds to todoTaskId. If so, returns that todoTask.
+// corresponds to todoTaskId. If so, this returns that todoTask.
 const userCanEditTodoTask = async (req, res, todoTaskId) => {
   userIsLoggedIn(req, res);
   const todoTask = await TodoTask.findById(todoTaskId);
-
+  if (await userCanEditTodoList(req, res, todoTask.todoListId)) return todoTask;
 }
 
 module.exports = {

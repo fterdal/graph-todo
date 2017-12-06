@@ -76,7 +76,7 @@ type Mutation {
   updateTodoList(input: UpdateTodoListInput!): TodoList
 
   # Creates a TodoTask
-  createTodoTask(input: TodoTaskInput!): TodoTask
+  # createTodoTask(input: TodoTaskInput!): TodoTask
   # Update a TodoTask
   updateTodoTask(input: UpdateTodoTaskInput!): TodoTask
 
