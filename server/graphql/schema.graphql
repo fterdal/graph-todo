@@ -28,9 +28,7 @@ input TodoListInput {
 
 input UpdateTodoListInput {
   todoListId: Int!
-  name: String
-  description: String
-  todoTasks: [TodoTaskInput]
+  input: TodoListInput!
 }
 
 input TodoTaskInput {
@@ -41,9 +39,7 @@ input TodoTaskInput {
 
 input UpdateTodoTaskInput {
   todoTaskId: Int!
-  title: String
-  text: String
-  completed: Boolean
+  input: TodoTaskInput!
 }
 
 input UserInput {
