@@ -13,6 +13,16 @@ const isAdmin = (req, res) => {
   }
 }
 
+const todoListBelongsToUser = (req, res, todoList) => {
+  isLoggedIn(req, res);
+  // TODO
+}
+
+const todoTaskBelongsToUser = (req, res, todoTask) => {
+  isLoggedIn(req, res);
+  // TODO
+}
+
 module.exports = {
   isLoggedIn,
   isAdmin,
