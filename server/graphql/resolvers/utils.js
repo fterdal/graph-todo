@@ -1,4 +1,4 @@
-const { TodoList } = require('../../postgres/models');
+const { TodoList, TodoTask } = require('../../postgres/models');
 
 // Confirms that the user is logged in
 const userIsLoggedIn = (req, res) => {
@@ -33,7 +33,7 @@ const userCanEditTodoList = async (req, res, todoListId) => {
 // corresponds to todoTaskId. If so, returns that todoTask.
 const userCanEditTodoTask = async (req, res, todoTaskId) => {
   userIsLoggedIn(req, res);
-  const todoTask = await TodoList.findById(todoTaskId);
+  const todoTask = await TodoTask.findById(todoTaskId);
 
 }
 
