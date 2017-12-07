@@ -1,16 +1,16 @@
 ### Basic Types ###
-type TodoTask {
-  id: Int!
-  title: String
-  text: String
-  completed: Boolean
-}
-
 type TodoList {
   id: Int!
   name: String
   description: String
   todoTasks: [TodoTask]
+}
+
+type TodoTask {
+  id: Int!
+  title: String
+  text: String
+  completed: Boolean
 }
 
 type User {
@@ -20,16 +20,35 @@ type User {
 }
 
 ### Input Types ###
+input TodoListInput {
+  name: String
+  description: String
+  todoTasks: [TodoTaskInput]
+}
+
+input UpdateTodoListInput {
+  todoListId: Int!
+  input: TodoListInput!
+}
+
+input AddTodoTaskInput {
+  todoListId: Int!
+  input: TodoTaskInput!
+}
+
+input RemoveTodoTaskInput {
+  todoTaskId: Int!
+}
+
 input TodoTaskInput {
   title: String
   text: String
   completed: Boolean
 }
 
-input TodoListInput {
-  name: String
-  description: String
-  todoTasks: [TodoTaskInput]
+input UpdateTodoTaskInput {
+  todoTaskId: Int!
+  input: TodoTaskInput!
 }
 
 input UserInput {
@@ -39,12 +58,15 @@ input UserInput {
 
 ### Root Queries ###
 type Query {
-  # todoTasks
-  allTodoTasks: [TodoTask]
-  todoTaskById(id: Int!): TodoTask
-  # todoLists
+  # Get All todoLists (admins only)
   allTodoLists: [TodoList]
+  # Get a particular todoList by its id (admins only)
   todoListById(id: Int!): TodoList
+
+  # Get All todoTasks (admins only)
+  allTodoTasks: [TodoTask]
+  # Get a particular todoTask by its id (admins only)
+  todoTaskById(id: Int!): TodoTask
 
   # Get All users (admins only)
   allUsers: [User]
@@ -57,14 +79,20 @@ type Query {
 
 ### Root Mutations ###
 type Mutation {
-  # completeTaskById(id: Int!): TodoTask
-
-  createTodoTask(input: TodoTaskInput!): TodoTask
-  # Creates a TodoTask
-
+  # Creates a TodoList
   createTodoList(input: TodoListInput!): TodoList
+  # Update a TodoList
+  updateTodoList(input: UpdateTodoListInput!): TodoList
+  # Add a TodoTask to a TodoList
+  addTodoTask(input: AddTodoTaskInput!): TodoList
 
-  # Auth
+  # Update a TodoTask
+  updateTodoTask(input: UpdateTodoTaskInput!): TodoTask
+  # Remove a TodoTask from a TodoList
+  removeTodoTask(input: RemoveTodoTaskInput!): Int
+
+  # Login
   login(input: UserInput!): User
+  # Signup
   signup(input: UserInput!): User
 }

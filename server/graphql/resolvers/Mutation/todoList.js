@@ -1,14 +1,13 @@
-const { isLoggedIn } = require('../utils');
+const { userIsLoggedIn, userCanEditTodoList } = require('../utils');
 
 module.exports = {
-  // Not sure how to format this function. There's so much destructuring in the
-  // parameters list, and it should definitely be on more than one line.
+
   createTodoList: async (_, {
     input: { name, description, todoTasks }
   }, {
     req, res, models: { TodoTask, TodoList, User }
   }) => {
-    isLoggedIn(req, res);
+    userIsLoggedIn(req, res);
     const user = await User.findById(req.user.id);
     const todoList = await TodoList.create({ name, description });
     user.addTodoList(todoList);
@@ -18,4 +17,30 @@ module.exports = {
     }
     return todoList;
   },
+
+  updateTodoList: async (_, {
+    input: { todoListId, input: { name, description } }
+  }, {
+    req, res
+  }) => {
+    const todoList = await userCanEditTodoList(req, res, todoListId);
+    // Unfortunately, we can't just pass the arguments in as-is, like:
+    //   return todoList.update({ name, description })
+    // If the client omitted one of the fields, then it will try to set
+    // that field in the database to null
+    const newData = {};
+    if (name !== undefined) newData.name = name;
+    if (description !== undefined) newData.description = description;
+    return todoList.update(newData);
+  },
+
+  addTodoTask: async (_, {
+    input: { todoListId, input: { title, text, completed } }
+  }, {
+    req, res, models: { TodoTask }
+  }) => {
+    const todoList = await userCanEditTodoList(req, res, todoListId);
+    return todoList.addTodoTask(await TodoTask.create({ title, text, completed }));
+  },
+
 }

@@ -28,6 +28,10 @@ User.prototype.correctPassword = function (candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt) === this.password
 }
 
+User.prototype.canEditTodoList = function (todoList) {
+  return this.isAdmin || todoList.userId === this.id;
+}
+
 /**
  * classMethods
  */
