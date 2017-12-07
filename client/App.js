@@ -5,6 +5,7 @@ import {
   UsersList,
   Home,
   NavBar,
+  SidebarLeftPush,
 } from './components';
 import history from './history';
 
@@ -12,7 +13,7 @@ const App = () => {
   return (
     <Router history={history}>
       <div>
-        <NavBar />
+        <SidebarLeftPush />
         <Switch>
           <Route path="/users" component={UsersList} />
           <Route path="/" component={Home} />
