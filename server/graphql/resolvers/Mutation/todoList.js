@@ -43,15 +43,4 @@ module.exports = {
     return todoList.addTodoTask(await TodoTask.create({ title, text, completed }));
   },
 
-  // removeTodoTask: async (_, {
-  //   input: { todoListId, todoTaskId }
-  // }, {
-  //   req, res, models: { TodoTask }
-  // }) => {
-  //   const todoList = await userCanEditTodoList(req, res, todoListId);
-  //   await TodoTask.destroy({
-  //     where: { id: todoTaskId }
-  //   });
-  //   return todoList;
-  // },
 }
