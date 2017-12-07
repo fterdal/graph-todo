@@ -9,10 +9,6 @@ const NavBar = () => {
         <ul>
           <li><NavLink to="/">Home</NavLink></li>
           <li><NavLink to="/users">Users</NavLink></li>
-          <div className="authButtons">
-            <Login />
-
-          </div>
         </ul>
       </div>
     </div>
