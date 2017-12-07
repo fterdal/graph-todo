@@ -22,6 +22,10 @@ const userIsAdmin = (req, res) => {
 const userCanEditTodoList = async (req, res, todoListId) => {
   userIsLoggedIn(req, res);
   const todoList = await TodoList.findById(todoListId);
+  if (!todoList) {
+    res.status(404);
+    throw new Error('Not Found');
+  }
   if (!req.user.canEditTodoList(todoList)) {
     res.status(403);
     throw new Error('Forbidden');
@@ -34,6 +38,10 @@ const userCanEditTodoList = async (req, res, todoListId) => {
 const userCanEditTodoTask = async (req, res, todoTaskId) => {
   userIsLoggedIn(req, res);
   const todoTask = await TodoTask.findById(todoTaskId);
+  if (!todoTask) {
+    res.status(404);
+    throw new Error('Not Found');
+  }
   if (await userCanEditTodoList(req, res, todoTask.todoListId)) return todoTask;
 }
 

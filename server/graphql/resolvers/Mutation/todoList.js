@@ -1,6 +1,7 @@
 const { userIsLoggedIn, userCanEditTodoList } = require('../utils');
 
 module.exports = {
+
   createTodoList: async (_, {
     input: { name, description, todoTasks }
   }, {
@@ -16,6 +17,7 @@ module.exports = {
     }
     return todoList;
   },
+
   updateTodoList: async (_, {
     input: { todoListId, input: { name, description } }
   }, {
@@ -31,19 +33,25 @@ module.exports = {
     if (description !== undefined) newData.description = description;
     return todoList.update(newData);
   },
+
   addTodoTask: async (_, {
-    input: { todoListId, input: { name, description } }
+    input: { todoListId, input: { title, text, completed } }
   }, {
-    req, res
+    req, res, models: { TodoTask }
   }) => {
     const todoList = await userCanEditTodoList(req, res, todoListId);
-    // Unfortunately, we can't just pass the arguments in as-is, like:
-    //   return todoList.update({ name, description })
-    // If the client omitted one of the fields, then it will try to set
-    // that field in the database to null
-    const newData = {};
-    if (name !== undefined) newData.name = name;
-    if (description !== undefined) newData.description = description;
-    return todoList.update(newData);
+    return todoList.addTodoTask(await TodoTask.create({ title, text, completed }));
   },
+
+  // removeTodoTask: async (_, {
+  //   input: { todoListId, todoTaskId }
+  // }, {
+  //   req, res, models: { TodoTask }
+  // }) => {
+  //   const todoList = await userCanEditTodoList(req, res, todoListId);
+  //   await TodoTask.destroy({
+  //     where: { id: todoTaskId }
+  //   });
+  //   return todoList;
+  // },
 }

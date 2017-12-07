@@ -36,6 +36,10 @@ input AddTodoTaskInput {
   input: TodoTaskInput!
 }
 
+input RemoveTodoTaskInput {
+  todoTaskId: Int!
+}
+
 input TodoTaskInput {
   title: String
   text: String
@@ -84,6 +88,8 @@ type Mutation {
 
   # Update a TodoTask
   updateTodoTask(input: UpdateTodoTaskInput!): TodoTask
+  # Remove a TodoTask from a TodoList
+  removeTodoTask(input: RemoveTodoTaskInput!): Int
 
   # Login
   login(input: UserInput!): User
