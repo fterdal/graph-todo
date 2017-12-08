@@ -17,6 +17,7 @@ class Login extends Component {
         password
       }
     })
+    this.state = {email: '', password: ''};
   }
   render() {
     console.log('this.props', this.props);
@@ -62,7 +63,10 @@ const loginMutation = gql`
   }
 `;
 
-// export default compose(
-//   graphql(loginMutation),
-// )(Login)
-export default graphql(loginMutation, { name: 'loginMutation' })(Login)
+export default compose(
+  graphql(loginMutation, {
+    name: 'loginMutation',
+    props: ({ data, mutate }) => ({data, loginMutation: mutate}),
+  }),
+)(Login)
+// export default graphql(loginMutation, { name: 'loginMutation' })(Login)

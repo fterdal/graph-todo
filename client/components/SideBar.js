@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 const SideBar = (props) => {
   const welcome = !props.data.me ? (<div />)
                                  : (<div>Welcome, {props.data.me.email}</div>);
-  console.log('props.data:', props.data);
+  // console.log('props.data:', props.data);
   return (
     <div className="sidebar-container">
       <div />
