@@ -75,6 +75,7 @@ type Query {
 
   # Describes the currently logged-in user
   me: User
+  # me: Int
 }
 
 ### Root Mutations ###

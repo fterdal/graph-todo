@@ -1,12 +1,66 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { Component } from 'react';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 
-const Login = () => {
-  return (
-    <div>
-      <a className="button" href="#">Default Button</a>
-    </div>
-  )
+class Login extends Component {
+
+  state = {
+    email: '',
+    password: '',
+  }
+
+  // login = async () => {
+  //   const { email, password } = this.state
+  //   await this.props.loginMutation({
+  //     variables: {
+  //       email,
+  //       password
+  //     }
+  //   })
+  // }
+
+  doAsync = async () => {
+    await console.log('hello')
+    return 'buttz';
+  }
+
+  render() {
+    return (
+      <form>
+        <fieldset>
+          <label>Email</label>
+          <input
+            id="emailField"
+            type="text"
+            value={this.state.email}
+            onChange={(evt) => this.setState({ email: evt.target.value })}
+          />
+          <label>Password</label>
+          <input
+            id="passwordField"
+            type="password"
+            value={this.state.password}
+            onChange={(evt) => this.setState({ password: evt.target.value })}
+          />
+          <a className="button auth-button">Login</a>
+        </fieldset>
+      </form>
+    )
+  }
 }
 
-export default Login;
+const loginMutation = gql`
+  mutation LoginMutation($email: String!, $password: String!){
+    login(
+      email: $email,
+      password: $password,
+    ) {
+      id
+      email
+    }
+  }
+`;
+
+export default compose(
+  graphql(loginMutation),
+)(Login)

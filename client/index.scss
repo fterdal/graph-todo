@@ -24,13 +24,17 @@ body,html {
 
 .sidebar-container {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 66%;
+  grid-template-rows: 10% 1fr 1fr 1fr 66%;
   background-color: $teal-deer;
-  div,a {
+  div, a {
     text-align: center;
     margin: 10px 10px;
     // width: 90%;
   }
+}
+
+#emailField, #passwordField {
+  background-color: $teal-deer;
 }
 
 .auth-button {
