@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import {
   UsersList,
   Home,
-  NavBar,
+  SideBar,
 } from './components';
 import history from './history';
 
@@ -12,13 +12,13 @@ const App = () => {
   return (
     <Router history={history}>
       <div className="app-container">
-        <div className="sidebar-container">
-          <div />
+        <SideBar />
+        {/* <div className="sidebar-container"> */}
+          {/* <div />
           <div>Welcome, USER</div>
           <div>Login</div>
-          <div>Logout</div>
-          {/* <NavBar /> */}
-        </div>
+          <div>Logout</div> */}
+        {/* </div> */}
         <div>
           <Switch>
             <Route path="/users" component={UsersList} />
