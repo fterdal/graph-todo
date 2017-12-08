@@ -65,7 +65,7 @@ const loginMutation = gql`
 
 export default compose(
   graphql(loginMutation, {
-    name: 'loginMutation',
+    // name: 'loginMutation',
     props: ({ data, mutate }) => ({data, loginMutation: mutate}),
   }),
 )(Login)

@@ -10,7 +10,9 @@ import App from './App';
 
 const client = new ApolloClient({
   link: new HttpLink(),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    dataIdFromObject: obj => obj.id,
+  }),
 });
 
 ReactDOM.render(
