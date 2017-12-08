@@ -10,8 +10,8 @@ const SideBar = (props) => {
     <div className="sidebar-container">
       <div />
       {welcome}
-      <div>Login</div>
-      <div>Logout</div>
+      <a className="button auth-button">Login</a>
+      <a className="button auth-button">Logout</a>
     </div>
   )
 }

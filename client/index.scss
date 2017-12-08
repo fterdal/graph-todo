@@ -24,12 +24,15 @@ body,html {
 
 .sidebar-container {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  div {
+  grid-template-rows: 1fr 1fr 1fr 1fr 66%;
+  background-color: $teal-deer;
+  div,a {
     text-align: center;
+    margin: 10px 10px;
+    // width: 90%;
   }
 }
 
-.navbar li a:hover {
-    background-color: $dark-green;
+.auth-button {
+  background-color: $polished-pine;
 }
