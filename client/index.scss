@@ -1,19 +1,11 @@
 /* Coolors Exported Palette - coolors.co/b5ffe1-93e5ab-65b891-4e878c-00241b */
 
-/* HSL */
-// $color1: hsla(156%, 100%, 85%, 1);
-// $color2: hsla(138%, 61%, 74%, 1);
-// $color3: hsla(152%, 37%, 56%, 1);
-// $color4: hsla(185%, 28%, 43%, 1);
-// $color5: hsla(165%, 100%, 7%, 1);
-
 /* RGB */
 $aero-blue: rgba(181, 255, 225, 1);
 $teal-deer: rgba(147, 229, 171, 1);
 $polished-pine: rgba(101, 184, 145, 1);
 $steel-teal: rgba(78, 135, 140, 1);
 $dark-green: rgba(0, 36, 27, 1);
-
 
 body,html {
   padding: 0;
@@ -28,6 +20,14 @@ body,html {
 
   width: 100vw;
   height: 100vh;
+}
+
+.sidebar-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  div {
+    text-align: center;
+  }
 }
 
 .navbar li a:hover {

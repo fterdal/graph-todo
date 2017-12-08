@@ -12,8 +12,11 @@ const App = () => {
   return (
     <Router history={history}>
       <div className="app-container">
-        <div>
-          <p>SIDEBAR</p>
+        <div className="sidebar-container">
+          <div />
+          <div>Welcome, USER</div>
+          <div>Login</div>
+          <div>Logout</div>
           {/* <NavBar /> */}
         </div>
         <div>
