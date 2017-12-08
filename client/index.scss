@@ -1,77 +1,35 @@
+/* Coolors Exported Palette - coolors.co/b5ffe1-93e5ab-65b891-4e878c-00241b */
+
+/* HSL */
+// $color1: hsla(156%, 100%, 85%, 1);
+// $color2: hsla(138%, 61%, 74%, 1);
+// $color3: hsla(152%, 37%, 56%, 1);
+// $color4: hsla(185%, 28%, 43%, 1);
+// $color5: hsla(165%, 100%, 7%, 1);
+
+/* RGB */
+$aero-blue: rgba(181, 255, 225, 1);
+$teal-deer: rgba(147, 229, 171, 1);
+$polished-pine: rgba(101, 184, 145, 1);
+$steel-teal: rgba(78, 135, 140, 1);
+$dark-green: rgba(0, 36, 27, 1);
+
+
 body,html {
   padding: 0;
   margin: 0;
 }
 
-.appContainer {
+.app-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 5fr;
   grid-column-gap: 1px;
-  grid-row-gap: 1px;
-  background-color: black;
+  background-color: $aero-blue;
 
-  grid-template-rows: 1fr 3fr;
-
-  @media screen and (min-width: 500px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  @media screen and (min-width: 800px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-}
-
-// .letter {
-//   background-color: #0069b3;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 20px;
-//   font-size: 70px;
-//   color: white;
-//   line-height: 1;
-//   font-family: 'hobeaux-rococeaux-background', Helvetica;
-//   font-weight: 200;
-//   cursor: pointer;
-//   transition: all .3s ease;
-// }
-
-// Colors
-$color-off-white: #f6f8ff;
-$color-dark-grey: #50514f;
-$color-purple: #a846a0;
-
-
-.navbar {
-  margin-bottom: 10px;
-}
-
-.users-list {
-  list-style-type: none;
-}
-
-.navbar ul {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    // overflow: hidden;
-    background-color: $color-dark-grey;
-}
-
-.navbar li {
-    float: left;
-    margin-bottom: 0;
-}
-
-.navbar li a {
-    display: block;
-    color: $color-off-white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  width: 100vw;
+  height: 100vh;
 }
 
 .navbar li a:hover {
-    background-color: $color-purple;
+    background-color: $dark-green;
 }

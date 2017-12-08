@@ -8,15 +8,20 @@ import {
 } from './components';
 import history from './history';
 
-const OldApp = () => {
+const App = () => {
   return (
     <Router history={history}>
-      <div>
-        <NavBar />
-        <Switch>
-          <Route path="/users" component={UsersList} />
-          <Route path="/" component={Home} />
-        </Switch>
+      <div className="app-container">
+        <div>
+          <p>SIDEBAR</p>
+          {/* <NavBar /> */}
+        </div>
+        <div>
+          <Switch>
+            <Route path="/users" component={UsersList} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </div>
       </div>
     </Router>
   )
