@@ -8,7 +8,7 @@ import {
 } from './components';
 import history from './history';
 
-const App = () => {
+const OldApp = () => {
   return (
     <Router history={history}>
       <div>
@@ -21,5 +21,25 @@ const App = () => {
     </Router>
   )
 }
+
+// // https://css-tricks.com/getting-started-css-grid/
+// const GridDemoApp = () => {
+//   return (
+//     <div className="appContainer">
+//       <div className="letter">
+//         A
+//       </div>
+//       <div className="letter">
+//         B
+//       </div>
+//       <div className="letter">
+//         C
+//       </div>
+//       <div className="letter">
+//         D
+//       </div>
+//     </div>
+//   )
+// }
 
 export default App;
