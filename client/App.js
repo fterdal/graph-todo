@@ -13,12 +13,6 @@ const App = () => {
     <Router history={history}>
       <div className="app-container">
         <SideBar />
-        {/* <div className="sidebar-container"> */}
-          {/* <div />
-          <div>Welcome, USER</div>
-          <div>Login</div>
-          <div>Logout</div> */}
-        {/* </div> */}
         <div>
           <Switch>
             <Route path="/users" component={UsersList} />
@@ -29,25 +23,5 @@ const App = () => {
     </Router>
   )
 }
-
-// // https://css-tricks.com/getting-started-css-grid/
-// const GridDemoApp = () => {
-//   return (
-//     <div className="appContainer">
-//       <div className="letter">
-//         A
-//       </div>
-//       <div className="letter">
-//         B
-//       </div>
-//       <div className="letter">
-//         C
-//       </div>
-//       <div className="letter">
-//         D
-//       </div>
-//     </div>
-//   )
-// }
 
 export default App;

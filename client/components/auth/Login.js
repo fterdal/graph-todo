@@ -9,22 +9,17 @@ class Login extends Component {
     password: '',
   }
 
-  // login = async () => {
-  //   const { email, password } = this.state
-  //   await this.props.loginMutation({
-  //     variables: {
-  //       email,
-  //       password
-  //     }
-  //   })
-  // }
-
-  doAsync = async () => {
-    await console.log('hello')
-    return 'buttz';
+  login = async () => {
+    const { email, password } = this.state
+    await this.props.loginMutation({
+      variables: {
+        email,
+        password
+      }
+    })
   }
-
   render() {
+    console.log('this.props', this.props);
     return (
       <form>
         <fieldset>
@@ -42,7 +37,11 @@ class Login extends Component {
             value={this.state.password}
             onChange={(evt) => this.setState({ password: evt.target.value })}
           />
-          <a className="button auth-button">Login</a>
+          <a
+            className="button auth-button"
+            onClick={() => this.login()}>
+              Login
+          </a>
         </fieldset>
       </form>
     )
@@ -52,8 +51,10 @@ class Login extends Component {
 const loginMutation = gql`
   mutation LoginMutation($email: String!, $password: String!){
     login(
-      email: $email,
-      password: $password,
+      input: {
+        email: $email,
+        password: $password,
+      }
     ) {
       id
       email
@@ -61,6 +62,7 @@ const loginMutation = gql`
   }
 `;
 
-export default compose(
-  graphql(loginMutation),
-)(Login)
+// export default compose(
+//   graphql(loginMutation),
+// )(Login)
+export default graphql(loginMutation, { name: 'loginMutation' })(Login)
