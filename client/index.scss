@@ -1,11 +1,11 @@
 /* Coolors Exported Palette - coolors.co/b5ffe1-93e5ab-65b891-4e878c-00241b */
 
 /* RGB */
-$aero-blue: rgba(181, 255, 225, 1);
-$teal-deer: rgba(147, 229, 171, 1);
-$polished-pine: rgba(101, 184, 145, 1);
-$steel-teal: rgba(78, 135, 140, 1);
-$dark-green: rgba(0, 36, 27, 1);
+$color1: rgba(181, 255, 225, 1); // aero blue
+$color2: rgba(147, 229, 171, 1); // teal dear
+$color3: rgba(101, 184, 145, 1); // polished pine
+$color4: rgba(78, 135, 140, 1); // steal teal
+$color5: rgba(0, 36, 27, 1); // dark green
 
 body,html {
   padding: 0;
@@ -16,7 +16,7 @@ body,html {
   display: grid;
   grid-template-columns: 1fr 5fr;
   grid-column-gap: 1px;
-  background-color: $aero-blue;
+  background-color: $color1;
 
   width: 100vw;
   height: 100vh;
@@ -25,7 +25,7 @@ body,html {
 .sidebar-container {
   display: grid;
   grid-template-rows: 10% 1fr 1fr 1fr 66%;
-  background-color: $teal-deer;
+  background-color: $color2;
   div, a {
     text-align: center;
     margin: 10px 10px;
@@ -34,9 +34,9 @@ body,html {
 }
 
 #emailField, #passwordField {
-  background-color: $teal-deer;
+  background-color: $color2;
 }
 
 .auth-button {
-  background-color: $polished-pine;
+  background-color: $color3;
 }
