@@ -3,9 +3,9 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
 const SideBar = (props) => {
-  const welcome = !props.data.me ? (<div />)
+  const welcome = !props.data.me ? (<div>Login or Signup</div>)
                                  : (<div>Welcome, {props.data.me.email}</div>);
-  // console.log('props.data:', props.data);
+  console.log('props:', props);
   return (
     <div className="sidebar-container">
       <div />

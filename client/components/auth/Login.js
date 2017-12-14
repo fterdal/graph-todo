@@ -15,12 +15,22 @@ class Login extends Component {
       variables: {
         email,
         password
+      },
+      update: (store, { data }) => {
+        console.log('store', store);
+        console.log('data', data);
+        // const data = store.readQuery({ query: ALL_LINKS_QUERY })
+        // data.allLinks.splice(0, 0, createLink)
+        // store.writeQuery({
+        //   query: ALL_LINKS_QUERY,
+        //   data
+        // })
       }
     })
     this.state = {email: '', password: ''};
   }
   render() {
-    console.log('this.props', this.props);
+    // console.log('this.props', this.props);
     return (
       <form>
         <fieldset>
