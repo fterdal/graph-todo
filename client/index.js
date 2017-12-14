@@ -1,22 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import apolloClient from './apolloClient';
+import store from './store';
 
 import './index.scss';
 import App from './App';
 
-export const client = new ApolloClient({
-  link: new HttpLink(),
-  cache: new InMemoryCache({
-    dataIdFromObject: obj => obj.id,
-  }),
-});
-
 ReactDOM.render(
-  <ApolloProvider client={client}>
+  <ApolloProvider client={apolloClient}>
     <App />
   </ApolloProvider>,
   document.getElementById('app')

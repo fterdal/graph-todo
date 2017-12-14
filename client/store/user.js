@@ -1,10 +1,7 @@
 import axios from 'axios';
 import history from '../history';
-import {
-  clearTrip,
-  setTripName,
-  clearInputAirport,
-} from './user-input';
+import apolloClient from '../apolloClient'
+console.log('apolloClient', apolloClient);
 
 /**
  * ACTION TYPES
