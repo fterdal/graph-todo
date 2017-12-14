@@ -27,10 +27,12 @@ class Login extends Component {
         // })
       }
     })
+    await this.props.meQuery();
     this.state = {email: '', password: ''};
   }
   render() {
     // console.log('this.props', this.props);
+    console.log('this.props', this.props);
     return (
       <form>
         <fieldset>
@@ -73,10 +75,21 @@ const loginMutation = gql`
   }
 `;
 
+const meQuery = gql`
+  query {
+    me {
+      id
+      email
+    }
+  }
+`;
+
 export default compose(
   graphql(loginMutation, {
-    // name: 'loginMutation',
     props: ({ data, mutate }) => ({data, loginMutation: mutate}),
+  }),
+  graphql(meQuery, {
+    name: 'meQuery',
   }),
 )(Login)
 // export default graphql(loginMutation, { name: 'loginMutation' })(Login)

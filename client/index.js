@@ -8,7 +8,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import './index.scss';
 import App from './App';
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   link: new HttpLink(),
   cache: new InMemoryCache({
     dataIdFromObject: obj => obj.id,
