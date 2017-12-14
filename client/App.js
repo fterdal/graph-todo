@@ -12,6 +12,7 @@ const App = () => {
   return (
     <Router history={history}>
       <div className="app-container">
+        {console.log('localStorage', localStorage)}
         <SideBar />
         <div>
           <Switch>
