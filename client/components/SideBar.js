@@ -1,17 +1,10 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Logout } from './index';
 
-const LoginButton = withRouter(({ history }) => {
-  return (
-    <a className="button auth-button" onClick={() => history.push('/login')}>Login</a>
-  )
-})
-
 const SideBar = ({ data }) => {
-  // console.log('history', history)
   const loggedIn = !!data.me;
 
   if (loggedIn) {
@@ -29,7 +22,8 @@ const SideBar = ({ data }) => {
         <div />
         <div />
         <Link className="button auth-button" to="/login">Login</Link>
-        <a className="button auth-button">Sign Up</a>
+        <Link className="button auth-button" to="/signup">Signup</Link>
+        {/* <a className="button auth-button">Sign Up</a> */}
       </div>
     )
   }
@@ -44,6 +38,6 @@ export const meQuery = gql`
   }
 `;
 
-export default withRouter(compose(
+export default compose(
   graphql(meQuery),
-)(SideBar))
+)(SideBar)

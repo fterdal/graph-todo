@@ -1,7 +1,13 @@
 module.exports = {
-  signup: async (_, {input: { email, password }}, { req, models: { User } }) => {
-    const user = await User.create({ email, password });
-    req.login(user, err => { if (err) console.error(err) });
+  signup: async (_, {input: { email, password }}, { req, res, models: { User } }) => {
+    let user;
+    try {
+      user = await User.create({ email, password });
+    } catch(err) {
+      res.status(400);
+      throw new Error('User Already Exists')
+    }
+    req.login(user, err => { if (err) throw new Error(err) });
     return user;
   },
   login: async (_, {input: { email, password }}, { req, models: { User } }) => {
