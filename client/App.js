@@ -5,6 +5,8 @@ import {
   UsersList,
   Home,
   SideBar,
+  Login,
+  // Signup,
 } from './components';
 import history from './history';
 
@@ -16,6 +18,7 @@ const App = () => {
         <div>
           <Switch>
             <Route path="/users" component={UsersList} />
+            <Route path="/login" component={Login} />
             <Route path="/" component={Home} />
           </Switch>
         </div>

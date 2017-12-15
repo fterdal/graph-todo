@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { meQuery } from '../SideBar';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
 
   state = {
     email: '',
     password: '',
+    loggedIn: false,
   }
 
-  login = async () => {
+  _login = async () => {
     const { email, password } = this.state
     await this.props.loginMutation({
       variables: {
@@ -21,33 +23,40 @@ class Login extends Component {
         { query: meQuery },
       ],
     })
-    this.setState({email: '', password: ''});
+    this.setState({ loggedIn: true });
   }
   render() {
+    const { _login, state: { email, password, loggedIn } } = this;
+
+    if (loggedIn) return (<Redirect to="/" />)
+
     return (
-      <form>
-        <fieldset>
-          <label>Email</label>
-          <input
-            id="emailField"
-            type="text"
-            value={this.state.email}
-            onChange={(evt) => this.setState({ email: evt.target.value })}
-          />
-          <label>Password</label>
-          <input
-            id="passwordField"
-            type="password"
-            value={this.state.password}
-            onChange={(evt) => this.setState({ password: evt.target.value })}
-          />
-          <a
-            className="button auth-button"
-            onClick={() => this.login()}>
+      <div className="container">
+        <h1>Login</h1>
+        <form>
+          <fieldset>
+            <label>Email</label>
+            <input
+              id="emailField"
+              type="text"
+              value={email}
+              onChange={(evt) => this.setState({ email: evt.target.value })}
+            />
+            <label>Password</label>
+            <input
+              id="passwordField"
+              type="password"
+              value={password}
+              onChange={(evt) => this.setState({ password: evt.target.value })}
+            />
+            <a
+              className="button auth-button"
+              onClick={() => _login()}>
               Login
-          </a>
-        </fieldset>
-      </form>
+            </a>
+          </fieldset>
+        </form>
+      </div>
     )
   }
 }
