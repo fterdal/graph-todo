@@ -9,11 +9,21 @@ class Signup extends Component {
   state = {
     email: '',
     password: '',
+    confirmPassword: '',
     signedUp: false,
+    errorMessage: '',
   }
 
   _signup = async () => {
-    const { email, password } = this.state
+    const { email, password, confirmPassword } = this.state
+    if (password !== confirmPassword) {
+      this.setState({
+        password: '',
+        confirmPassword: '',
+        errorMessage: 'Password and Confirm Password must match',
+      })
+      return;
+    }
     await this.props.signupMutation({
       variables: {
         email,
@@ -25,14 +35,22 @@ class Signup extends Component {
     })
     this.setState({ signedUp: true });
   }
+
   render() {
-    const { _signup, state: { email, password, signedUp } } = this;
-
+    const { _signup, state: {
+      email,
+      password,
+      confirmPassword,
+      signedUp,
+      errorMessage,
+    } } = this;
     if (signedUp) return (<Redirect to="/" />)
-
+    const errorMsg = errorMessage ? <div className="container errorMsg">{errorMessage}</div>
+                            : null
     return (
       <div className="container">
         <h1>Signup</h1>
+        {errorMsg}
         <form>
           <fieldset>
             <label>Email</label>
@@ -48,6 +66,13 @@ class Signup extends Component {
               type="password"
               value={password}
               onChange={(evt) => this.setState({ password: evt.target.value })}
+            />
+            <label>Confirm Password</label>
+            <input
+              id="confirmPasswordField"
+              type="password"
+              value={confirmPassword}
+              onChange={(evt) => this.setState({ confirmPassword: evt.target.value })}
             />
             <a
               className="button auth-button"

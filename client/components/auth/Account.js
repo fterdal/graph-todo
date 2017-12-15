@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { meQuery } from '../SideBar';
-import { Redirect } from 'react-router-dom';
 
-class Login extends Component {
+// This component isn't finished yet.
+class Account extends Component {
 
   state = {
     email: '',
     password: '',
-    loggedIn: false,
+    confirmPassword: '',
+    successFailMessage: '',
   }
 
-  _login = async () => {
+  _editUser = async () => {
     const { email, password } = this.state
     await this.props.loginMutation({
       variables: {
@@ -23,12 +24,10 @@ class Login extends Component {
         { query: meQuery },
       ],
     })
-    this.setState({ loggedIn: true });
   }
 
   render() {
-    const { _login, state: { email, password, loggedIn } } = this;
-    if (loggedIn) return (<Redirect to="/" />)
+    const { _login, state: { email, password, confirmPassword } } = this;
     return (
       <div className="container">
         <h1>Login</h1>
@@ -48,6 +47,13 @@ class Login extends Component {
               value={password}
               onChange={(evt) => this.setState({ password: evt.target.value })}
             />
+            <label>Confirm Password</label>
+            <input
+              id="confirmPasswordField"
+              type="password"
+              value={confirmPassword}
+              onChange={(evt) => this.setState({ password: evt.target.value })}
+            />
             <a
               className="button auth-button"
               onClick={() => _login()}>
@@ -60,22 +66,12 @@ class Login extends Component {
   }
 }
 
-const loginMutation = gql`
-  mutation LoginMutation($email: String!, $password: String!){
-    login(
-      input: {
-        email: $email,
-        password: $password,
-      }
-    ) {
-      id
-      email
-    }
-  }
+const editUserMutation = gql`
+  # edit user mutation goes here
 `;
 
 export default compose(
-  graphql(loginMutation, {
-    props: ({ data, mutate }) => ({data, loginMutation: mutate}),
+  graphql(editUserMutation, {
+    props: ({ data, mutate }) => ({data, editUserMutation: mutate}),
   }),
-)(Login)
+)(Account)

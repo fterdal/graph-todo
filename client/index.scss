@@ -7,6 +7,9 @@ $color3: rgba(101, 184, 145, 1); // polished pine
 $color4: rgba(78, 135, 140, 1); // steal teal
 $color5: rgba(0, 36, 27, 1); // dark green
 
+/* Coolors Exported Palette - coolors.co/b5ffe1-ef946c-65b891-c4a77d-00241b */
+$color6: rgba(239, 148, 108, 1); // dark salmon
+
 body,html {
   padding: 0;
   margin: 0;
@@ -33,8 +36,12 @@ body,html {
   }
 }
 
-#emailField, #passwordField {
+#emailField, #passwordField, #confirmPasswordField {
   background-color: $color2;
+}
+
+.errorMsg {
+  background-color: $color6;
 }
 
 .auth-button {
