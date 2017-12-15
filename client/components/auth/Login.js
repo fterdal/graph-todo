@@ -17,11 +17,11 @@ class Login extends Component {
         email,
         password
       },
-      refetchQueries: [{
-        query: meQuery,
-      }],
+      refetchQueries: [
+        { query: meQuery },
+      ],
     })
-    this.state = {email: '', password: ''};
+    this.setState({email: '', password: ''});
   }
   render() {
     return (

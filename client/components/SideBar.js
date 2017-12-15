@@ -1,10 +1,8 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
-// import { client } from '../index';
 
 const SideBar = (props) => {
-  console.log('props', props);
   const welcome = !props.data.me ? (<div>Login or Signup</div>)
                                  : (<div>Welcome, {props.data.me.email}</div>);
   return (
