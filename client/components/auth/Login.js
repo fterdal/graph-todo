@@ -20,23 +20,10 @@ class Login extends Component {
       refetchQueries: [{
         query: meQuery,
       }],
-      update: (store, { data }) => {
-        console.log('store', store);
-        console.log('data', data);
-        // const data = store.readQuery({ query: ALL_LINKS_QUERY })
-        // data.allLinks.splice(0, 0, createLink)
-        // store.writeQuery({
-        //   query: ALL_LINKS_QUERY,
-        //   data
-        // })
-      }
     })
-    // await this.props.meQuery();
     this.state = {email: '', password: ''};
   }
   render() {
-    // console.log('this.props', this.props);
-    console.log('this.props', this.props);
     return (
       <form>
         <fieldset>
@@ -79,21 +66,8 @@ const loginMutation = gql`
   }
 `;
 
-// const meQuery = gql`
-//   query {
-//     me {
-//       id
-//       email
-//     }
-//   }
-// `;
-
 export default compose(
   graphql(loginMutation, {
     props: ({ data, mutate }) => ({data, loginMutation: mutate}),
   }),
-  // graphql(meQuery, {
-  //   name: 'meQuery',
-  // }),
 )(Login)
-// export default graphql(loginMutation, { name: 'loginMutation' })(Login)
