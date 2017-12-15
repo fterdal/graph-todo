@@ -1,11 +1,7 @@
 module.exports = {
   me: (_, __, { req }) => {
     console.log('req.user', req.user);
-    // return {
-    //   id: req.user.id,
-    //   email: req.user.email,
-    // };
+    // console.log('ME req.session.cookie', req.session.cookie);
     return req.user;
   },
-  // me: () => 7234,
 }

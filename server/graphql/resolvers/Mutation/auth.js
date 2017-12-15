@@ -5,7 +5,8 @@ module.exports = {
     return user;
   },
   login: async (_, {input: { email, password }}, { req, models: { User } }) => {
-    console.log('IN THE LOGIN REDUCER! \t email:', email, ' password:', password);
+    // console.log('IN THE LOGIN REDUCER! \t email:', email, ' password:', password);
+    console.log('LOGIN req.session.cookie', req.session.cookie);
     const user = await User.findOne({ where: { email } });
     if (!user) throw new Error('User Not Found');
     if (!user.correctPassword(password)) throw new Error('Invalid Credentials');

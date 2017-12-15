@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+import { meQuery } from '../SideBar';
 
 class Login extends Component {
 
@@ -16,6 +17,9 @@ class Login extends Component {
         email,
         password
       },
+      refetchQueries: [{
+        query: meQuery,
+      }],
       update: (store, { data }) => {
         console.log('store', store);
         console.log('data', data);
@@ -27,7 +31,7 @@ class Login extends Component {
         // })
       }
     })
-    await this.props.meQuery();
+    // await this.props.meQuery();
     this.state = {email: '', password: ''};
   }
   render() {
@@ -75,21 +79,21 @@ const loginMutation = gql`
   }
 `;
 
-const meQuery = gql`
-  query {
-    me {
-      id
-      email
-    }
-  }
-`;
+// const meQuery = gql`
+//   query {
+//     me {
+//       id
+//       email
+//     }
+//   }
+// `;
 
 export default compose(
   graphql(loginMutation, {
     props: ({ data, mutate }) => ({data, loginMutation: mutate}),
   }),
-  graphql(meQuery, {
-    name: 'meQuery',
-  }),
+  // graphql(meQuery, {
+  //   name: 'meQuery',
+  // }),
 )(Login)
 // export default graphql(loginMutation, { name: 'loginMutation' })(Login)
