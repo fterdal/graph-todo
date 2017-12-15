@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { meQuery } from '../SideBar';
-import { Redirect } from 'react-router-dom';
 
 class Logout extends Component {
-
-  state = {
-    loggedOut: false,
-  }
 
   _logout = async () => {
     await this.props.logoutMutation({
@@ -16,13 +11,10 @@ class Logout extends Component {
         { query: meQuery },
       ],
     })
-    this.setState({ loggedOut: true });
   }
+
   render() {
-    const { _logout, state: { loggedOut } } = this;
-
-    if (loggedOut) return (<Redirect to="/" />)
-
+    const { _logout } = this;
     return (
       <a
         className="button auth-button"
@@ -34,7 +26,7 @@ class Logout extends Component {
 }
 
 const logoutMutation = gql`
-  mutation LogoutMutation(){
+  mutation {
     logout {
       id
     }
@@ -43,6 +35,6 @@ const logoutMutation = gql`
 
 export default compose(
   graphql(logoutMutation, {
-    props: ({ data, mutate }) => ({data, logoutMutation: mutate}),
+    props: ({ mutate }) => ({ logoutMutation: mutate }),
   }),
 )(Logout)

@@ -1,4 +1,4 @@
 export Home from './Home';
 export UsersList from './UsersList';
 export SideBar from './SideBar';
-export * from './auth';
+export { Login, Logout, Signup } from './auth';
