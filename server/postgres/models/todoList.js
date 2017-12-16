@@ -2,10 +2,6 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 const { models: { todoTask } } = require('../db');
 
-// const models = require('../models');
-// console.log('db.models.todoTask', db.models.todoTask);
-// console.log('todoTask', todoTask);
-
 const TodoList = db.define('todoList', {
   name: {
     type: Sequelize.STRING,
@@ -21,6 +17,7 @@ const TodoList = db.define('todoList', {
 /**
  * instanceMethods
  */
+ // Not sure if we actually need this.
  TodoList.prototype.markAllComplete = async function() {
    const todoTasks = await todoTask.findAll({ where: { todoListId: this.id }})
    console.log('todoTasks', todoTasks);
@@ -28,11 +25,6 @@ const TodoList = db.define('todoList', {
      await singleTodoTask.update({complete: true})
    }));
  }
-
- TodoList.prototype.markAllUncomplete = function() {
-
- }
-
 
 /**
  * classMethods

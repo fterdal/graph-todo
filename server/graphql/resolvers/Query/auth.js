@@ -1,3 +1,5 @@
 module.exports = {
-  me: (_, __, { req }) => req.user,
+  me: (_, __, { req }) => {
+    return req.user;
+  },
 }

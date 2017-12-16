@@ -4,19 +4,25 @@ import { Route, Switch } from 'react-router-dom';
 import {
   UsersList,
   Home,
-  NavBar,
+  SideBar,
+  Login,
+  Signup,
 } from './components';
 import history from './history';
 
 const App = () => {
   return (
     <Router history={history}>
-      <div>
-        <NavBar />
-        <Switch>
-          <Route path="/users" component={UsersList} />
-          <Route path="/" component={Home} />
-        </Switch>
+      <div className="app-container">
+        <SideBar />
+        <div>
+          <Switch>
+            <Route path="/users" component={UsersList} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </div>
       </div>
     </Router>
   )

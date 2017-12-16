@@ -1,39 +1,50 @@
-// Colors
-$color-off-white: #f6f8ff;
-$color-dark-grey: #50514f;
-$color-purple: #a846a0;
+/* Coolors Exported Palette - coolors.co/b5ffe1-93e5ab-65b891-4e878c-00241b */
 
+/* RGB */
+$color1: rgba(181, 255, 225, 1); // aero blue
+$color2: rgba(147, 229, 171, 1); // teal dear
+$color3: rgba(101, 184, 145, 1); // polished pine
+$color4: rgba(78, 135, 140, 1); // steal teal
+$color5: rgba(0, 36, 27, 1); // dark green
 
-.navbar {
-  margin-bottom: 10px;
+/* Coolors Exported Palette - coolors.co/b5ffe1-ef946c-65b891-c4a77d-00241b */
+$color6: rgba(239, 148, 108, 1); // dark salmon
+
+body,html {
+  padding: 0;
+  margin: 0;
 }
 
-.users-list {
-  list-style-type: none;
+.app-container {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-column-gap: 1px;
+  background-color: $color1;
+
+  width: 100vw;
+  height: 100vh;
 }
 
-.navbar ul {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    // overflow: hidden;
-    background-color: $color-dark-grey;
-}
-
-.navbar li {
-    float: left;
-    margin-bottom: 0;
-}
-
-.navbar li a {
-    display: block;
-    color: $color-off-white;
+.sidebar-container {
+  display: grid;
+  grid-template-rows: 10% 1fr 1fr 1fr 66%;
+  background-color: $color2;
+  div, a {
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+    margin: 10px 10px;
+    // width: 90%;
+  }
 }
 
-.navbar li a:hover {
-    background-color: $color-purple;
+#emailField, #passwordField, #confirmPasswordField {
+  background-color: $color2;
+}
+
+.errorMsg {
+  background-color: $color6;
+  font-weight: bold;
+}
+
+.auth-button {
+  background-color: $color3;
 }
