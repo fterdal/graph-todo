@@ -22,3 +22,26 @@ exports[`Sidebar renders when logged in 1`] = `
   </a>
 </div>
 `;
+
+exports[`Sidebar renders when not logged in 1`] = `
+<div
+  className="sidebar-container"
+>
+  <div />
+  <div />
+  <a
+    className="button auth-button"
+    href="/login"
+    onClick={[Function]}
+  >
+    Login
+  </a>
+  <a
+    className="button auth-button"
+    href="/signup"
+    onClick={[Function]}
+  >
+    Signup
+  </a>
+</div>
+`;

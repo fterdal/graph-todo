@@ -1,9 +1,9 @@
 import React from 'react';
-import { SideBar } from '../SideBar';
 import renderer from 'react-test-renderer';
+import { StaticRouter } from 'react-router';
+import { SideBar } from '../SideBar';
 
 test('Sidebar renders when logged in', () => {
-  // const notLoggedIn = { me: null };
   const loggedIn = {
     me: {
       id: 7,
@@ -17,10 +17,12 @@ test('Sidebar renders when logged in', () => {
   expect(sidebarTree).toMatchSnapshot();
 });
 
-xtest('Sidebar renders when not logged in', () => {
+test('Sidebar renders when not logged in', () => {
   const notLoggedIn = { me: null };
   const sidebar = renderer.create(
-    <SideBar data={notLoggedIn} />,
+    <StaticRouter context={{}}>
+      <SideBar data={notLoggedIn} />
+    </StaticRouter>
   );
   let sidebarTree = sidebar.toJSON();
   expect(sidebarTree).toMatchSnapshot();

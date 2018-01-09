@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders a simple div 1`] = `
+<div
+  className="container"
+>
+  <h1>
+    Home Page
+  </h1>
+</div>
+`;
