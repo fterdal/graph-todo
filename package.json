@@ -7,7 +7,8 @@
     "start": "nodemon server/index.js -e js,graphql --ignore public",
     "test-server": "NODE_ENV='test' mocha --watch --recursive server",
     "client-dev": "webpack -w",
-    "start-dev": "yarn client-dev & yarn start"
+    "start-dev": "yarn client-dev & yarn start",
+    "test-jest": "jest"
   },
   "license": "MIT",
   "dependencies": {
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-jest": "^22.0.4",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
@@ -46,8 +48,10 @@
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.1.2",
     "css-loader": "^0.28.7",
+    "jest": "^22.0.5",
     "mocha": "^4.0.1",
     "node-sass": "^4.7.1",
+    "react-test-renderer": "^16.2.0",
     "sass-loader": "^6.0.6",
     "sinon": "^4.1.2",
     "sinon-chai": "^2.14.0",
