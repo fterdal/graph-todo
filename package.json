@@ -8,7 +8,7 @@
     "test-server": "NODE_ENV='test' mocha --watch --recursive server",
     "client-dev": "webpack -w",
     "start-dev": "yarn client-dev & yarn start",
-    "test-jest": "jest"
+    "test-jest": "jest --watch"
   },
   "license": "MIT",
   "dependencies": {
