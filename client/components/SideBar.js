@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import { Logout } from './index';
 
-const SideBar = ({ data }) => {
+export const SideBar = ({ data }) => {
   const loggedIn = !!data.me;
 
   if (loggedIn) {
@@ -23,7 +23,6 @@ const SideBar = ({ data }) => {
         <div />
         <Link className="button auth-button" to="/login">Login</Link>
         <Link className="button auth-button" to="/signup">Signup</Link>
-        {/* <a className="button auth-button">Sign Up</a> */}
       </div>
     )
   }

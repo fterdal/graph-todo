@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { meQuery } from '../SideBar';
 
 // This component isn't finished yet.
-class Account extends Component {
+export class Account extends Component {
 
   state = {
     email: '',

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar renders when logged in 1`] = `
+<div
+  className="sidebar-container"
+>
+  <div />
+  <div>
+    Welcome, 
+    hello@world.com
+  </div>
+  <a
+    className="button auth-button"
+  >
+    Account
+  </a>
+  <a
+    className="button auth-button"
+    onClick={[Function]}
+  >
+    Logout
+  </a>
+</div>
+`;
+
+exports[`Sidebar renders when not logged in 1`] = `
+<div
+  className="sidebar-container"
+>
+  <div />
+  <div />
+  <a
+    className="button auth-button"
+    href="/login"
+    onClick={[Function]}
+  >
+    Login
+  </a>
+  <a
+    className="button auth-button"
+    href="/signup"
+    onClick={[Function]}
+  >
+    Signup
+  </a>
+</div>
+`;

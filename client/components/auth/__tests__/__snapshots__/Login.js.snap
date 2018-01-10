@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login renders a form to log in 1`] = `
+<div
+  className="container"
+>
+  <h1>
+    Login
+  </h1>
+  <form>
+    <fieldset>
+      <label>
+        Email
+      </label>
+      <input
+        id="emailField"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <label>
+        Password
+      </label>
+      <input
+        id="passwordField"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+      <a
+        className="button auth-button"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </fieldset>
+  </form>
+</div>
+`;
+
+exports[`User can enter in the login fields 1`] = `
+<div
+  className="container"
+>
+  <h1>
+    Login
+  </h1>
+  <form>
+    <fieldset>
+      <label>
+        Email
+      </label>
+      <input
+        id="emailField"
+        onChange={[Function]}
+        type="text"
+        value="hello@world.com"
+      />
+      <label>
+        Password
+      </label>
+      <input
+        id="passwordField"
+        onChange={[Function]}
+        type="password"
+        value="secretPassword"
+      />
+      <a
+        className="button auth-button"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </fieldset>
+  </form>
+</div>
+`;
+
+exports[`User can enter in the login fields 2`] = `
+<div
+  className="container"
+>
+  <h1>
+    Login
+  </h1>
+  <form>
+    <fieldset>
+      <label>
+        Email
+      </label>
+      <input
+        id="emailField"
+        onChange={[Function]}
+        type="text"
+        value="hello@world.com"
+      />
+      <label>
+        Password
+      </label>
+      <input
+        id="passwordField"
+        onChange={[Function]}
+        type="password"
+        value="secretPassword"
+      />
+      <a
+        className="button auth-button"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </fieldset>
+  </form>
+</div>
+`;

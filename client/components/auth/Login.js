@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { meQuery } from '../SideBar';
 import { Redirect } from 'react-router-dom';
 
-class Login extends Component {
+export class Login extends Component {
 
   state = {
     email: '',
