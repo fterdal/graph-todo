@@ -3,7 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { meQuery } from '../SideBar';
 
-class Logout extends Component {
+export class Logout extends Component {
 
   _logout = async () => {
     await this.props.logoutMutation({

@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login renders a form to log in 1`] = `
+exports[`Signup renders a form to sign up 1`] = `
 <div
   className="container"
 >
   <h1>
-    Login
+    Signup
   </h1>
   <form>
     <fieldset>
@@ -27,23 +27,32 @@ exports[`Login renders a form to log in 1`] = `
         type="password"
         value=""
       />
+      <label>
+        Confirm Password
+      </label>
+      <input
+        id="confirmPasswordField"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
       <a
         className="button auth-button"
         onClick={[Function]}
       >
-        Login
+        Signup
       </a>
     </fieldset>
   </form>
 </div>
 `;
 
-exports[`User can enter in the login fields 1`] = `
+exports[`User can enter in the signup fields 1`] = `
 <div
   className="container"
 >
   <h1>
-    Login
+    Signup
   </h1>
   <form>
     <fieldset>
@@ -65,11 +74,20 @@ exports[`User can enter in the login fields 1`] = `
         type="password"
         value="secretPassword"
       />
+      <label>
+        Confirm Password
+      </label>
+      <input
+        id="confirmPasswordField"
+        onChange={[Function]}
+        type="password"
+        value="secretPassword"
+      />
       <a
         className="button auth-button"
         onClick={[Function]}
       >
-        Login
+        Signup
       </a>
     </fieldset>
   </form>
