@@ -8,9 +8,17 @@
     "test-server": "NODE_ENV='test' mocha --watch --recursive server",
     "client-dev": "webpack -w",
     "start-dev": "yarn client-dev & yarn start",
-    "test-jest": "jest --watch"
+    "test": "jest --watch"
   },
   "license": "MIT",
+  "jest": {
+    "setupFiles": [
+      "./jestSetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.1",
     "apollo-client": "^2.0.3",
@@ -48,6 +56,9 @@
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.1.2",
     "css-loader": "^0.28.7",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.0",
     "jest": "^22.0.5",
     "mocha": "^4.0.1",
     "node-sass": "^4.7.1",
