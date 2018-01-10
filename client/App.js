@@ -10,7 +10,7 @@ import {
 } from './components';
 import history from './history';
 
-const App = () => {
+export const App = () => {
   return (
     <Router history={history}>
       <div className="app-container">
