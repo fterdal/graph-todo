@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup renders a form to sign up 1`] = `
+<div
+  className="container"
+>
+  <h1>
+    Signup
+  </h1>
+  <form>
+    <fieldset>
+      <label>
+        Email
+      </label>
+      <input
+        id="emailField"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <label>
+        Password
+      </label>
+      <input
+        id="passwordField"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+      <label>
+        Confirm Password
+      </label>
+      <input
+        id="confirmPasswordField"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+      <a
+        className="button auth-button"
+        onClick={[Function]}
+      >
+        Signup
+      </a>
+    </fieldset>
+  </form>
+</div>
+`;
+
+exports[`User can enter in the signup fields 1`] = `
+<div
+  className="container"
+>
+  <h1>
+    Signup
+  </h1>
+  <form>
+    <fieldset>
+      <label>
+        Email
+      </label>
+      <input
+        id="emailField"
+        onChange={[Function]}
+        type="text"
+        value="hello@world.com"
+      />
+      <label>
+        Password
+      </label>
+      <input
+        id="passwordField"
+        onChange={[Function]}
+        type="password"
+        value="secretPassword"
+      />
+      <label>
+        Confirm Password
+      </label>
+      <input
+        id="confirmPasswordField"
+        onChange={[Function]}
+        type="password"
+        value="secretPassword"
+      />
+      <a
+        className="button auth-button"
+        onClick={[Function]}
+      >
+        Signup
+      </a>
+    </fieldset>
+  </form>
+</div>
+`;
