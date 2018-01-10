@@ -21,10 +21,9 @@ test('User can enter in the login fields', () => {
   login.find('#passwordField').simulate('change', {
     target: { value: 'secretPassword' }
   });
-  expect(login.state().email).toBe('hello@world.com')
-  expect(login.state().password).toBe('secretPassword')
+  expect(login.state().email).toBe('hello@world.com');
+  expect(login.state().password).toBe('secretPassword');
   expect(login).toMatchSnapshot();
   login.find('.auth-button').simulate('click');
   expect(loginMutationMock).toHaveBeenCalled();
-  expect(login).toMatchSnapshot();
 });
