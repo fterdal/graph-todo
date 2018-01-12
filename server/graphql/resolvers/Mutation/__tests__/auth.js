@@ -1,5 +1,9 @@
 /* eslint-env jest */
-const mutation = require('../index');
+const {
+  login,
+  logout,
+  signup,
+} = require('../index');
 
 describe('mutation mutations', () => {
 
@@ -38,7 +42,7 @@ describe('mutation mutations', () => {
   })
 
   test('signup creates user and logs in', async () => {
-    const createdUser = await mutation.signup(null, { input }, { req, res, models });
+    const createdUser = await signup(null, { input }, { req, res, models });
     expect(createdUser).toEqual(user);
     expect(res.status).not.toHaveBeenCalled();
     expect(req.login).toHaveBeenCalled();
@@ -47,7 +51,7 @@ describe('mutation mutations', () => {
   test('signup fails when user already exists', async () => {
     input.email = 'hagrid@hogwarts.edu';
     try {
-      await mutation.signup(null, { input }, { req, res, models });
+      await signup(null, { input }, { req, res, models });
       throw new Error('Incorrect Error')
     } catch(err) {
       expect(err).toEqual(new Error('User Already Exists'))
@@ -55,7 +59,7 @@ describe('mutation mutations', () => {
   })
 
   test('login logs the user in', async () => {
-    const loggedInUser = await mutation.login(null, { input }, { req, res, models });
+    const loggedInUser = await login(null, { input }, { req, res, models });
     expect(loggedInUser).toEqual(user);
     expect(res.status).not.toHaveBeenCalled();
     expect(req.login).toHaveBeenCalled();
@@ -64,7 +68,7 @@ describe('mutation mutations', () => {
   test('login fails when the user does not exist', async () => {
     input.email = 'hermione@hogwarts.edu';
     try {
-      await mutation.login(null, { input }, { req, res, models });
+      await login(null, { input }, { req, res, models });
       throw new Error('Incorrect Error')
     } catch(err) {
       expect(err).toEqual(new Error('User Not Found'))
@@ -74,7 +78,7 @@ describe('mutation mutations', () => {
   test('login fails when the credentials are invalid', async () => {
     input.password = '10points4gryffindor';
     try {
-      await mutation.login(null, { input }, { req, res, models });
+      await login(null, { input }, { req, res, models });
       throw new Error('Incorrect Error')
     } catch(err) {
       expect(err).toEqual(new Error('Invalid Credentials'))
@@ -83,7 +87,7 @@ describe('mutation mutations', () => {
 
   test('logout logs the user out', () => {
     req.user = user;
-    const loggedOutUser = mutation.logout(null, null, { req });
+    const loggedOutUser = logout(null, null, { req });
     expect(req.logout).toHaveBeenCalled();
     expect(loggedOutUser).toEqual(user)
   })
