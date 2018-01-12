@@ -8,6 +8,7 @@ describe('auth mutations', () => {
     user = {
       id: 7,
       email: 'harrypotter@hogwarts.edu',
+      correctPassword: pw => pw === 'ExpectoPatronum',
     }
     input = {
       email: 'harrypotter@hogwarts.edu',
@@ -26,7 +27,12 @@ describe('auth mutations', () => {
           }
           return user;
         }),
-        findOne: jest.fn(),
+        findOne: jest.fn(({ where: { email } }) => {
+          if (email !== 'harrypotter@hogwarts.edu') {
+            throw new Error()
+          }
+          return user
+        }),
       }
     };
   })
@@ -48,7 +54,16 @@ describe('auth mutations', () => {
     }
   })
 
-  test('login', () => {
+  test('login logs the user in', async () => {
+    // TO DO
+    const loggedInUser = await auth.login(null, { input }, { req, res, models });
+  })
+
+  test('login fails when the user does not exist', async () => {
+
+  })
+
+  test('login fails when the credentials are invalid', async () => {
 
   })
 
