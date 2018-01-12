@@ -15,6 +15,7 @@ describe('todoList mutations', () => {
       addTodoList: jest.fn(),
     };
     todoList = {
+      id: 3,
       name: 'studying',
       description: 'do some reading, homework, etc',
       addTodoTask: jest.fn(),
@@ -30,7 +31,8 @@ describe('todoList mutations', () => {
     req = {
       user: {
         id: 7,
-        isAdmin: false,
+        isAdmin: true,
+        canEditTodoList: jest.fn(() => true),
       }
     };
     res = { status: jest.fn() };
@@ -43,7 +45,13 @@ describe('todoList mutations', () => {
       TodoList: {
         create: jest.fn(() => {
           return todoList;
-        })
+        }),
+        findById: jest.fn(id => {
+          if (id !== todoList.id) {
+            throw new Error('Not Found')
+          }
+          return todoList;
+        }),
       },
       TodoTask: {
         create: jest.fn(),
@@ -62,6 +70,16 @@ describe('todoList mutations', () => {
     });
     expect(user.addTodoList).toHaveBeenCalledWith(createdTodoList);
     expect(createdTodoList).toBe(todoList);
+  })
+
+  test('updateTodoList updates a todoTist', async () => {
+    const input = {
+      todoListId: todoList.id,
+      input: todoList,
+    };
+    input.input.name = 'reading';
+    const updatedTodoList = await updateTodoList(null, { input }, { req, res, models });
+    console.log('updatedTodoList', updatedTodoList);
   })
 
 

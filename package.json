@@ -12,8 +12,11 @@
     "test:coverage:watch": "jest --coverage --watch"
   },
   "license": "MIT",
+  "majestic": {
+    "runscript": "jest --coverage --watch --silent",
+    "jestConfig": "./jestSetup.js"
+  },
   "jest": {
-
     "setupFiles": [
       "./jestSetup.js"
     ],
