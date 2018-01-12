@@ -72,7 +72,13 @@ describe('auth mutations', () => {
   })
 
   test('login fails when the credentials are invalid', async () => {
-
+    input.password = '10points4gryffindor';
+    try {
+      await auth.login(null, { input }, { req, res, models });
+      throw new Error('Incorrect Error')
+    } catch(err) {
+      expect(err).toEqual(new Error('Invalid Credentials'))
+    }
   })
 
   test('logout', () => {
