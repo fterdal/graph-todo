@@ -13,31 +13,33 @@ let {
   res,
 } = require('../../../../postgres/models/__mocks__/mockData');
 
+const models = require('../../../../postgres/models');
+
 describe('todoList mutations', () => {
 
-  let models;
+  // let models;
   beforeEach(() => {
-    models = {
-      User: {
-        findById: jest.fn(() => {
-          return user;
-        }),
-      },
-      TodoList: {
-        create: jest.fn(() => {
-          return todoList;
-        }),
-        findById: jest.fn(id => {
-          if (id !== todoList.id) {
-            throw new Error('Not Found')
-          }
-          return todoList;
-        }),
-      },
-      TodoTask: {
-        create: jest.fn(),
-      },
-    };
+    // models = {
+    //   User: {
+    //     findById: jest.fn(() => {
+    //       return user;
+    //     }),
+    //   },
+    //   TodoList: {
+    //     create: jest.fn(() => {
+    //       return todoList;
+    //     }),
+    //     findById: jest.fn(id => {
+    //       if (id !== todoList.id) {
+    //         throw new Error('Not Found')
+    //       }
+    //       return todoList;
+    //     }),
+    //   },
+    //   TodoTask: {
+    //     create: jest.fn(),
+    //   },
+    // };
   })
 
   test('createTodoList creates a new todoTist', async () => {
