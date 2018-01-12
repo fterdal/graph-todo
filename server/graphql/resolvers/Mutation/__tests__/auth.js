@@ -81,7 +81,10 @@ describe('auth mutations', () => {
     }
   })
 
-  test('logout', () => {
-
+  test('logout logs the user out', () => {
+    req.user = user;
+    const loggedOutUser = auth.logout(null, null, { req });
+    expect(req.logout).toHaveBeenCalled();
+    expect(loggedOutUser).toEqual(user)
   })
 })
