@@ -20,7 +20,6 @@ const TodoList = db.define('todoList', {
  // Not sure if we actually need this.
  TodoList.prototype.markAllComplete = async function() {
    const todoTasks = await todoTask.findAll({ where: { todoListId: this.id }})
-   console.log('todoTasks', todoTasks);
    return Promise.all(todoTasks.map(async singleTodoTask => {
      await singleTodoTask.update({complete: true})
    }));
