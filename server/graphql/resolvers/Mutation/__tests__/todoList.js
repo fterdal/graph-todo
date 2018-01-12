@@ -5,37 +5,18 @@ const {
   addTodoTask,
 } = require('../index');
 
+let {
+  user,
+  todoList,
+  todoTasks,
+  req,
+  res,
+} = require('../../../../postgres/models/__mocks__/mockData');
+
 describe('todoList mutations', () => {
 
-  let user, todoList, todoTasks, inputUpdate, inputAddTodoTask, req, res, models;
+  let models;
   beforeEach(() => {
-    user = {
-      id: 7,
-      email: 'harrypotter@hogwarts.edu',
-      addTodoList: jest.fn(),
-    };
-    todoList = {
-      id: 3,
-      name: 'studying',
-      description: 'do some reading, homework, etc',
-      addTodoTask: jest.fn(),
-    };
-    todoTasks = [{
-      title: 'potions reading',
-      text: 'chapter 4 on polymorph',
-      completed: true,
-    }, {
-      title: 'divination assignment',
-      text: 'predict a celestial event (just ask hermione)',
-    }];
-    req = {
-      user: {
-        id: 7,
-        isAdmin: true,
-        canEditTodoList: jest.fn(() => true),
-      }
-    };
-    res = { status: jest.fn() };
     models = {
       User: {
         findById: jest.fn(() => {
