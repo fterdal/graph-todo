@@ -79,7 +79,7 @@ describe('todoList mutations', () => {
     };
     input.input.name = 'reading';
     const updatedTodoList = await updateTodoList(null, { input }, { req, res, models });
-    console.log('updatedTodoList', updatedTodoList);
+    // console.log('updatedTodoList', updatedTodoList);
   })
 
 

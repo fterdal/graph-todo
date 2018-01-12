@@ -1,8 +1,9 @@
-/* eslint-env jest */
-console.log(`Here's the mock database models!`)
+// const TodoTask = require('./todoTask');
+const TodoList = require('./todoList');
+// const User = require('./user');
 
 module.exports = {
-  TodoList: jest.fn(),
-  TodoTask: jest.fn(),
-  User: jest.fn(),
+  // TodoTask,
+  TodoList,
+  // User,
 }
