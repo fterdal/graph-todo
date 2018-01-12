@@ -29,9 +29,9 @@ describe('auth mutations', () => {
         }),
         findOne: jest.fn(({ where: { email } }) => {
           if (email !== 'harrypotter@hogwarts.edu') {
-            throw new Error()
+            return null;
           }
-          return user
+          return user;
         }),
       }
     };
@@ -55,12 +55,20 @@ describe('auth mutations', () => {
   })
 
   test('login logs the user in', async () => {
-    // TO DO
     const loggedInUser = await auth.login(null, { input }, { req, res, models });
+    expect(loggedInUser).toEqual(user);
+    expect(res.status).not.toHaveBeenCalled();
+    expect(req.login).toHaveBeenCalled();
   })
 
   test('login fails when the user does not exist', async () => {
-
+    input.email = 'hermione@hogwarts.edu';
+    try {
+      await auth.login(null, { input }, { req, res, models });
+      throw new Error('Incorrect Error')
+    } catch(err) {
+      expect(err).toEqual(new Error('User Not Found'))
+    }
   })
 
   test('login fails when the credentials are invalid', async () => {
