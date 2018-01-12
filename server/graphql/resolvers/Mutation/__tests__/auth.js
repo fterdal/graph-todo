@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const auth = require('../auth');
+const auth = require('../index');
 
 describe('auth mutations', () => {
 

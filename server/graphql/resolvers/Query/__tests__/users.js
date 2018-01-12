@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const users = require('../users');
+const query = require('../index');
 
 describe('allUsers', () => {
 
@@ -15,14 +15,14 @@ describe('allUsers', () => {
   })
 
   test('resolves when user is admin', () => {
-    users.allUsers(null, null, { req, res, models });
+    query.allUsers(null, null, { req, res, models });
     expect(models.User.findAll).toHaveBeenCalled();
   })
 
   test('throws when user is not admin', () => {
     req.user.isAdmin = false;
     const userIsNotAdmin = () => {
-      users.allUsers(null, null, { req, res, models })
+      query.allUsers(null, null, { req, res, models })
     }
     expect(userIsNotAdmin).toThrowError('Forbidden');
     expect(res.status).toHaveBeenCalledWith(403);
@@ -31,7 +31,7 @@ describe('allUsers', () => {
   test('throws when user is not logged in', () => {
     req.user = null;
     const userIsNotLoggedIn = () => {
-      users.allUsers(null, null, { req, res, models })
+      query.allUsers(null, null, { req, res, models })
     }
     expect(userIsNotLoggedIn).toThrowError('Unauthorized');
     expect(res.status).toHaveBeenCalledWith(401);
@@ -52,14 +52,14 @@ describe('userById', () => {
   })
 
   test('resolves when user is admin', () => {
-    users.userById(null, { id: 1 }, { req, res, models });
+    query.userById(null, { id: 1 }, { req, res, models });
     expect(models.User.findById).toHaveBeenCalled();
   })
 
   test('throws when user is not admin', () => {
     req.user.isAdmin = false;
     const userIsNotAdmin = () => {
-      users.userById(null, { id: 1 }, { req, res, models })
+      query.userById(null, { id: 1 }, { req, res, models })
     }
     expect(userIsNotAdmin).toThrowError('Forbidden');
     expect(res.status).toHaveBeenCalledWith(403);
@@ -68,7 +68,7 @@ describe('userById', () => {
   test('throws when user is not logged in', () => {
     req.user = null;
     const userIsNotLoggedIn = () => {
-      users.userById(null, { id: 1 }, { req, res, models })
+      query.userById(null, { id: 1 }, { req, res, models })
     }
     expect(userIsNotLoggedIn).toThrowError('Unauthorized');
     expect(res.status).toHaveBeenCalledWith(401);

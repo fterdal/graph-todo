@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const todoLists = require('../todoLists');
+const query = require('../index');
 
 describe('allTodoLists', () => {
 
@@ -15,14 +15,14 @@ describe('allTodoLists', () => {
   })
 
   test('resolves when user is admin', () => {
-    todoLists.allTodoLists(null, null, { req, res, models });
+    query.allTodoLists(null, null, { req, res, models });
     expect(models.TodoList.findAll).toHaveBeenCalled();
   })
 
   test('throws when user is not admin', () => {
     req.user.isAdmin = false;
     const userIsNotAdmin = () => {
-      todoLists.allTodoLists(null, null, { req, res, models })
+      query.allTodoLists(null, null, { req, res, models })
     }
     expect(userIsNotAdmin).toThrowError('Forbidden');
     expect(res.status).toHaveBeenCalledWith(403);
@@ -31,7 +31,7 @@ describe('allTodoLists', () => {
   test('throws when user is not logged in', () => {
     req.user = null;
     const userIsNotLoggedIn = () => {
-      todoLists.allTodoLists(null, null, { req, res, models })
+      query.allTodoLists(null, null, { req, res, models })
     }
     expect(userIsNotLoggedIn).toThrowError('Unauthorized');
     expect(res.status).toHaveBeenCalledWith(401);
@@ -52,14 +52,14 @@ describe('todoListById', () => {
   })
 
   test('resolves when user is admin', () => {
-    todoLists.todoListById(null, { id: 1 }, { req, res, models });
+    query.todoListById(null, { id: 1 }, { req, res, models });
     expect(models.TodoList.findById).toHaveBeenCalled();
   })
 
   test('throws when user is not admin', () => {
     req.user.isAdmin = false;
     const userIsNotAdmin = () => {
-      todoLists.todoListById(null, { id: 1 }, { req, res, models })
+      query.todoListById(null, { id: 1 }, { req, res, models })
     }
     expect(userIsNotAdmin).toThrowError('Forbidden');
     expect(res.status).toHaveBeenCalledWith(403);
@@ -68,7 +68,7 @@ describe('todoListById', () => {
   test('throws when user is not logged in', () => {
     req.user = null;
     const userIsNotLoggedIn = () => {
-      todoLists.todoListById(null, { id: 1 }, { req, res, models })
+      query.todoListById(null, { id: 1 }, { req, res, models })
     }
     expect(userIsNotLoggedIn).toThrowError('Unauthorized');
     expect(res.status).toHaveBeenCalledWith(401);

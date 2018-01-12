@@ -1,8 +1,8 @@
 /* eslint-env jest */
-const auth = require('../auth');
+const query = require('../index');
 
 test('me resolves to null when user is not logged in', () => {
-  expect(auth.me(null, null, {req: { user: null } })).toBe(null);
+  expect(query.me(null, null, {req: { user: null } })).toBe(null);
 });
 
 test('me resolves to user data when user is logged in', () => {
@@ -16,5 +16,5 @@ test('me resolves to user data when user is logged in', () => {
       }
     ]
   }
-  expect(auth.me(null, null, {req: { user } })).toBe(user);
+  expect(query.me(null, null, {req: { user } })).toBe(user);
 });
