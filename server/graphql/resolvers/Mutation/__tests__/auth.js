@@ -5,7 +5,7 @@ const {
   signup,
 } = require('../index');
 
-describe('mutation mutations', () => {
+describe('auth mutations', () => {
 
   let user, input, req, res, models;
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe('mutation mutations', () => {
       id: 7,
       email: 'harrypotter@hogwarts.edu',
       correctPassword: pw => pw === 'ExpectoPatronum',
-    }
+    };
     input = {
       email: 'harrypotter@hogwarts.edu',
       password: 'ExpectoPatronum',
