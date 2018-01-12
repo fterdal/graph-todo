@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const todoList = require('../index');
+const mutation = require('../index');
 
 describe('todoList mutations', () => {
   test('', () => {
