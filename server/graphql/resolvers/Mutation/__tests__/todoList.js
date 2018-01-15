@@ -58,11 +58,16 @@ describe('todoList mutations', () => {
   test('updateTodoList updates a todoTist', async () => {
     const input = {
       todoListId: todoList.id,
-      input: todoList,
+      input: {
+        name: todoList.name,
+        description: todoList.description,
+      },
     };
     input.input.name = 'reading';
     const updatedTodoList = await updateTodoList(null, { input }, { req, res, models });
-    // console.log('updatedTodoList', updatedTodoList);
+    expect(todoList.update).toHaveBeenCalledWith({name: 'reading', description: todoList.description});
+    expect(updatedTodoList.name).toBe('reading')
+    expect(updatedTodoList.description).toBe(todoList.description)
   })
 
 

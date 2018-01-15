@@ -1,9 +1,9 @@
-// const TodoTask = require('./todoTask');
+const TodoTask = require('./todoTask');
 const TodoList = require('./todoList');
-// const User = require('./user');
+const User = require('./user');
 
 module.exports = {
-  // TodoTask,
+  TodoTask,
   TodoList,
-  // User,
+  User,
 }
