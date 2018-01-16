@@ -64,7 +64,7 @@ describe('auth mutations', () => {
     expect(req.login).toHaveBeenCalled();
   })
 
-  xtest('signup fails when user already exists', async () => {
+  test('signup fails when user already exists', async () => {
     const input = {
       email: 'hagrid@hogwarts.edu',
       password: 'ExpectoPatronum',
