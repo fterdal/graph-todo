@@ -19,6 +19,7 @@ describe('auth mutations', () => {
       req,
       res,
     } = reset());
+    user.correctPassword = pw => pw === 'ExpectoPatronum';
 
     // user = {
     //   id: 7,
@@ -63,7 +64,7 @@ describe('auth mutations', () => {
     expect(req.login).toHaveBeenCalled();
   })
 
-  test('signup fails when user already exists', async () => {
+  xtest('signup fails when user already exists', async () => {
     const input = {
       email: 'hagrid@hogwarts.edu',
       password: 'ExpectoPatronum',
@@ -76,7 +77,7 @@ describe('auth mutations', () => {
     }
   })
 
-  test('login logs the user in', async () => {
+  xtest('login logs the user in', async () => {
     const input = {
       email: 'harrypotter@hogwarts.edu',
       password: 'ExpectoPatronum',
@@ -87,7 +88,7 @@ describe('auth mutations', () => {
     expect(req.login).toHaveBeenCalled();
   })
 
-  test('login fails when the user does not exist', async () => {
+  xtest('login fails when the user does not exist', async () => {
     const input = {
       email: 'hermione@hogwarts.edu',
       password: 'ExpectoPatronum',
@@ -100,7 +101,7 @@ describe('auth mutations', () => {
     }
   })
 
-  test('login fails when the credentials are invalid', async () => {
+  xtest('login fails when the credentials are invalid', async () => {
     const input = {
       email: 'harrypotter@hogwarts.edu',
       password: '10points4gryffindor',
