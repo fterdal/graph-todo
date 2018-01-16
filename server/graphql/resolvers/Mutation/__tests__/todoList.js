@@ -123,5 +123,27 @@ describe('todoList mutations', () => {
     expect(models.TodoTask.create).toHaveBeenCalled();
   })
 
+  test('addTodoTask fails when todoList does not belong to user', async () => {
+    const input = {
+      todoListId: todoList.id,
+      input: {
+        name: 'reading',
+        description: todoList.description,
+      },
+    };
+    const fakeReq = {...req, user: {
+      isAdmin: false,
+      canEditTodoList: jest.fn(() => false),
+    } };
+    try {
+      await addTodoTask(null, { input }, { req: fakeReq, res, models });
+      throw new Error('Incorrect Error')
+    } catch(err) {
+      expect(err).toEqual(new Error('Forbidden'))
+      expect(res.status).toHaveBeenCalledWith(403);
+      expect(todoList.addTodoTask).not.toHaveBeenCalled();
+      expect(models.TodoTask.create).not.toHaveBeenCalled();
+    }
+  })
 
 })
