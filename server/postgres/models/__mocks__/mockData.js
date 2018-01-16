@@ -38,11 +38,7 @@ const data = {
 }
 
 module.exports = {
-  ...data,
+  reset: () => {
+    return data;
+  },
 }
-
-// module.exports = {
-//   reset: () => {
-//     return data;
-//   },
-// }

@@ -5,19 +5,27 @@ const {
   addTodoTask,
 } = require('../index');
 
-let {
-  user,
-  todoList,
-  todoTasks,
-  req,
-  res,
-} = require('../../../../postgres/models/__mocks__/mockData');
-
 const models = require('../../../../postgres/models');
+
+const { reset } = require('../../../../postgres/models/__mocks__/mockData');
 
 describe('todoList mutations', () => {
 
+  let
+    user,
+    todoList,
+    todoTasks,
+    req,
+    res;
+
   beforeEach(() => {
+    ({
+      user,
+      todoList,
+      todoTasks,
+      req,
+      res,
+    } = reset());
 
   })
 
@@ -65,5 +73,6 @@ describe('todoList mutations', () => {
     // expect(updatedTodoList.name).toBe('reading')
     // expect(updatedTodoList.description).toBe(todoList.description)
   })
+
 
 })

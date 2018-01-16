@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const { todoTasks } = require('./mockData');
+const { todoTasks } = require('./mockData').reset();
 
 const TodoList = {
   findById: jest.fn(id => {

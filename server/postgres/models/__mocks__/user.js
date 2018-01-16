@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const { user } = require('./mockData');
+const { user } = require('./mockData').reset();
 
 const User = {
   findById: jest.fn(id => {
