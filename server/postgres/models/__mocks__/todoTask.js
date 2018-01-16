@@ -1,13 +1,13 @@
 /* eslint-env jest */
 const { todoTasks } = require('./mockData').reset();
 
-const TodoList = {
+const TodoTask = {
   findById: jest.fn(id => {
-    if (id === todoList.id) return todoList;
+    return todoTasks.find(el => el.id === id);
   }),
-  create: jest.fn(({ title, text}) => {
+  create: jest.fn(({ title }) => {
     return todoTasks.find(el => el.title === title);
-  })
+  }),
 }
 
-module.exports = TodoList;
+module.exports = TodoTask;

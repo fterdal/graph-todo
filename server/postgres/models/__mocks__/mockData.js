@@ -20,10 +20,18 @@ const data = {
     title: 'potions reading',
     text: 'chapter 4 on polymorph',
     completed: true,
+    todoListId: 3,
+    update: jest.fn(function({ title }) {
+      return {...this, title }
+    })
   }, {
     id: 3,
     title: 'divination assignment',
     text: 'predict a celestial event (just ask hermione)',
+    todoListId: 3,
+    update: jest.fn(function({ title }) {
+      return {...this, title }
+    })
   }],
   req: {
     user: {
