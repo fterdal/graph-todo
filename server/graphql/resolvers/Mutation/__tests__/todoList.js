@@ -92,6 +92,26 @@ describe('todoList mutations', () => {
     }
   })
 
+  test('updateTodoList fails when todoTist does not exist', async () => {
+    const input = {
+      todoListId: todoList.id + 1,
+      input: {
+        name: 'reading',
+        description: todoList.description,
+      },
+    };
+    let updatedTodoList;
+    try {
+      updatedTodoList = await updateTodoList(null, { input }, { req, res, models });
+      throw new Error('Incorrect Error')
+    } catch(err) {
+      expect(err).toEqual(new Error('Not Found'))
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(todoList.update).not.toHaveBeenCalled();
+      expect(updatedTodoList).toBe(undefined)
+    }
+  })
+
   test('addTodoTask adds a todoTask to a todoList', async () => {
     const [ todoTaskA ] = todoTasks;
     const input = {
