@@ -5,43 +5,58 @@ const {
   signup,
 } = require('../index');
 
+const models = require('../../../../postgres/models');
+
+const { reset } = require('../../../../postgres/models/__mocks__/mockData');
+
 describe('auth mutations', () => {
 
-  let user, input, req, res, models;
+  let user, req, res;
   beforeEach(() => {
-    user = {
-      id: 7,
-      email: 'harrypotter@hogwarts.edu',
-      correctPassword: pw => pw === 'ExpectoPatronum',
-    };
-    input = {
-      email: 'harrypotter@hogwarts.edu',
-      password: 'ExpectoPatronum',
-    };
-    req = {
-      login: jest.fn(),
-      logout: jest.fn(),
-    };
-    res = { status: jest.fn() };
-    models = {
-      User: {
-        create: jest.fn(({ email }) => {
-          if (email === 'hagrid@hogwarts.edu') {
-            throw new Error()
-          }
-          return user;
-        }),
-        findOne: jest.fn(({ where: { email } }) => {
-          if (email !== 'harrypotter@hogwarts.edu') {
-            return null;
-          }
-          return user;
-        }),
-      }
-    };
+
+    ({
+      user,
+      req,
+      res,
+    } = reset());
+
+    // user = {
+    //   id: 7,
+    //   email: 'harrypotter@hogwarts.edu',
+    //   correctPassword: pw => pw === 'ExpectoPatronum',
+    // };
+    // input = {
+    //   email: 'harrypotter@hogwarts.edu',
+    //   password: 'ExpectoPatronum',
+    // };
+    // req = {
+    //   login: jest.fn(),
+    //   logout: jest.fn(),
+    // };
+    // res = { status: jest.fn() };
+    // models = {
+    //   User: {
+    //     create: jest.fn(({ email }) => {
+    //       if (email === 'hagrid@hogwarts.edu') {
+    //         throw new Error()
+    //       }
+    //       return user;
+    //     }),
+    //     findOne: jest.fn(({ where: { email } }) => {
+    //       if (email !== 'harrypotter@hogwarts.edu') {
+    //         return null;
+    //       }
+    //       return user;
+    //     }),
+    //   }
+    // };
   })
 
   test('signup creates user and logs in', async () => {
+    const input = {
+      email: 'harrypotter@hogwarts.edu',
+      password: 'ExpectoPatronum',
+    };
     const createdUser = await signup(null, { input }, { req, res, models });
     expect(createdUser).toEqual(user);
     expect(res.status).not.toHaveBeenCalled();
@@ -49,7 +64,10 @@ describe('auth mutations', () => {
   })
 
   test('signup fails when user already exists', async () => {
-    input.email = 'hagrid@hogwarts.edu';
+    const input = {
+      email: 'hagrid@hogwarts.edu',
+      password: 'ExpectoPatronum',
+    };
     try {
       await signup(null, { input }, { req, res, models });
       throw new Error('Incorrect Error')
@@ -59,6 +77,10 @@ describe('auth mutations', () => {
   })
 
   test('login logs the user in', async () => {
+    const input = {
+      email: 'harrypotter@hogwarts.edu',
+      password: 'ExpectoPatronum',
+    };
     const loggedInUser = await login(null, { input }, { req, res, models });
     expect(loggedInUser).toEqual(user);
     expect(res.status).not.toHaveBeenCalled();
@@ -66,7 +88,10 @@ describe('auth mutations', () => {
   })
 
   test('login fails when the user does not exist', async () => {
-    input.email = 'hermione@hogwarts.edu';
+    const input = {
+      email: 'hermione@hogwarts.edu',
+      password: 'ExpectoPatronum',
+    };
     try {
       await login(null, { input }, { req, res, models });
       throw new Error('Incorrect Error')
@@ -76,7 +101,10 @@ describe('auth mutations', () => {
   })
 
   test('login fails when the credentials are invalid', async () => {
-    input.password = '10points4gryffindor';
+    const input = {
+      email: 'harrypotter@hogwarts.edu',
+      password: '10points4gryffindor',
+    };
     try {
       await login(null, { input }, { req, res, models });
       throw new Error('Incorrect Error')

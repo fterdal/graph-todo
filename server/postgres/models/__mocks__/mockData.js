@@ -30,7 +30,9 @@ const data = {
       id: 7,
       isAdmin: true,
       canEditTodoList: jest.fn(() => true),
-    }
+    },
+    login: jest.fn(),
+    logout: jest.fn(),
   },
   res: {
     status: jest.fn(),
