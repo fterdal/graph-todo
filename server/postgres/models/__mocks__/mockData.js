@@ -28,7 +28,7 @@ const data = {
   req: {
     user: {
       id: 7,
-      isAdmin: true,
+      isAdmin: false,
       canEditTodoList: jest.fn(() => true),
     },
     login: jest.fn(),

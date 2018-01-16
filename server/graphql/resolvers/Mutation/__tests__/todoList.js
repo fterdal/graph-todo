@@ -43,32 +43,48 @@ describe('todoList mutations', () => {
     const input = {
       todoListId: todoList.id,
       input: {
-        name: todoList.name,
+        name: 'reading',
         description: todoList.description,
       },
     };
-    input.input.name = 'reading';
     const updatedTodoList = await updateTodoList(null, { input }, { req, res, models });
     expect(todoList.update).toHaveBeenCalledWith({name: 'reading', description: todoList.description});
     expect(updatedTodoList.name).toBe('reading')
     expect(updatedTodoList.description).toBe(todoList.description)
   })
 
-  test('addTodoTask adds a todoTask to a todoList', async () => {
-    const [ todoTaskA, todoTaskB ] = todoTasks;
-    // console.log('todoTaskA', todoTaskA);
+  test('updateTodoList fails when todoTist does not belong to user', async () => {
     const input = {
       todoListId: todoList.id,
       input: {
-        title: todoTaskA.title,
-        text: todoTaskA.text,
-        completed: todoTaskA.completed,
+        name: 'reading',
+        description: todoList.description,
       },
     };
-    const modifiedTodoList = await addTodoTask(null, { input }, { req, res, models });
-    // expect(todoList.addTodoTask).toHaveBeenCalledWith({});
-    // expect(updatedTodoList.name).toBe('reading')
-    // expect(updatedTodoList.description).toBe(todoList.description)
+    const fakeReq = {...req, user: {
+      isAdmin: false,
+      canEditTodoList: jest.fn(() => false),
+    } };
+    let updatedTodoList;
+    try {
+      updatedTodoList = await updateTodoList(null, { input }, { req: fakeReq, res, models });
+      throw new Error('Incorrect Error')
+    } catch(err) {
+      expect(err).toEqual(new Error('Forbidden'))
+      expect(todoList.update).not.toHaveBeenCalled();
+      expect(updatedTodoList).toBe(undefined)
+    }
+  })
+
+  test('addTodoTask adds a todoTask to a todoList', async () => {
+    const [ todoTaskA, todoTaskB ] = todoTasks;
+    const input = {
+      todoListId: todoList.id,
+      input: todoTaskA,
+    };
+    await addTodoTask(null, { input }, { req, res, models });
+    expect(todoList.addTodoTask).toHaveBeenCalledWith(todoTaskA);
+    expect(models.TodoTask.create).toHaveBeenCalled();
   })
 
 
