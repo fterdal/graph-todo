@@ -39,6 +39,21 @@ describe('todoList mutations', () => {
     expect(createdTodoList).toBe(todoList);
   })
 
+  test('createTodoList fails when user is not logged in', async () => {
+    const input = {...todoList, todoTasks };
+    const fakeReq = {...req, user: null };
+    let createdTodoList;
+    try {
+      createdTodoList = await createTodoList(null, { input }, { req: fakeReq, res, models });
+      throw new Error('Incorrect Error')
+    } catch(err) {
+      expect(err).toEqual(new Error('Unauthorized'))
+      expect(res.status).toHaveBeenCalledWith(401);
+      expect(models.TodoList.create).not.toHaveBeenCalled();
+      expect(createdTodoList).toBe(undefined)
+    }
+  })
+
   test('updateTodoList updates a todoTist', async () => {
     const input = {
       todoListId: todoList.id,
@@ -71,13 +86,14 @@ describe('todoList mutations', () => {
       throw new Error('Incorrect Error')
     } catch(err) {
       expect(err).toEqual(new Error('Forbidden'))
+      expect(res.status).toHaveBeenCalledWith(403);
       expect(todoList.update).not.toHaveBeenCalled();
       expect(updatedTodoList).toBe(undefined)
     }
   })
 
   test('addTodoTask adds a todoTask to a todoList', async () => {
-    const [ todoTaskA, todoTaskB ] = todoTasks;
+    const [ todoTaskA ] = todoTasks;
     const input = {
       todoListId: todoList.id,
       input: todoTaskA,
