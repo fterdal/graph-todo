@@ -11,6 +11,8 @@ describe('todoTask mutations', () => {
   let
     todoList,
     todoTasks,
+    todoTaskA,
+    todoTaskB,
     req,
     res;
   beforeEach(() => {
@@ -20,11 +22,11 @@ describe('todoTask mutations', () => {
       req,
       res,
     } = reset());
+    [ todoTaskA, todoTaskB ] = todoTasks;
     jest.clearAllMocks();
   })
 
   test('updateTodoTask updates a todoTask', async () => {
-    const [ todoTaskA ] = todoTasks;
     const input = {
       todoTaskId: todoTaskA.id,
       input: {
@@ -38,7 +40,6 @@ describe('todoTask mutations', () => {
   })
 
   test('updateTodoTask fails when todoTask does not belong to user', async () => {
-    const [ todoTaskA ] = todoTasks;
     const input = {
       todoTaskId: todoTaskA.id,
       input: {
@@ -83,12 +84,34 @@ describe('todoTask mutations', () => {
     }
   })
 
-  xtest('removeTodoTask removes a todoTask', () => {
-
+  test('removeTodoTask removes a todoTask', async () => {
+    const input = {
+      todoTaskId: todoTaskA.id,
+    };
+    const removedTodoTaskId = await removeTodoTask(null, { input }, { req, res, models });
+    expect(models.TodoTask.findById).toHaveBeenCalledWith(todoTaskA.id);
+    expect(todoTaskA.destroy).toHaveBeenCalled();
+    expect(removedTodoTaskId).toBe(input.todoTaskId);
   })
 
-  xtest('removeTodoTask fails when todoTask does not belong to user', () => {
-
+  test('removeTodoTask fails when todoTask does not belong to user', async () => {
+    const input = {
+      todoTaskId: todoTaskA.id,
+    };
+    const fakeReq = {...req, user: {
+      isAdmin: false,
+      canEditTodoList: jest.fn(() => false),
+    } };
+    let removedTodoTaskId;
+    try {
+      removedTodoTaskId = await removeTodoTask(null, { input }, { req: fakeReq, res, models });
+      throw new Error('Incorrect Error');
+    } catch(err) {
+      expect(err).toEqual(new Error('Forbidden'));
+      expect(models.TodoTask.findById).toHaveBeenCalledWith(todoTaskA.id);
+      expect(todoTaskA.destroy).not.toHaveBeenCalled();
+      expect(removedTodoTaskId).toBe(undefined);
+    }
   })
 
 })

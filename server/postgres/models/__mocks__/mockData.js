@@ -23,6 +23,9 @@ const data = {
     todoListId: 3,
     update: jest.fn(function({ title }) {
       return {...this, title }
+    }),
+    destroy: jest.fn(function() {
+      return this.id;
     })
   }, {
     id: 3,
