@@ -90,7 +90,7 @@ describe('auth mutations', () => {
     expect(req.login).toHaveBeenCalled();
   })
 
-  xtest('login fails when the user does not exist', async () => {
+  test('login fails when the user does not exist', async () => {
     const input = {
       email: 'hermione@hogwarts.edu',
       password: 'ExpectoPatronum',
@@ -103,7 +103,7 @@ describe('auth mutations', () => {
     }
   })
 
-  xtest('login fails when the credentials are invalid', async () => {
+  test('login fails when the credentials are invalid', async () => {
     const input = {
       email: 'harrypotter@hogwarts.edu',
       password: '10points4gryffindor',

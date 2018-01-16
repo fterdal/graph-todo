@@ -5,7 +5,8 @@ const User = {
   findById: jest.fn(id => {
     if (id === user.id) return user;
   }),
-  findOne: jest.fn(() => {
+  findOne: jest.fn(({ where: { email } }) => {
+    if (email === 'hermione@hogwarts.edu') return null;
     return user;
   }),
   create: jest.fn(({ email }) => {
