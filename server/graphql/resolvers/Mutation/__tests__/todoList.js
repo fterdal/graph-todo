@@ -4,9 +4,7 @@ const {
   updateTodoList,
   addTodoTask,
 } = require('../index');
-
 const models = require('../../../../postgres/models');
-
 const { reset } = require('../../../../postgres/models/__mocks__/mockData');
 
 describe('todoList mutations', () => {
@@ -17,7 +15,6 @@ describe('todoList mutations', () => {
     todoTasks,
     req,
     res;
-
   beforeEach(() => {
     ({
       user,
@@ -27,7 +24,6 @@ describe('todoList mutations', () => {
       res,
     } = reset());
     jest.clearAllMocks();
-
   })
 
   test('createTodoList creates a new todoTist', async () => {

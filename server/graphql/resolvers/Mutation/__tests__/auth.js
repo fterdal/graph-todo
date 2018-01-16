@@ -4,16 +4,16 @@ const {
   logout,
   signup,
 } = require('../index');
-
 const models = require('../../../../postgres/models');
-
 const { reset } = require('../../../../postgres/models/__mocks__/mockData');
 
 describe('auth mutations', () => {
 
-  let user, req, res;
+  let
+    user,
+    req,
+    res;
   beforeEach(() => {
-
     ({
       user,
       req,
@@ -21,37 +21,6 @@ describe('auth mutations', () => {
     } = reset());
     user.correctPassword = pw => pw === 'ExpectoPatronum';
     jest.clearAllMocks();
-
-    // user = {
-    //   id: 7,
-    //   email: 'harrypotter@hogwarts.edu',
-    //   correctPassword: pw => pw === 'ExpectoPatronum',
-    // };
-    // input = {
-    //   email: 'harrypotter@hogwarts.edu',
-    //   password: 'ExpectoPatronum',
-    // };
-    // req = {
-    //   login: jest.fn(),
-    //   logout: jest.fn(),
-    // };
-    // res = { status: jest.fn() };
-    // models = {
-    //   User: {
-    //     create: jest.fn(({ email }) => {
-    //       if (email === 'hagrid@hogwarts.edu') {
-    //         throw new Error()
-    //       }
-    //       return user;
-    //     }),
-    //     findOne: jest.fn(({ where: { email } }) => {
-    //       if (email !== 'harrypotter@hogwarts.edu') {
-    //         return null;
-    //       }
-    //       return user;
-    //     }),
-    //   }
-    // };
   })
 
   test('signup creates user and logs in', async () => {
