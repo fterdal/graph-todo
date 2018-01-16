@@ -26,6 +26,7 @@ describe('todoList mutations', () => {
       req,
       res,
     } = reset());
+    jest.clearAllMocks();
 
   })
 

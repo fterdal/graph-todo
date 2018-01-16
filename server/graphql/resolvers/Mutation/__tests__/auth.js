@@ -20,6 +20,7 @@ describe('auth mutations', () => {
       res,
     } = reset());
     user.correctPassword = pw => pw === 'ExpectoPatronum';
+    jest.clearAllMocks();
 
     // user = {
     //   id: 7,
@@ -74,10 +75,11 @@ describe('auth mutations', () => {
       throw new Error('Incorrect Error')
     } catch(err) {
       expect(err).toEqual(new Error('User Already Exists'))
+      expect(res.status).toHaveBeenCalledWith(400);
     }
   })
 
-  xtest('login logs the user in', async () => {
+  test('login logs the user in', async () => {
     const input = {
       email: 'harrypotter@hogwarts.edu',
       password: 'ExpectoPatronum',
