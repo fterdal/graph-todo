@@ -17,29 +17,8 @@ const models = require('../../../../postgres/models');
 
 describe('todoList mutations', () => {
 
-  // let models;
   beforeEach(() => {
-    // models = {
-    //   User: {
-    //     findById: jest.fn(() => {
-    //       return user;
-    //     }),
-    //   },
-    //   TodoList: {
-    //     create: jest.fn(() => {
-    //       return todoList;
-    //     }),
-    //     findById: jest.fn(id => {
-    //       if (id !== todoList.id) {
-    //         throw new Error('Not Found')
-    //       }
-    //       return todoList;
-    //     }),
-    //   },
-    //   TodoTask: {
-    //     create: jest.fn(),
-    //   },
-    // };
+
   })
 
   test('createTodoList creates a new todoTist', async () => {
@@ -70,5 +49,21 @@ describe('todoList mutations', () => {
     expect(updatedTodoList.description).toBe(todoList.description)
   })
 
+  test('addTodoTask adds a todoTask to a todoList', async () => {
+    const [ todoTaskA, todoTaskB ] = todoTasks;
+    // console.log('todoTaskA', todoTaskA);
+    const input = {
+      todoListId: todoList.id,
+      input: {
+        title: todoTaskA.title,
+        text: todoTaskA.text,
+        completed: todoTaskA.completed,
+      },
+    };
+    const modifiedTodoList = await addTodoTask(null, { input }, { req, res, models });
+    // expect(todoList.addTodoTask).toHaveBeenCalledWith({});
+    // expect(updatedTodoList.name).toBe('reading')
+    // expect(updatedTodoList.description).toBe(todoList.description)
+  })
 
 })

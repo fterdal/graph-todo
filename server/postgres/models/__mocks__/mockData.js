@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-module.exports = {
+const data = {
   user: {
     id: 7,
     email: 'harrypotter@hogwarts.edu',
@@ -36,3 +36,13 @@ module.exports = {
     status: jest.fn(),
   },
 }
+
+module.exports = {
+  ...data,
+}
+
+// module.exports = {
+//   reset: () => {
+//     return data;
+//   },
+// }
