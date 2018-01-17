@@ -17,6 +17,7 @@ type User {
   id: Int!
   email: String!
   todoLists: [TodoList]
+  todoListById(id: Int!): TodoList
 }
 
 ### Input Types ###
