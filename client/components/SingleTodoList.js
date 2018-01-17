@@ -3,8 +3,6 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
 export const SingleTodoLists = ({ data }) => {
-  // Figure out how to add a directive to the GraphQL query
-  // http://graphql.org/learn/queries/#directives
   console.log('SingleTodoLists data', data);
   if (!data.me || !data.me.todoLists) return (<div>Loading...</div>)
   return (
@@ -16,16 +14,8 @@ export const SingleTodoLists = ({ data }) => {
 
 export const myTodoListsQuery = gql`
   query {
-    me {
-      id
-      todoLists {
-        id
-        name
-        todoTasks {
-          id
-          completed
-        }
-      }
+    todoListId(id: 1) {
+      # More stuff here...
     }
   }
 `;
