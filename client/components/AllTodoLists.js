@@ -4,9 +4,16 @@ import gql from 'graphql-tag';
 
 export const AllTodoLists = ({ data }) => {
   console.log('AllTodoLists data', data);
+  if (!data.me || !data.me.todoLists) return (<div>Loading...</div>)
+  const todoLists = data.me.todoLists.map(list => {
+    return (<li key={list.name + list.id}>{list.name}</li>)
+  })
   return (
     <div className="container">
-      <h1>AllTodoLists Page</h1>
+      <h1>Your Todo Lists</h1>
+      <ul>
+        {todoLists}
+      </ul>
     </div>
   )
 }
