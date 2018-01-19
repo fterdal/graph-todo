@@ -2,8 +2,7 @@ import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
-export const SingleTodoList = ({ data, match }) => {
-  console.log('SingleTodoList match', match);
+export const SingleTodoList = ({ data }) => {
   console.log('SingleTodoList data', data);
   if (!data.todoListById) return (<div>Loading...</div>)
   return (
@@ -13,7 +12,6 @@ export const SingleTodoList = ({ data, match }) => {
   )
 }
 
-// Figure out how to dynamically pass the match.params.id into the query
 export const myTodoListQuery = gql`
   query myTodoList($id: Int!){
   	todoListById(id: $id) {
@@ -31,6 +29,6 @@ export const myTodoListQuery = gql`
 
 export default compose(
   graphql(myTodoListQuery, {
-    options: { variables: { id: 1 } },
+    options: ({ match }) => ({ variables: { id: match.params.id } }),
   }),
 )(SingleTodoList)
