@@ -1,9 +1,12 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
+import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
+import { SingleTodoLists } from './index';
 
-export const AllTodoLists = ({ data }) => {
-  console.log('AllTodoLists data', data);
+export const AllTodoLists = ({ data, match }) => {
+  // console.log('match', match);
+  // console.log('AllTodoLists data', data);
   if (!data.me || !data.me.todoLists) return (<div>Loading...</div>)
   const todoLists = data.me.todoLists.map(list => {
     const numTasks = list.todoTasks.length;
@@ -17,7 +20,9 @@ export const AllTodoLists = ({ data }) => {
         fontWeight: allDone ? 'bold' : 'normal',
         textDecoration: allDone ? 'normal' : 'line-through',
       }}>
-      {list.name} <span>({numCompleted} / {numTasks})</span>
+      <Link to="/lists/1">
+        {list.name} <span>({numCompleted} / {numTasks})</span>
+      </Link>
     </li>)
   })
   return (

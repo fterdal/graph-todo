@@ -6,6 +6,7 @@ import {
   Home,
   SideBar,
   AllTodoLists,
+  SingleTodoList,
   Login,
   Signup,
 } from './components';
@@ -21,6 +22,7 @@ export const App = () => {
             <Route path="/users" component={UsersList} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/lists/:id" component={SingleTodoList} />
             <Route path="/lists" component={AllTodoLists} />
             <Route path="/" component={Home} />
           </Switch>
