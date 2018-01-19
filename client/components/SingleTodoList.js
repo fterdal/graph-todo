@@ -14,16 +14,23 @@ export const SingleTodoList = ({ data, match }) => {
 }
 
 // Figure out how to dynamically pass the match.params.id into the query
-export const myTodoListsQuery = gql`
-  query {
-    todoListById(id: 1) {
+export const myTodoListQuery = gql`
+  query myTodoList($id: Int!){
+  	todoListById(id: $id) {
       id
       name
-      # More stuff here...
+      description
+      todoTasks {
+        id
+        title
+        completed
+      }
     }
   }
 `;
 
 export default compose(
-  graphql(myTodoListsQuery),
+  graphql(myTodoListQuery, {
+    options: { variables: { id: 1 } },
+  }),
 )(SingleTodoList)
