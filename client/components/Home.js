@@ -1,11 +1,12 @@
 import React from 'react';
+import { Redirect } from 'react-router';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import { AllTodoLists } from './index';
+// import { AllTodoLists } from './index';
 
 export const Home = ({ data }) => {
-  if (data && data.me) return (<AllTodoLists />);
+  if (data && data.me) return (<Redirect to="/lists" />);
   return (
     <div className="container">
       <h1>Home Page</h1>
