@@ -8,8 +8,7 @@ export const AllTodoLists = ({ data }) => {
   const todoLists = data.me.todoLists.map(list => {
     const numTasks = list.todoTasks.length;
     const numCompleted = list.todoTasks.filter(task => task.completed).length;
-    let allDone;
-    if (numTasks && numTasks !== numCompleted) allDone = true;
+    const allDone = numTasks && numTasks !== numCompleted
     return (
       <li
         key={list.name + list.id}
