@@ -8,14 +8,15 @@ export const SingleTodoList = ({ data, match }) => {
   if (!data.todoListById) return (<div>Loading...</div>)
   return (
     <div className="container">
-      <h1>Single TodoList</h1>
+      <h1>{data.todoListById.name}</h1>
     </div>
   )
 }
 
+// Figure out how to dynamically pass the match.params.id into the query
 export const myTodoListsQuery = gql`
   query {
-    todoListId(id: 1) {
+    todoListById(id: 1) {
       id
       name
       # More stuff here...
