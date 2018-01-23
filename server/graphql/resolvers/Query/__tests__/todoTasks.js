@@ -38,7 +38,7 @@ describe('allTodoTasks', () => {
   })
 });
 
-describe('todoTaskById', () => {
+xdescribe('todoTaskById', () => {
 
   let req, res, models;
   beforeEach(() => {
