@@ -7,7 +7,13 @@ export const SingleTodoList = ({ data }) => {
   const { todoListById } = data;
   const todoTasks = todoListById.todoTasks.map(task => {
     return (
-      <li key={task.title + task.id}>{task.title}</li>
+      <li
+        key={task.title + task.id}
+        style={{
+          fontWeight: !task.commpleted ? 'bold' : 'normal',
+        }}>
+        {task.title}
+      </li>
     )
   });
 
