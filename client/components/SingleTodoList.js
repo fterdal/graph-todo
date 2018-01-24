@@ -3,12 +3,11 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
 export const SingleTodoList = ({ data }) => {
-  console.log('SingleTodoList data', data);
   if (!data.todoListById) return (<div>Loading...</div>)
   const { todoListById } = data;
   const todoTasks = todoListById.todoTasks.map(task => {
     return (
-      <li key={task.name + task.id}>{task.title}</li>
+      <li key={task.title + task.id}>{task.title}</li>
     )
   });
 
