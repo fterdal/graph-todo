@@ -6,13 +6,15 @@ export const SingleTodoList = ({ data }) => {
   if (!data.todoListById) return (<div>Loading...</div>)
   const { todoListById } = data;
   const todoTasks = todoListById.todoTasks.map(task => {
+    console.log(task.title, task.completed)
     return (
       <li
         key={task.title + task.id}
         style={{
-          fontWeight: !task.commpleted ? 'bold' : 'normal',
+          fontWeight: task.commpleted ? 'bold' : 'normal',
+          // textDecoration: task.commpleted ? 'line-through' : 'none',
         }}>
-        {task.title}
+        {task.title} - {task.completed ? 'completed' : 'not completed'}
       </li>
     )
   });
