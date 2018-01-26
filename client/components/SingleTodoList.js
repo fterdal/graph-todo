@@ -1,28 +1,33 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+import { SingleTodoTask } from './index';
 
 export const SingleTodoList = ({ data }) => {
   if (!data.todoListById) return (<div>Loading...</div>)
-  const { todoListById } = data;
-  const todoTasks = todoListById.todoTasks.map(task => {
-    return (
-      <li
-        key={task.title + task.id}
-        style={{
-          // fontWeight: task.completed ? 'bold' : 'normal',
-          textDecoration: task.completed ? 'line-through' : 'normal',
-        }}>
-        {task.title}
-      </li>
-    )
-  });
+  const { todoListById: { name, todoTasks } } = data;
+  // const todoTasks = todoListById.todoTasks.map(task => {
+  //   return (
+  //     <li
+  //       key={task.title + task.id}
+  //       style={{
+  //         // fontWeight: task.completed ? 'bold' : 'normal',
+  //         textDecoration: task.completed ? 'line-through' : 'normal',
+  //       }}>
+  //       {task.title}
+  //     </li>
+  //   )
+  // });
 
   return (
     <div className="container">
-      <h1>{data.todoListById.name}</h1>
+      {/* <h1>{data.todoListById.name}</h1> */}
+      <h1>{name}</h1>
       <ul>
-        {todoTasks}
+        {/* {todoTasks} */}
+        {/* {todoListById.todoTasks.map(task => <SingleTodoTask key={task.title + task.id} id={task.id} />)} */}
+        {todoTasks.map(task => <SingleTodoTask key={task.title + task.id} id={task.id} />)}
+        {/* <SingleTodoTask id={2} /> */}
       </ul>
     </div>
   )
