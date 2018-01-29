@@ -10,7 +10,9 @@ export const SingleTodoList = ({ data }) => {
     <div className="container">
       <h1>{name}</h1>
       <ul>
-        {todoTasks.map(task => <SingleTodoTask key={task.title + task.id} id={task.id} />)}
+        {todoTasks.map(task =>
+          <SingleTodoTask key={task.title + task.id} id={task.id} />
+        )}
       </ul>
     </div>
   )
