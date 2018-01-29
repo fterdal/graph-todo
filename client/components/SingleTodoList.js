@@ -1,13 +1,19 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+import { SingleTodoTask } from './index';
 
 export const SingleTodoList = ({ data }) => {
-  console.log('SingleTodoList data', data);
   if (!data.todoListById) return (<div>Loading...</div>)
+  const { todoListById: { name, todoTasks } } = data;
   return (
     <div className="container">
-      <h1>{data.todoListById.name}</h1>
+      <h1>{name}</h1>
+      <ul>
+        {todoTasks.map(task =>
+          <SingleTodoTask key={task.title + task.id} id={task.id} />
+        )}
+      </ul>
     </div>
   )
 }
@@ -21,7 +27,6 @@ export const myTodoListQuery = gql`
       todoTasks {
         id
         title
-        completed
       }
     }
   }
