@@ -4,7 +4,6 @@ import gql from 'graphql-tag';
 
 export const SingleTodoTask = ({ data }) => {
   if (!data.todoTaskById) return (<div>Loading...</div>)
-  console.log('data', data);
   const { todoTaskById: { title, completed } } = data;
   const style = {
     textDecoration: completed ? 'line-through' : 'none',
