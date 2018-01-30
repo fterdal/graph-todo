@@ -51,6 +51,8 @@ export const SingleTodoTask = props => {
   )
 }
 
+
+/***** Apollo Wrapper *****/
 export default compose(
   graphql(myTodoTaskQuery, {
     options: ({ id }) => ({ variables: { id } }),

@@ -3,6 +3,22 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { SingleTodoTask } from './index';
 
+/***** GraphQL *****/
+export const myTodoListQuery = gql`
+  query myTodoList($id: Int!){
+  	todoListById(id: $id) {
+      id
+      name
+      description
+      todoTasks {
+        id
+        title
+      }
+    }
+  }
+`;
+
+/***** React Component *****/
 export const SingleTodoList = ({ data }) => {
   if (!data.todoListById) return (<div>Loading...</div>)
   const { todoListById: { name, todoTasks } } = data;
@@ -18,20 +34,7 @@ export const SingleTodoList = ({ data }) => {
   )
 }
 
-export const myTodoListQuery = gql`
-  query myTodoList($id: Int!){
-  	todoListById(id: $id) {
-      id
-      name
-      description
-      todoTasks {
-        id
-        title
-      }
-    }
-  }
-`;
-
+/***** Apollo Wrapper *****/
 export default compose(
   graphql(myTodoListQuery, {
     options: ({ match }) => ({ variables: { id: match.params.id } }),
