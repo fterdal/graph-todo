@@ -3,6 +3,16 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { meQuery } from '../SideBar';
 
+/***** GraphQL *****/
+const logoutMutation = gql`
+  mutation {
+    logout {
+      id
+    }
+  }
+`;
+
+/***** React Component *****/
 export class Logout extends Component {
 
   _logout = async () => {
@@ -25,14 +35,7 @@ export class Logout extends Component {
   }
 }
 
-const logoutMutation = gql`
-  mutation {
-    logout {
-      id
-    }
-  }
-`;
-
+/***** Apollo Wrapper *****/
 export default compose(
   graphql(logoutMutation, {
     props: ({ mutate }) => ({ logoutMutation: mutate }),

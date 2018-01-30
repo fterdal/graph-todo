@@ -3,6 +3,24 @@ import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 
+/***** GraphQL *****/
+export const myTodoListsQuery = gql`
+  query {
+    me {
+      id
+      todoLists {
+        id
+        name
+        todoTasks {
+          id
+          completed
+        }
+      }
+    }
+  }
+`;
+
+/***** React Component *****/
 export const AllTodoLists = ({ data }) => {
   if (!data.me || !data.me.todoLists) return (<div>Loading...</div>)
   const todoLists = data.me.todoLists.map(list => {
@@ -32,22 +50,7 @@ export const AllTodoLists = ({ data }) => {
   )
 }
 
-export const myTodoListsQuery = gql`
-  query {
-    me {
-      id
-      todoLists {
-        id
-        name
-        todoTasks {
-          id
-          completed
-        }
-      }
-    }
-  }
-`;
-
+/***** Apollo Wrapper *****/
 export default compose(
   graphql(myTodoListsQuery),
 )(AllTodoLists)
