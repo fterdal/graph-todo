@@ -5,7 +5,6 @@ import { meQuery } from '../SideBar';
 
 // This component isn't finished yet.
 export class Account extends Component {
-
   state = {
     email: '',
     password: '',

@@ -4,6 +4,22 @@ import gql from 'graphql-tag';
 import { meQuery } from '../SideBar';
 import { Redirect } from 'react-router-dom';
 
+/***** GraphQL *****/
+const loginMutation = gql`
+  mutation LoginMutation($email: String!, $password: String!){
+    login(
+      input: {
+        email: $email,
+        password: $password,
+      }
+    ) {
+      id
+      email
+    }
+  }
+`;
+
+/***** React Component *****/
 export class Login extends Component {
 
   state = {
@@ -60,20 +76,7 @@ export class Login extends Component {
   }
 }
 
-const loginMutation = gql`
-  mutation LoginMutation($email: String!, $password: String!){
-    login(
-      input: {
-        email: $email,
-        password: $password,
-      }
-    ) {
-      id
-      email
-    }
-  }
-`;
-
+/***** Apollo Wrapper *****/
 export default compose(
   graphql(loginMutation, {
     props: ({ data, mutate }) => ({data, loginMutation: mutate}),

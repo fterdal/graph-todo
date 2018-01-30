@@ -4,6 +4,17 @@ import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 import { Logout } from './index';
 
+/***** GraphQL *****/
+export const meQuery = gql`
+  query {
+    me {
+      id
+      email
+    }
+  }
+`;
+
+/***** React Component *****/
 export const SideBar = ({ data }) => {
   const loggedIn = !!data.me;
 
@@ -28,15 +39,7 @@ export const SideBar = ({ data }) => {
   }
 }
 
-export const meQuery = gql`
-  query {
-    me {
-      id
-      email
-    }
-  }
-`;
-
+/***** Apollo Wrapper *****/
 export default compose(
   graphql(meQuery),
 )(SideBar)

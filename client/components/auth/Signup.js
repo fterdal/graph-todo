@@ -4,8 +4,23 @@ import gql from 'graphql-tag';
 import { meQuery } from '../SideBar';
 import { Redirect } from 'react-router-dom';
 
-export class Signup extends Component {
+/***** GraphQL *****/
+const signupMutation = gql`
+  mutation SignupMutation($email: String!, $password: String!){
+    signup(
+      input: {
+        email: $email,
+        password: $password,
+      }
+    ) {
+      id
+      email
+    }
+  }
+`;
 
+/***** React Component *****/
+export class Signup extends Component {
   state = {
     email: '',
     password: '',
@@ -86,22 +101,9 @@ export class Signup extends Component {
   }
 }
 
-const signupMutation = gql`
-  mutation SignupMutation($email: String!, $password: String!){
-    signup(
-      input: {
-        email: $email,
-        password: $password,
-      }
-    ) {
-      id
-      email
-    }
-  }
-`;
-
+/***** Apollo Wrapper *****/
 export default compose(
   graphql(signupMutation, {
-    props: ({ data, mutate }) => ({data, signupMutation: mutate}),
+    props: ({ data, mutate }) => ({ data, signupMutation: mutate }),
   }),
 )(Signup)

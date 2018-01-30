@@ -3,8 +3,16 @@ import { Redirect } from 'react-router-dom';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
-// import { AllTodoLists } from './index';
+/***** GraphQL *****/
+export const meQuery = gql`
+  query {
+    me {
+      id
+    }
+  }
+`;
 
+/***** React Component *****/
 export const Home = ({ data }) => {
   if (data && data.me) return (<Redirect to="/lists" />);
   return (
@@ -14,14 +22,7 @@ export const Home = ({ data }) => {
   )
 }
 
-export const meQuery = gql`
-  query {
-    me {
-      id
-    }
-  }
-`;
-
+/***** Apollo Wrapper *****/
 export default compose(
   graphql(meQuery),
 )(Home)
