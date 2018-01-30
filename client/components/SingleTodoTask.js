@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
-import { myTodoListQuery } from './SingleTodoList';
 
 /***** GraphQL *****/
 export const myTodoTaskQuery = gql`
@@ -27,15 +26,16 @@ export const toggleCompleteTodoTaskMutation = gql`
 `;
 
 /***** React Component *****/
-export class SingleTodoTask extends Component {
-  _toggleComplete = async () => {
-    if (!this.props.data.todoTaskById) return; // Data hasn't been loaded yet
-    let { todoTaskById: { id, completed } } = this.props.data;
-    completed = !completed;
-    await this.props.toggleCompleteTodoTaskMutation({
+export const SingleTodoTask = props => {
+  if (!props.data.todoTaskById) return (<div>Loading...</div>)
+  const { todoTaskById: { id, title, completed } } = props.data;
+  const toggleCompleteStatus = props.toggleCompleteTodoTaskMutation;
+  const _toggleComplete = async () => {
+    const newCompletedStatus = !completed;
+    await toggleCompleteStatus({
       variables: {
         id,
-        completed,
+        completed: newCompletedStatus,
       },
       refetchQueries: [
         {
@@ -45,17 +45,10 @@ export class SingleTodoTask extends Component {
       ],
     })
   }
-  render() {
-    const data = this.props.data;
-    if (!data.todoTaskById) return (<div>Loading...</div>)
-    const { todoTaskById: { title, completed } } = data;
-    const style = {
-      textDecoration: completed ? 'line-through' : 'none',
-    };
-    return (
-      <li style={style} onClick={this._toggleComplete}>{title}</li>
-    )
-  }
+  const style = { textDecoration: completed ? 'line-through' : 'none' };
+  return (
+    <li style={style} onClick={_toggleComplete}>{title}</li>
+  )
 }
 
 export default compose(
@@ -63,7 +56,6 @@ export default compose(
     options: ({ id }) => ({ variables: { id } }),
   }),
   graphql(toggleCompleteTodoTaskMutation, {
-    // options: ({ id }) => ({ variables: { todoTaskId: id, input:  } }),
     props: ({ mutate }) => ({ toggleCompleteTodoTaskMutation: mutate }),
   }),
 )(SingleTodoTask)
