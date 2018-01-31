@@ -26,12 +26,11 @@ export const toggleCompleteTodoTaskMutation = gql`
 `;
 
 /***** React Component *****/
-export const SingleTodoTask = props => {
-  if (!props.data.todoTaskById) return (<div>Loading...</div>)
-  const { todoTaskById: { id, title, completed } } = props.data;
-  const toggleCompleteStatus = props.toggleCompleteTodoTaskMutation;
+export const SingleTodoTask = ({ data: { todoTaskById }, toggleComplete }) => {
+  if (!todoTaskById) return (<div>Loading...</div>)
+  const { id, title, completed } = todoTaskById;
   const _toggleComplete = () => {
-    toggleCompleteStatus({
+    toggleComplete({
       variables: {
         id,
         completed: !completed,
@@ -46,7 +45,7 @@ export const SingleTodoTask = props => {
   return (
     <li style={style} onClick={_toggleComplete}>{title}</li>
   )
-}
+};
 
 /***** Apollo Wrapper *****/
 export default compose(
@@ -54,6 +53,6 @@ export default compose(
     options: ({ id }) => ({ variables: { id } }),
   }),
   graphql(toggleCompleteTodoTaskMutation, {
-    props: ({ mutate }) => ({ toggleCompleteTodoTaskMutation: mutate }),
+    props: ({ mutate }) => ({ toggleComplete: mutate }),
   }),
 )(SingleTodoTask)
