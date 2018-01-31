@@ -30,19 +30,16 @@ export const SingleTodoTask = props => {
   if (!props.data.todoTaskById) return (<div>Loading...</div>)
   const { todoTaskById: { id, title, completed } } = props.data;
   const toggleCompleteStatus = props.toggleCompleteTodoTaskMutation;
-  const _toggleComplete = async () => {
-    const newCompletedStatus = !completed;
-    await toggleCompleteStatus({
+  const _toggleComplete = () => {
+    toggleCompleteStatus({
       variables: {
         id,
-        completed: newCompletedStatus,
+        completed: !completed,
       },
-      refetchQueries: [
-        {
-          query: myTodoTaskQuery,
-          variables: { id, completed },
-        },
-      ],
+      refetchQueries: [{
+        query: myTodoTaskQuery,
+        variables: { id },
+      }],
     })
   }
   const style = { textDecoration: completed ? 'line-through' : 'none' };
