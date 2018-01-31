@@ -19,14 +19,14 @@ export const myTodoListQuery = gql`
 `;
 
 /***** React Component *****/
-export const SingleTodoList = ({ data }) => {
-  if (!data.todoListById) return (<div>Loading...</div>)
-  const { todoListById: { name, todoTasks } } = data;
+export const SingleTodoList = ({ data: { todoListById } }) => {
+  if (!todoListById) return (<div>Loading...</div>)
+  const { name, todoTasks } = todoListById;
   return (
     <div className="container">
       <h1>{name}</h1>
       <ul>
-        {todoTasks.map(task =>
+        {todoTasks && todoTasks.map(task =>
           <SingleTodoTask key={task.title + task.id} id={task.id} />
         )}
       </ul>
