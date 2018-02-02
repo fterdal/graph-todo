@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+import { myTodoListQuery } from './SingleTodoList';
 
 /***** GraphQL *****/
-const addTodoTaskMutation = gql`
-  mutation addTodoTaskMutation($title: String, $text: String, $completed: Boolean) {
+export const addTodoTaskMutation = gql`
+  mutation addTodoTaskMutation($id: Int!, $title: String, $text: String, $completed: Boolean) {
   	addTodoTask(input: {
-      todoListId: 2
+      todoListId: $id
       input: {
         title: $title
         text: $text
@@ -24,19 +25,72 @@ const addTodoTaskMutation = gql`
 
 /***** React Component *****/
 export class AddTodoTask extends Component {
-  state = {}
-  _addTodoTask = () => {
-
+  state = {
+    title: '',
+    text: '',
+    completed: false,
+  }
+  _addTodoTask = async () => {
+    const { title, text, completed } = this.state;
+    const { addTodoTask, id } = this.props;
+    await addTodoTask({
+      variables: {
+        id,
+        title,
+        text,
+        completed,
+      },
+      refetchQueries: [{
+        query: myTodoListQuery,
+        variables: { id },
+      }],
+    })
+    this.setState({ title: '', text: '', completed: false });
   }
   render() {
-    if (this.hello) return {};
-    return (<div />);
+    const { title, text, completed } = this.state;
+    return (
+      <div className="container">
+        <form>
+          <fieldset>
+            <label>Add Task</label>
+            <input
+              id="titleField"
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={evt => this.setState({ title: evt.target.value })}
+            />
+            <input
+              id="textField"
+              type="text"
+              placeholder="Text"
+              value={text}
+              onChange={evt => this.setState({ text: evt.target.value })}
+            />
+            <label>Completed?</label>
+            <input
+              id="completedField"
+              type="checkbox"
+              value={completed}
+              onChange={() => this.setState({ completed: !completed })}
+            />
+            <br />
+            <a
+              className="button button-outline"
+              onClick={() => this._addTodoTask()}>
+              Add
+            </a>
+          </fieldset>
+        </form>
+      </div>
+    )
   }
 }
 
 /***** Apollo Wrapper *****/
 export default compose(
   graphql(addTodoTaskMutation, {
-    // props: ({ data, mutate }) => ({data, addTodoTask: mutate}),
+    props: ({ data, mutate }) => ({ data, addTodoTask: mutate }),
   }),
 )(AddTodoTask)

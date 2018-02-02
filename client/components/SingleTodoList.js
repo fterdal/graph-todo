@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
-import { SingleTodoTask } from './index';
+import { SingleTodoTask, AddTodoTask } from './index';
 
 /***** GraphQL *****/
 export const myTodoListQuery = gql`
@@ -30,6 +30,7 @@ export const SingleTodoList = ({ data: { todoListById } }) => {
           <SingleTodoTask key={task.title + task.id} id={task.id} />
         )}
       </ul>
+      <AddTodoTask id={todoListById.id} />
     </div>
   )
 }
