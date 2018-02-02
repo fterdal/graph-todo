@@ -91,6 +91,6 @@ export class AddTodoTask extends Component {
 /***** Apollo Wrapper *****/
 export default compose(
   graphql(addTodoTaskMutation, {
-    props: ({ data, mutate }) => ({ data, addTodoTask: mutate }),
+    props: ({ mutate }) => ({ addTodoTask: mutate }),
   }),
 )(AddTodoTask)
