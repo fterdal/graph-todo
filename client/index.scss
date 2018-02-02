@@ -40,6 +40,10 @@ body,html {
   background-color: $color2;
 }
 
+.todo-task {
+  cursor: pointer;
+}
+
 .errorMsg {
   background-color: $color6;
   font-weight: bold;

@@ -43,7 +43,7 @@ export const SingleTodoTask = ({ data: { todoTaskById }, toggleComplete }) => {
   }
   const style = { textDecoration: completed ? 'line-through' : 'none' };
   return (
-    <li style={style} onClick={_toggleComplete}>{title}</li>
+    <li className="todo-task" style={style} onClick={_toggleComplete}>{title}</li>
   )
 };
 
